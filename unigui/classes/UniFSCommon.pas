@@ -26,7 +26,7 @@ const
   {$ENDIF}
 
   {https://developers.google.com/maps/documentation/embed/get-api-key}
-  API_KEY_MAPS = 'AIzaSyBe19StCdd88xEYhQL9yYZFD545fNQ25Aw';
+  API_KEY_MAPS = '';
 
 implementation
 
