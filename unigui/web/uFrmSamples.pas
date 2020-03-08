@@ -39,7 +39,9 @@ end;
 
 procedure TfrmSamples.btnDownloadClick(Sender: TObject);
 begin
-  UniSession.SendFile(UniServerModule.StartPath+'files\sample_use.rar');
+  CopyFile(PwideChar(UniServerModule.StartPath+'files\sample_use.rar'),
+    PWideChar(UniServerModule.LocalCachePath+'sample_use.rar'),False);
+  UniSession.SendFile(UniServerModule.LocalCachePath+'sample_use.rar');
 end;
 
 procedure TfrmSamples.UniFormAfterShow(Sender: TObject);

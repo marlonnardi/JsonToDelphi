@@ -50,7 +50,10 @@ begin
   synx.Lines.SaveToFile(vTempFile);
 
   UniSession.SendFile(vTempFile);
-  UniSession.SendFile(UniServerModule.StartPath+'files\Pkg.Json.DTO.pas');
+
+  CopyFile(PwideChar(UniServerModule.StartPath+'files\Pkg.Json.DTO.pas'),
+    PWideChar(UniServerModule.LocalCachePath+'Pkg.Json.DTO.pas'),False);
+  UniSession.SendFile(UniServerModule.LocalCachePath+'Pkg.Json.DTO.pas');
 end;
 
 procedure TfrmGenerateUnit.UniFormShow(Sender: TObject);
