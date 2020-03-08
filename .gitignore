@@ -1,0 +1,16 @@
+*.identcache
+*.local
+*.res
+*.stat
+__history/
+*.dcu
+executavel/cache/
+*.log
+*.exe
+*.dll
+executavel/JsonToDelphi.zip
+unigui/executavel/cache/
+*.zip
+*.skincfg
+*.dsk
+*.map
