@@ -1,7 +1,10 @@
 Delphi-JsonToDelphiClass
 ========================
 
-## This is a fork of Petar Georgiev original work  ##
+## This is a fork of Petar Georgiev original  ##
+
+## JsonToDelphi Online  ##
+https://jsontodelphi.com
 
 Lots of changes in this version:
 * Only floating poiunt numbers are mapped to Double
