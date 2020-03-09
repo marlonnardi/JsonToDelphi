@@ -1,7 +1,7 @@
 {$DEFINE WEB_UNIGUI} // Diretiva Interna
 
-{$define UNIGUI_VCL} // Diretiva Gera EXE
-//{$define UNIGUI_DLL} // Diretiva Gera DLL
+//{$define UNIGUI_VCL} // Diretiva Gera EXE
+{$define UNIGUI_DLL} // Diretiva Gera DLL
 //{$define UNIGUI_SERVICE} // Diretiva Service
 
   {$IFDEF UNIGUI_VCL}

@@ -3,9 +3,6 @@
         <ProjectGuid>{C6DE524F-4BAC-483B-9F60-4A635CBDE197}</ProjectGuid>
     </PropertyGroup>
     <ItemGroup>
-        <Projects Include="package\UniFSButton.dproj">
-            <Dependencies/>
-        </Projects>
         <Projects Include="JsonToDelphi.dproj">
             <Dependencies/>
         </Projects>
@@ -17,15 +14,6 @@
             <Default.Personality/>
         </BorlandProject>
     </ProjectExtensions>
-    <Target Name="UniFSButton">
-        <MSBuild Projects="package\UniFSButton.dproj"/>
-    </Target>
-    <Target Name="UniFSButton:Clean">
-        <MSBuild Projects="package\UniFSButton.dproj" Targets="Clean"/>
-    </Target>
-    <Target Name="UniFSButton:Make">
-        <MSBuild Projects="package\UniFSButton.dproj" Targets="Make"/>
-    </Target>
     <Target Name="JsonToDelphi">
         <MSBuild Projects="JsonToDelphi.dproj"/>
     </Target>
@@ -36,13 +24,13 @@
         <MSBuild Projects="JsonToDelphi.dproj" Targets="Make"/>
     </Target>
     <Target Name="Build">
-        <CallTarget Targets="UniFSButton;JsonToDelphi"/>
+        <CallTarget Targets="JsonToDelphi"/>
     </Target>
     <Target Name="Clean">
-        <CallTarget Targets="UniFSButton:Clean;JsonToDelphi:Clean"/>
+        <CallTarget Targets="JsonToDelphi:Clean"/>
     </Target>
     <Target Name="Make">
-        <CallTarget Targets="UniFSButton:Make;JsonToDelphi:Make"/>
+        <CallTarget Targets="JsonToDelphi:Make"/>
     </Target>
     <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
 </Project>
