@@ -1,7 +1,7 @@
 object MainmForm: TMainmForm
   Left = 0
   Top = 0
-  ClientHeight = 727
+  ClientHeight = 706
   ClientWidth = 320
   Caption = 'jsontodelphi'
   OnShow = UnimFormShow
@@ -35,7 +35,7 @@ object MainmForm: TMainmForm
     Left = 0
     Top = 6
     Width = 320
-    Height = 721
+    Height = 700
     Hint = ''
     Margins.Left = 0
     Margins.Top = 6
@@ -44,7 +44,8 @@ object MainmForm: TMainmForm
     Align = alClient
     Color = clWhite
     ScrollIndicators = False
-    ScrollHeight = 668
+    ExplicitHeight = 721
+    ScrollHeight = 677
     ScrollWidth = 0
     object memJson: TUnimMemo
       AlignWithMargins = True
@@ -93,12 +94,15 @@ object MainmForm: TMainmForm
       Margins.Right = 15
       Align = alTop
       Caption = 'Validate JSON'
+      ClientEvents.ExtEvents.Strings = (
+        
+          'tap=function tap(sender, e, eOpts)'#13#10'{'#13#10'  window.open("https://js' +
+          'onformatter.curiousconcept.com");'#13#10'}')
       UI = 'round'
       ScreenMask.Enabled = True
       ScreenMask.WaitData = True
       ScreenMask.Message = 'Processing...'
       LayoutConfig.Cls = 'button-style'
-      OnClick = btnValidateClick
     end
     object btnSample: TUnimButton
       AlignWithMargins = True
@@ -117,30 +121,12 @@ object MainmForm: TMainmForm
       ScreenMask.WaitData = True
       ScreenMask.Message = 'Processing...'
       LayoutConfig.Cls = 'button-style'
-    end
-    object btnDonate: TUnimButton
-      AlignWithMargins = True
-      Left = 15
-      Top = 541
-      Width = 288
-      Height = 47
-      Hint = ''
-      Margins.Left = 15
-      Margins.Top = 10
-      Margins.Right = 15
-      Align = alTop
-      Caption = 'Donate'
-      UI = 'round'
-      ScreenMask.Enabled = True
-      ScreenMask.WaitData = True
-      ScreenMask.Message = 'Processing...'
-      LayoutConfig.Cls = 'button-style'
-      OnClick = btnDonateClick
+      OnClick = btnSampleClick
     end
     object pnlFalcon: TUnimPanel
       AlignWithMargins = True
       Left = 15
-      Top = 601
+      Top = 610
       Width = 288
       Height = 67
       Hint = ''
@@ -150,16 +136,36 @@ object MainmForm: TMainmForm
       Align = alTop
       Color = clWhite
       BorderStyle = ubsNone
+      ExplicitTop = 601
       object imgFalcon: TUnimImage
-        Left = 70
+        Left = 52
         Top = 14
-        Width = 150
+        Width = 180
         Height = 39
         Hint = ''
         AutoSize = True
-        Url = '/imagens/Falcon_Sistemas_Powered_by.png'
+        Url = 
+          'https://store.falconsistemas.com.br/imagens/sistema/falcon_siste' +
+          'mas_store.png'
         OnClick = imgFalconClick
       end
+    end
+    object lblDoacao: TUnimLabel
+      AlignWithMargins = True
+      Left = 15
+      Top = 541
+      Width = 288
+      Height = 56
+      Hint = ''
+      Margins.Left = 15
+      Margins.Top = 10
+      Margins.Right = 15
+      Alignment = taCenter
+      AutoSize = False
+      Caption = '<b>teste</b> teste'
+      Align = alTop
+      ParentFont = False
+      ExplicitTop = 601
     end
   end
 end

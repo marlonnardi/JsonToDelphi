@@ -86,6 +86,7 @@ begin
   try
     Confirm.Alert('About Donate',
       '*Project Open Source, disponible in github.</br>'+
+      '*Project Open Source, disponible in github.</br>'+
       '*Help keep domain https://jsontodelphi.com online.</br>'+
       '*Help keep hosting server online. </br> '+
       '*Help get new features. </br></br> '+

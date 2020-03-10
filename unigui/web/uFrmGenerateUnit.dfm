@@ -22,24 +22,26 @@ object frmGenerateUnit: TfrmGenerateUnit
       Left = 1
       Top = 1
       Width = 1022
-      Height = 515
+      Height = 494
       Hint = ''
       Font.Height = -13
       Font.Name = 'Courier New'
       Align = alClient
+      ExplicitHeight = 495
     end
     object pnlBottom: TUniPanel
       Left = 1
-      Top = 516
+      Top = 495
       Width = 1022
-      Height = 43
+      Height = 64
       Hint = ''
       Align = alBottom
       TabOrder = 2
       Caption = ''
+      ExplicitTop = 496
       object lblUnitName: TUniLabel
         Left = 11
-        Top = 15
+        Top = 13
         Width = 55
         Height = 16
         Hint = ''
@@ -50,7 +52,7 @@ object frmGenerateUnit: TfrmGenerateUnit
       end
       object edtUnitName: TUniEdit
         Left = 72
-        Top = 8
+        Top = 6
         Width = 201
         Height = 25
         Hint = ''
@@ -61,7 +63,7 @@ object frmGenerateUnit: TfrmGenerateUnit
       end
       object lbl1: TUniLabel
         Left = 275
-        Top = 15
+        Top = 13
         Width = 24
         Height = 16
         Hint = ''
@@ -72,7 +74,7 @@ object frmGenerateUnit: TfrmGenerateUnit
       end
       object btnDownload: TUniFSButton
         Left = 311
-        Top = 6
+        Top = 4
         Width = 145
         Height = 34
         Hint = ''
@@ -88,6 +90,16 @@ object frmGenerateUnit: TfrmGenerateUnit
         Font.Height = -13
         TabOrder = 4
         OnClick = btnDownloadClick
+      end
+      object chkandClassDTO: TUniCheckBox
+        Left = 72
+        Top = 41
+        Width = 201
+        Height = 17
+        Hint = ''
+        Checked = True
+        Caption = 'and Pkg.Json.DTO.pas'
+        TabOrder = 5
       end
     end
   end

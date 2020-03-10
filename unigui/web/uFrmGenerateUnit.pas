@@ -7,7 +7,7 @@ uses
   Controls, Forms, Dialogs, uniGUITypes, uniGUIAbstractClasses,
   uniGUIClasses, uniGUIForm, uniGUIBaseClasses, uniPanel, uniTreeView,
   uniSyntaxEditor, uniEdit, uniLabel, uniButton, uniBitBtn, UniFSButton,
-  uniSyntaxEditorBase;
+  uniSyntaxEditorBase, uniCheckBox;
 
 type
   TfrmGenerateUnit = class(TUniForm)
@@ -18,6 +18,7 @@ type
     edtUnitName: TUniEdit;
     lbl1: TUniLabel;
     btnDownload: TUniFSButton;
+    chkandClassDTO: TUniCheckBox;
     procedure btnDownloadClick(Sender: TObject);
     procedure UniFormShow(Sender: TObject);
   private
@@ -51,9 +52,12 @@ begin
 
   UniSession.SendFile(vTempFile);
 
-  CopyFile(PwideChar(UniServerModule.StartPath+'files\Pkg.Json.DTO.pas'),
-    PWideChar(UniServerModule.LocalCachePath+'Pkg.Json.DTO.pas'),False);
-  UniSession.SendFile(UniServerModule.LocalCachePath+'Pkg.Json.DTO.pas');
+  if chkandClassDTO.Checked then
+  begin
+    CopyFile(PwideChar(UniServerModule.StartPath+'files\Pkg.Json.DTO.pas'),
+      PWideChar(UniServerModule.LocalCachePath+'Pkg.Json.DTO.pas'),False);
+    UniSession.SendFile(UniServerModule.LocalCachePath+'Pkg.Json.DTO.pas');
+  end;
 end;
 
 procedure TfrmGenerateUnit.UniFormShow(Sender: TObject);

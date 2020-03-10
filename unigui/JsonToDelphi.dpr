@@ -1,7 +1,7 @@
 {$DEFINE WEB_UNIGUI} // Diretiva Interna
 
-//{$define UNIGUI_VCL} // Diretiva Gera EXE
-{$define UNIGUI_DLL} // Diretiva Gera DLL
+{$define UNIGUI_VCL} // Diretiva Gera EXE
+//{$define UNIGUI_DLL} // Diretiva Gera DLL
 //{$define UNIGUI_SERVICE} // Diretiva Service
 
   {$IFDEF UNIGUI_VCL}
@@ -41,7 +41,8 @@ uses
   Main in 'web\Main.pas' {MainForm: TUniForm},
   uFrmGenerateUnit in 'web\uFrmGenerateUnit.pas' {frmGenerateUnit: TUniForm},
   uFrmSamples in 'web\uFrmSamples.pas' {frmSamples: TUniForm},
-  uFrmWebNavigate in 'web\uFrmWebNavigate.pas' {frmWebNavigate: TUniForm};
+  uFrmWebNavigate in 'web\uFrmWebNavigate.pas' {frmWebNavigate: TUniForm},
+  uFrmmSamples in 'mobile\uFrmmSamples.pas' {frmmSamples: TUnimForm};
 
 {$R *.res}
 

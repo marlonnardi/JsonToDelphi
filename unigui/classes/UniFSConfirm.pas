@@ -551,7 +551,7 @@ initialization
   {$IFDEF FolderUni}
   UniAddCSSLibrary(CDN+'falcon/css/jquery-confirm.min.css?v=2', CDNENABLED, [upoFolderUni, upoPlatformBoth]);
   UniAddCSSLibrary(CDN+'falcon/css/preloader.css?v=2', CDNENABLED, [upoFolderUni, upoPlatformBoth]);
-  UniAddCSSLibrary(CDN+'falcon/css/jquery-confirm-style.css', CDNENABLED, [upoFolderUni, upoPlatformBoth]);
+  UniAddCSSLibrary(CDN+'falcon/css/jquery-confirm-style.css?v=2', CDNENABLED, [upoFolderUni, upoPlatformBoth]);
   UniAddJSLibrary(CDN+'falcon/js/jquery-confirm.min.js?v=2', CDNENABLED, [upoFolderUni, upoPlatformBoth]);
   UniAddJSLibrary(CDN+'falcon/js/jquery.preloader.min.js?v=2', CDNENABLED, [upoFolderUni, upoPlatformBoth]);
   {$ENDIF}

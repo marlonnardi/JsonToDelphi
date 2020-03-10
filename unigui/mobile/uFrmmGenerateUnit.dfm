@@ -15,4 +15,39 @@ object frmmGenerateUnit: TfrmmGenerateUnit
   ScrollPosition = 0
   ScrollHeight = 47
   PlatformData = {}
+  object memSyntax: TUnimMemo
+    Left = 0
+    Top = 0
+    Width = 320
+    Height = 413
+    Hint = ''
+    Align = alClient
+    TabOrder = 0
+    ExplicitLeft = 64
+    ExplicitTop = 136
+    ExplicitWidth = 225
+    ExplicitHeight = 235
+  end
+  object btnGenerate: TUnimButton
+    AlignWithMargins = True
+    Left = 15
+    Top = 423
+    Width = 290
+    Height = 47
+    Hint = ''
+    Margins.Left = 15
+    Margins.Top = 10
+    Margins.Right = 15
+    Margins.Bottom = 10
+    Align = alBottom
+    Caption = 'Download'
+    UI = 'round'
+    ScreenMask.Enabled = True
+    ScreenMask.WaitData = True
+    ScreenMask.Message = 'Processing...'
+    LayoutConfig.Cls = 'button-style'
+    OnClick = btnGenerateClick
+    ExplicitLeft = 20
+    ExplicitTop = 402
+  end
 end
