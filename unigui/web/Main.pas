@@ -52,6 +52,8 @@ type
 
     procedure DefineRegrasLayout;
     procedure AlinhamentoCenter;
+
+    procedure ShowAlert(Title, Msg: string);
   public
     { Public declarations }
   end;
@@ -115,7 +117,7 @@ begin
   except
     on e: Exception do
     begin
-      ShowMessage('JSON Invalid, please chek!');
+      ShowAlert('JSON Invalid, please chek!','');
       Exit;
     end;
   end;
@@ -132,7 +134,7 @@ begin
   except
     on e: Exception do
     begin
-      ShowMessage('JSON Invalid, please chek. </br></br>'+ e.Message);
+      ShowAlert('JSON Invalid','please chek. </br></br>'+ e.Message);
     end;
   end;
 end;
@@ -157,6 +159,18 @@ begin
   lblVersion.Caption := TSistema.GetVersao(UniServerModule.StartPath + '\jsontodelphi.dll');
 
   lblJsonToPascal.Visible := False;
+end;
+
+procedure TMainForm.ShowAlert(Title, Msg: string);
+var
+  Confirm: TUniFSConfirm;
+begin
+  Confirm := TUniFSConfirm.Create(Self);
+  try
+    Confirm.Alert(Title, Msg, 'fa fa-alert',TTypeColor.orange, TTheme.modern);
+  finally
+    FreeAndNil(Confirm);
+  end;
 end;
 
 procedure TMainForm.UniFormAfterShow(Sender: TObject);
