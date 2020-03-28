@@ -1,7 +1,7 @@
 object MainForm: TMainForm
   Left = 0
   Top = 0
-  Width = 1071
+  Width = 1080
   Height = 624
   Caption = 'MainForm'
   Color = 15460837
@@ -13,12 +13,12 @@ object MainForm: TMainForm
   OnAfterShow = UniFormAfterShow
   OnAjaxEvent = UniFormAjaxEvent
   DesignSize = (
-    1071
+    1080
     624)
   PixelsPerInch = 96
   TextHeight = 13
   object pnlMaster: TUniPanel
-    Left = 17
+    Left = 21
     Top = 8
     Width = 1024
     Height = 521
@@ -28,6 +28,7 @@ object MainForm: TMainForm
     BorderStyle = ubsNone
     Caption = ''
     Color = 15460837
+    ExplicitLeft = 17
     object pnlTop: TUniPanel
       Left = 0
       Top = 0
@@ -464,7 +465,7 @@ object MainForm: TMainForm
   object pnlBottom: TUniPanel
     Left = 0
     Top = 571
-    Width = 1071
+    Width = 1080
     Height = 53
     Hint = ''
     Align = alBottom
@@ -472,11 +473,12 @@ object MainForm: TMainForm
     BorderStyle = ubsNone
     Caption = ''
     Color = 15460837
+    ExplicitWidth = 1071
     DesignSize = (
-      1071
+      1080
       53)
     object imgFalconSistemas: TUniImage
-      Left = 438
+      Left = 442
       Top = 6
       Width = 150
       Height = 39
@@ -492,9 +494,10 @@ object MainForm: TMainForm
           'click=function click(sender, eOpts)'#13#10'{'#13#10'  window.open("https://f' +
           'alconsistemas.com.br");'#13#10'}')
       LayoutConfig.Cls = 'card card-radius'
+      ExplicitLeft = 438
     end
     object lblVersion: TUniLabel
-      Left = 961
+      Left = 970
       Top = 34
       Width = 89
       Height = 11
@@ -509,6 +512,24 @@ object MainForm: TMainForm
       Font.Color = 10853781
       Font.Height = -9
       TabOrder = 2
+      ExplicitLeft = 961
+    end
+    object lblVerionPrior: TUniLabel
+      Left = 26
+      Top = 34
+      Width = 89
+      Height = 11
+      Cursor = crHandPoint
+      Hint = 'Version Old of JsonToDelphi'
+      ShowHint = True
+      ParentShowHint = False
+      AutoSize = False
+      Caption = 'Version Old'
+      ParentFont = False
+      Font.Color = 10853781
+      Font.Height = -9
+      TabOrder = 3
+      OnClick = lblVerionPriorClick
     end
   end
 end

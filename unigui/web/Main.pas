@@ -40,12 +40,14 @@ type
     lblVersion: TUniLabel;
     lbl7: TUniLabel;
     lbl8: TUniLabel;
+    lblVerionPrior: TUniLabel;
     procedure UniFormAfterShow(Sender: TObject);
     procedure UniFormClose(Sender: TObject; var Action: TCloseAction);
     procedure UniFormAjaxEvent(Sender: TComponent; EventName: string; Params: TUniStrings);
     procedure btnGenerateClick(Sender: TObject);
     procedure btn1Click(Sender: TObject);
     procedure btnSampleClick(Sender: TObject);
+    procedure lblVerionPriorClick(Sender: TObject);
   private
     { Private declarations }
     jm : TPkgJsonMapper;
@@ -159,6 +161,11 @@ begin
   lblVersion.Caption := TSistema.GetVersao(UniServerModule.StartPath + '\jsontodelphi.dll');
 
   lblJsonToPascal.Visible := False;
+end;
+
+procedure TMainForm.lblVerionPriorClick(Sender: TObject);
+begin
+  UniSession.UrlRedirect('https://x_versionprior_x.jsontodelphi.com/');
 end;
 
 procedure TMainForm.ShowAlert(Title, Msg: string);
