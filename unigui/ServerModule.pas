@@ -3,11 +3,14 @@ unit ServerModule;
 interface
 
 uses
-  Classes, SysUtils, uniGUIServer, uniGUITypes;
+  Classes, SysUtils, uniGUIServer, uniGUITypes, uniGUIApplication;
 
 type
   TUniServerModule = class(TUniGUIServerModule)
     procedure UniGUIServerModuleBeforeInit(Sender: TObject);
+    procedure UniGUIServerModuleControlPanelLogin(ASession: TUniGUISession;
+      const Auser, APassword: string; var LoginValid: Boolean;
+      LoginAttempt: Integer);
   private
     { Private declarations }
   protected
@@ -85,6 +88,13 @@ begin
   UniAddJSLibrary('https://www.google-analytics.com/analytics.js', True, [upoAsync, upoPlatformBoth]);
   CustomFiles.Add(vJs+'falcon.google.ua.52856584-4.js?v=1');
   {$ENDREGION}
+end;
+
+procedure TUniServerModule.UniGUIServerModuleControlPanelLogin(
+  ASession: TUniGUISession; const Auser, APassword: string;
+  var LoginValid: Boolean; LoginAttempt: Integer);
+begin
+  LoginValid := (Auser = 'master') and (APassword = 'v8n1g2a1');
 end;
 
 initialization

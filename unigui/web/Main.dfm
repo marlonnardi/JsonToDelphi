@@ -28,7 +28,6 @@ object MainForm: TMainForm
     BorderStyle = ubsNone
     Caption = ''
     Color = 15460837
-    ExplicitLeft = 17
     object pnlTop: TUniPanel
       Left = 0
       Top = 0
@@ -473,7 +472,6 @@ object MainForm: TMainForm
     BorderStyle = ubsNone
     Caption = ''
     Color = 15460837
-    ExplicitWidth = 1071
     DesignSize = (
       1080
       53)
@@ -494,7 +492,6 @@ object MainForm: TMainForm
           'click=function click(sender, eOpts)'#13#10'{'#13#10'  window.open("https://f' +
           'alconsistemas.com.br");'#13#10'}')
       LayoutConfig.Cls = 'card card-radius'
-      ExplicitLeft = 438
     end
     object lblVersion: TUniLabel
       Left = 970
@@ -512,7 +509,6 @@ object MainForm: TMainForm
       Font.Color = 10853781
       Font.Height = -9
       TabOrder = 2
-      ExplicitLeft = 961
     end
     object lblVerionPrior: TUniLabel
       Left = 26

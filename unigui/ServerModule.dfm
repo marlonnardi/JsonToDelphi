@@ -3191,6 +3191,7 @@ object UniServerModule: TUniServerModule
   ConnectionFailureRecovery.RetryMessage = 'Reconectando...'
   ConnectionFailureRecovery.TextColor = 13075991
   OnBeforeInit = UniGUIServerModuleBeforeInit
+  OnControlPanelLogin = UniGUIServerModuleControlPanelLogin
   UniMobileRoot = 'c:\unigui\[unim]\'
   Height = 555
   Width = 725
