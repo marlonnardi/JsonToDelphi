@@ -3,7 +3,12 @@ unit ServerModule;
 interface
 
 uses
-  Classes, SysUtils, uniGUIServer, uniGUITypes, uniGUIApplication;
+  System.Classes,
+  System.SysUtils,
+  System.IniFiles,
+  uniGUIServer,
+  uniGUITypes,
+  uniGUIApplication;
 
 type
   TUniServerModule = class(TUniGUIServerModule)
@@ -13,6 +18,10 @@ type
       LoginAttempt: Integer);
   private
     { Private declarations }
+    FUser: string;
+    FPassword: string;
+
+    procedure LoadConfigIni();
   protected
     procedure FirstInit; override;
   public
@@ -46,6 +55,30 @@ begin
   InitServerModule(Self);
 end;
 
+procedure TUniServerModule.LoadConfigIni;
+var
+  IniFile: TIniFile;
+  vArqIni: string;
+begin
+  try
+    vArqIni := ExtractFilePath(StartPath) + '\config.ini';
+
+    if not(FileExists(vArqIni)) then
+      Exit;
+
+    IniFile := TIniFile.Create(vArqIni);
+    try
+      FUser := IniFile.ReadString('SERVER', 'USER', '');
+      FPassword := IniFile.ReadString('SERVER', 'PASSWORD', '');
+    finally
+      FreeAndNil(IniFile);
+    end;
+  except
+    on e: Exception do
+      raise Exception.Create('LoadConfigIni '+ e.Message);
+  end;
+end;
+
 procedure TUniServerModule.UniGUIServerModuleBeforeInit(Sender: TObject);
 var
   vJs, vCss: string;
@@ -55,6 +88,8 @@ begin
   {$ELSE}
   SuppressErrors := [errObjectNotFound];
   {$ENDIF}
+
+  LoadConfigIni;
 
   {$REGION 'Habilitando os MimeTypes (Arquivos permitidos)'}
   MimeTable.AddMimeType('ttf', 'application/font', False);
@@ -94,7 +129,7 @@ procedure TUniServerModule.UniGUIServerModuleControlPanelLogin(
   ASession: TUniGUISession; const Auser, APassword: string;
   var LoginValid: Boolean; LoginAttempt: Integer);
 begin
-  LoginValid := (Auser = 'master') and (APassword = 'v8n1g2a1');
+  LoginValid := (Auser = FUser) and (APassword = FPassword);
 end;
 
 initialization

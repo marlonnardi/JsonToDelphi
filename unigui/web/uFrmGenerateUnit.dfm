@@ -1,7 +1,7 @@
 object frmGenerateUnit: TfrmGenerateUnit
   Left = 0
   Top = 0
-  ClientHeight = 560
+  ClientHeight = 561
   ClientWidth = 1024
   Caption = 'Preview Delphi Unit'
   OnShow = UniFormShow
@@ -13,32 +13,33 @@ object frmGenerateUnit: TfrmGenerateUnit
     Left = 0
     Top = 0
     Width = 1024
-    Height = 560
+    Height = 561
     Hint = ''
     Align = alClient
     TabOrder = 0
     Caption = 'pnlUnit'
+    ExplicitHeight = 560
     object synx: TUniSyntaxEdit
       Left = 1
       Top = 1
       Width = 1022
-      Height = 494
+      Height = 495
       Hint = ''
       Font.Height = -13
       Font.Name = 'Courier New'
       Align = alClient
-      ExplicitHeight = 495
+      ExplicitHeight = 494
     end
     object pnlBottom: TUniPanel
       Left = 1
-      Top = 495
+      Top = 496
       Width = 1022
       Height = 64
       Hint = ''
       Align = alBottom
       TabOrder = 2
       Caption = ''
-      ExplicitTop = 496
+      ExplicitTop = 495
       object lblUnitName: TUniLabel
         Left = 11
         Top = 13

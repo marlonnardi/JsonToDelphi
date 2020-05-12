@@ -15,3 +15,4 @@ unigui/executavel/cache/
 *.dsk
 *.map
 *.vlb
+unigui/executavel/config.ini
