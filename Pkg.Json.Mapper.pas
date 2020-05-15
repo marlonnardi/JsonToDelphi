@@ -336,7 +336,6 @@ var
   JsonString: TJSONString;
   i: Integer;
   j: Int64;
-  b: Boolean;
 begin
   Result := jtUnknown;
 
