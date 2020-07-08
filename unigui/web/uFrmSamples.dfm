@@ -91,15 +91,13 @@ object frmSamples: TfrmSamples
       ''
       '    lblid.Caption := Root.Menu.Id;'
       '    lblvalue.Caption := Root.Menu.Value;'
-      
-        '    lblcount.Caption := IntToStr(Length(Root.Menu.Popup.Menuitem' +
-        '));'
+      '    lblcount.Caption := Root.Menu.Popup.Menuitem.Count.ToString;'
       
         '    lblfirstonclick.Caption := Root.Menu.Popup.Menuitem[0].Oncli' +
         'ck;'
       
-        '    lbllastonclick.Caption := Root.Menu.Popup.Menuitem[Length(Ro' +
-        'ot.Menu.Popup.Menuitem)-1].Onclick;'
+        '    lbllastonclick.Caption := Root.Menu.Popup.Menuitem[Root.Menu' +
+        '.Popup.Menuitem.Count-1].Onclick;'
       '  finally'
       '    Root.Free;'
       '  end;')

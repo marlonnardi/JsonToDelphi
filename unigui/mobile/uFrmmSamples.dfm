@@ -2,7 +2,7 @@ object frmmSamples: TfrmmSamples
   Left = 0
   Top = 0
   ClientHeight = 667
-  ClientWidth = 320
+  ClientWidth = 337
   Caption = 'Sample Use'
   OnShow = UnimFormShow
   AutoHeight = False
@@ -21,7 +21,7 @@ object frmmSamples: TfrmmSamples
     AlignWithMargins = True
     Left = 15
     Top = 10
-    Width = 290
+    Width = 307
     Height = 23
     Hint = ''
     Margins.Left = 15
@@ -31,15 +31,12 @@ object frmmSamples: TfrmmSamples
     Caption = 'Sample JSON'
     Align = alTop
     ParentFont = False
-    ExplicitLeft = 104
-    ExplicitTop = 160
-    ExplicitWidth = 225
   end
   object memJSON: TUnimMemo
     AlignWithMargins = True
     Left = 15
     Top = 36
-    Width = 290
+    Width = 307
     Height = 262
     Hint = ''
     Margins.Left = 15
@@ -66,7 +63,7 @@ object frmmSamples: TfrmmSamples
     AlignWithMargins = True
     Left = 15
     Top = 308
-    Width = 290
+    Width = 307
     Height = 23
     Hint = ''
     Margins.Left = 15
@@ -76,14 +73,12 @@ object frmmSamples: TfrmmSamples
     Caption = 'Sample Delphi'
     Align = alTop
     ParentFont = False
-    ExplicitLeft = 20
-    ExplicitTop = 291
   end
   object memDelphi: TUnimMemo
     AlignWithMargins = True
     Left = 15
     Top = 334
-    Width = 290
+    Width = 307
     Height = 262
     Hint = ''
     Margins.Left = 15
@@ -104,15 +99,13 @@ object frmmSamples: TfrmmSamples
       ''
       '    lblid.Caption := Root.Menu.Id;'
       '    lblvalue.Caption := Root.Menu.Value;'
-      
-        '    lblcount.Caption := IntToStr(Length(Root.Menu.Popup.Menuitem' +
-        '));'
+      '    lblcount.Caption := Root.Menu.Popup.Menuitem.Count.ToString;'
       
         '    lblfirstonclick.Caption := Root.Menu.Popup.Menuitem[0].Oncli' +
         'ck;'
       
-        '    lbllastonclick.Caption := Root.Menu.Popup.Menuitem[Length(Ro' +
-        'ot.Menu.Popup.Menuitem)-1].Onclick;'
+        '    lbllastonclick.Caption := Root.Menu.Popup.Menuitem[Root.Menu' +
+        '.Popup.Menuitem.Count-1].Onclick;'
       '  finally'
       '    Root.Free;'
       '  end;')
@@ -123,7 +116,7 @@ object frmmSamples: TfrmmSamples
     AlignWithMargins = True
     Left = 15
     Top = 611
-    Width = 290
+    Width = 307
     Height = 47
     Hint = ''
     Margins.Left = 15
@@ -138,7 +131,5 @@ object frmmSamples: TfrmmSamples
     ScreenMask.Message = 'Processing...'
     LayoutConfig.Cls = 'button-style'
     OnClick = btnGenerateClick
-    ExplicitLeft = 20
-    ExplicitTop = 402
   end
 end
