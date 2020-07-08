@@ -7,8 +7,6 @@
 
 *******************************************************************************}
 
-{$DEFINE FolderUni} //Adicione a pasta "falcon" dentro da pasta do uniGui (uni-XXX)
-
 unit UniFSBadgeText;
 
 interface
@@ -134,8 +132,6 @@ begin
 end;
 
 initialization
-  {$IFDEF FolderUni}
   UniAddJSLibrary(CDN+'falcon/js/falcon.components.min.js?v=2', CDNENABLED, [upoFolderUni, upoPlatformBoth]);
-  {$ENDIF}
 
 end.

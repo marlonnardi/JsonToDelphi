@@ -18,31 +18,30 @@ object frmGenerateUnit: TfrmGenerateUnit
     Align = alClient
     TabOrder = 0
     Caption = 'pnlUnit'
-    ExplicitHeight = 560
     object synx: TUniSyntaxEdit
       Left = 1
       Top = 1
       Width = 1022
-      Height = 495
+      Height = 489
       Hint = ''
       Font.Height = -13
       Font.Name = 'Courier New'
       Align = alClient
-      ExplicitHeight = 494
+      ExplicitHeight = 495
     end
     object pnlBottom: TUniPanel
       Left = 1
-      Top = 496
+      Top = 490
       Width = 1022
-      Height = 64
+      Height = 70
       Hint = ''
       Align = alBottom
       TabOrder = 2
       Caption = ''
-      ExplicitTop = 495
+      ExplicitTop = 491
       object lblUnitName: TUniLabel
         Left = 11
-        Top = 13
+        Top = 17
         Width = 55
         Height = 16
         Hint = ''
@@ -53,7 +52,7 @@ object frmGenerateUnit: TfrmGenerateUnit
       end
       object edtUnitName: TUniEdit
         Left = 72
-        Top = 6
+        Top = 10
         Width = 201
         Height = 25
         Hint = ''
@@ -64,7 +63,7 @@ object frmGenerateUnit: TfrmGenerateUnit
       end
       object lbl1: TUniLabel
         Left = 275
-        Top = 13
+        Top = 17
         Width = 24
         Height = 16
         Hint = ''
@@ -75,7 +74,7 @@ object frmGenerateUnit: TfrmGenerateUnit
       end
       object btnDownload: TUniFSButton
         Left = 311
-        Top = 4
+        Top = 8
         Width = 145
         Height = 34
         Hint = ''
@@ -94,7 +93,7 @@ object frmGenerateUnit: TfrmGenerateUnit
       end
       object chkandClassDTO: TUniCheckBox
         Left = 72
-        Top = 41
+        Top = 43
         Width = 201
         Height = 17
         Hint = ''

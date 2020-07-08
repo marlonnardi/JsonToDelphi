@@ -96,7 +96,7 @@ begin
 
       'All the amount collected will be kept for these purposes and others if they arise. </br></br>'+
       'suporte@falconsistemas.com.br </br></br>',
-      'fa fa-handshake-o',TTypeColor.blue, TTheme.supervan);
+      'fas fa-hands-helping',TTypeColor.blue, TTheme.supervan);
   finally
     FreeAndNil(Confirm);
   end;
@@ -173,7 +173,7 @@ var
 begin
   Confirm := TUniFSConfirm.Create(Self);
   try
-    Confirm.Alert(Title, Msg, 'fa fa-alert',TTypeColor.orange, TTheme.modern);
+    Confirm.Alert(Title, Msg, 'fas fa-exclamation-triangle',TTypeColor.orange, TTheme.modern);
   finally
     FreeAndNil(Confirm);
   end;

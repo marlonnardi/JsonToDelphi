@@ -7,8 +7,6 @@
 
 *******************************************************************************}
 
-{$DEFINE FolderUni} //Adicione a pasta "falcon" dentro da pasta do uniGui (uni-XXX)
-//{$DEFINE FontGlyphicons} //Define as fontes Glyphicons a serem utilizadas
 {$IF CompilerVersion >= 24.0} // XE3 ou superior
   {$LEGACYIFEND ON}
 {$IFEND}
@@ -22,17 +20,18 @@ uses
   UniFSBadgeText, UniFSCommon;
 
 const
-  FSAbout = 'www.falconsistemas.com.br';
-  PackageVersion = '1.3.1.135';
+  FSAbout = 'store.falconsistemas.com.br';
+  PackageVersion = '1.3.1.140';
 
 type
   TStyleButton = (Default, Primary, Success, Info, Warning, Danger, Purple, Butterfly, Black, Transparent,
   	GoogleNarrow, GoogleGreen, GoogleBlue, GoogleDanger, GoogleAccent, GoogleBlue2, GoogleBrow,
     GoogleSilver, GoogleYellow, GoogleOrange, GoogleBlack, GoogleBlue3, GoogleCustomMenu, GoogleDangerRound,
-    GoogleBlueRound, GoogleSilverRound, GoogleGreenRound, GoogleYellowRound, GoogleNarrowRound, TBDCRound);
+    GoogleBlueRound, GoogleSilverRound, GoogleGreenRound, GoogleYellowRound, GoogleNarrowRound, GoogleOrangeRound,
+    TBDCRound);
 
-  {$IF CompilerVersion >= 23.0} // XE2 ou superior
-  [ComponentPlatformsAttribute(pidWin32 or pidWin64)]
+  {$IF CompilerVersion >= 23.0}
+  [ComponentPlatformsAttribute(pidWin32 or pidWin64 {$IF CompilerVersion >= 34.0}or pidLinux64{$IFEND})]
   {$IFEND}
   TUniFSButton = class(TUniCustomBitBtn)
   private
@@ -215,11 +214,6 @@ begin
 end;
 
 initialization
-  {$IFDEF FolderUni}
-  UniAddCSSLibrary(CDN+'falcon/css/falcon.components.min.css?v=15', CDNENABLED, [upoFolderUni, upoPlatformBoth]);
-    {$IFDEF FontGlyphicons}
-    UniAddCSSLibrary(CDN+'falcon/css/falcon.fonts.glyphicons.min.css', CDNENABLED, [upoFolderUni, upoPlatformBoth]);
-    {$ENDIF}
-  {$ENDIF}
+  UniAddCSSLibrary(CDN+'falcon/css/falcon.components.css', CDNENABLED, [upoFolderUni, upoPlatformBoth]);
 
 end.

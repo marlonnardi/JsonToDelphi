@@ -4,7 +4,6 @@
                         www.falconsistemas.com.br
                       suporte@falconsistemas.com.br
                 Written by Marlon Nardi - ALL RIGHTS RESERVED.
-
   ******************************************************************************* }
 {$IF CompilerVersion >= 24.0} // XE3 ou superior
   {$LEGACYIFEND ON}
@@ -15,6 +14,9 @@
 unit UniFSCommon;
 
 interface
+
+uses
+  System.SysUtils, uniGUITypes, uniGUIClasses, uniGUIConst;
 
 const
   {$IFDEF CDN_FALCON}
@@ -29,5 +31,9 @@ const
   API_KEY_MAPS = '';
 
 implementation
+
+initialization
+  if StrToFloat(Copy(StringReplace(UNI_CURRENT_EXTJS_VERSION,'.','',[rfReplaceAll]),0,3)) < 700 then
+    UniAddCSSLibrary('https://use.fontawesome.com/releases/v5.13.1/css/all.css', True, [upoFolderUni, upoPlatformBoth]);
 
 end.

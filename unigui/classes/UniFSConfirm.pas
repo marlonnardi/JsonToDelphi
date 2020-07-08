@@ -9,7 +9,6 @@
 
 *******************************************************************************}
 
-{$DEFINE FolderUni} //Adicione a pasta "falcon" dentro da pasta do uniGui (uni-XXX)
 {$IF CompilerVersion >= 24.0} // XE3 ou superior
   {$LEGACYIFEND ON}
 {$IFEND}
@@ -23,8 +22,8 @@ uses
   uniGUIClasses, UniFSCommon;
 
 const
-  FSAbout = 'www.falconsistemas.com.br';
-  PackageVersion = '1.0.1.34';
+  FSAbout = 'store.falconsistemas.com.br';
+  PackageVersion = '1.0.2.45';
 
 type
   TTypeConfirm = (Confirm, ConfirmOther, Alert, Dialog, Prompt);
@@ -65,8 +64,8 @@ type
 
   end;
 
-  {$IF CompilerVersion >= 23.0} // XE2 ou superior
-  [ComponentPlatformsAttribute(pidWin32 or pidWin64)]
+  {$IF CompilerVersion >= 23.0}
+  [ComponentPlatformsAttribute(pidWin32 or pidWin64 {$IF CompilerVersion >= 34.0}or pidLinux64{$IFEND})]
   {$IFEND}
   TUniFSConfirm = class(TUniComponent)
   protected
@@ -100,12 +99,15 @@ type
     FCloseIcon: Boolean;
     FIcon: string;
     FRTL: Boolean;
+    FboxWidth: string;
+    FBackgroundDismiss: Boolean;
     FButtonTextConfirm: string;
     FButtonTextCancel: string;
     FButtonTextOther: string;
+    FButtonTextOK: string;
+    FButtonEnterConfirm: Boolean;
     FScreenMask: TUniFSScreenMask;
     FPromptType: TUniFSPrompt;
-    FboxWidth: string;
     FMsgPrompt: string;
 
     FButtonCallBack: TButtonCallBack;
@@ -122,10 +124,13 @@ type
     property Icon: string read FIcon write FIcon;
     property RTL: Boolean read FRTL write FRTL;
     property boxWidth: string read FboxWidth write FboxWidth;
+    property BackgroundDismiss: Boolean read FBackgroundDismiss write FBackgroundDismiss;
 
     property ButtonTextConfirm: string read FButtonTextConfirm write FButtonTextConfirm;
     property ButtonTextCancel: string read FButtonTextCancel write FButtonTextCancel;
     property ButtonTextOther: string read FButtonTextOther write FButtonTextOther;
+    property ButtonTextOK: string read FButtonTextOK write FButtonTextOK;
+    property ButtonEnterConfirm: Boolean read FButtonEnterConfirm write FButtonEnterConfirm;
 
     property ScreenMask: TUniFSScreenMask read FScreenMask write FScreenMask;
     property PromptType: TUniFSPrompt read FPromptType write FPromptType;
@@ -137,7 +142,10 @@ type
     destructor Destroy; override;
 
     procedure Clear;
-    procedure ShowMask(Msg: string);
+    procedure ShowMask(Msg: string); overload;
+    procedure ShowMask(Msg: string; Percent: Integer); overload;
+    procedure ShowMask(Msg, JSName: string); overload;
+    procedure ShowMaskUpdate(Msg: string; Percent: Integer); overload;
     procedure RemoveMask;
 
     procedure Alert(const Title, Content: string); overload;
@@ -149,7 +157,6 @@ type
     procedure Question(const Title, Content, Icon: string; BC: TButtonCallBack; const TP: TTypeConfirm = Confirm); overload;
     procedure Question(const Title, Content, Icon: string; Color: TTypeColor; Theme: TTheme; BC: TButtonCallBack; const TP: TTypeConfirm = Confirm); overload;
     procedure Mask(const Msg: string; M: TMaskCallBack);
-
   end;
 
 procedure Register;
@@ -211,6 +218,7 @@ begin
       Append('typeAnimated: '+BoolToStr(FTypeAnimated)+', ');
       Append('draggable: '+BoolToStr(FDraggable)+', ');
       Append('escapeKey: '+BoolToStr(FEscapeKey)+', ');
+      Append('backgroundDismiss: '+BoolToStr(FBackgroundDismiss)+', ');
       Append('rtl: '+BoolToStr(FRTL)+', ');
       Append('useBootstrap: false, ');
       Append('boxWidth: '''+FboxWidth+''', ');
@@ -219,6 +227,8 @@ begin
       begin
         Append('buttons: {');
         Append('  confirma: { ');
+        if FButtonEnterConfirm then
+          Append('   keys: ["enter"], ');
         Append('     text: '''+FButtonTextConfirm+''', ');
         Append('     action: function() {');
         if ScreenMask.Enabled then
@@ -268,6 +278,8 @@ begin
 
         Append('buttons: {');
         Append('  formSubmit: { ');
+        if FButtonEnterConfirm then
+          Append('   keys: ["enter"], ');
         Append('     text: '''+FButtonTextConfirm+''', ');
         Append('     action: function() {');
         if FPromptType.RequiredField then
@@ -311,7 +323,10 @@ begin
       if (TypeConfirm = TTypeConfirm.Alert) and (Assigned(FButtonCallBack)) then
       begin
         Append('buttons: {');
-        Append('  OK: { ');
+        Append('  specialKey: { ');
+        Append('     text: '''+Self.ButtonTextOK+''', ');
+        if FButtonEnterConfirm then
+          Append('   keys: ["enter"], ');
         Append('     action: function() {');
         if ScreenMask.Enabled then
           Append('      $(''body'').preloader({text: '''+ScreenMask.Text+'''});  ');
@@ -319,7 +334,16 @@ begin
         Append('     } ');
         Append('  }');
         Append('}');
+      end else if TypeConfirm = TTypeConfirm.Alert then
+      begin
+        Append('buttons: {');
+        Append('  specialKey: { ');
+        Append('     text: '''+Self.ButtonTextOK+''', ');
+        Append('     keys: ["enter"] ');
+        Append('  }');
+        Append('}');
       end;
+
     end;
 
     Result := StrBuilder.ToString;
@@ -347,8 +371,10 @@ begin
   FButtonTextConfirm := 'Confirma';
   FButtonTextCancel := 'Cancela';
   FButtonTextOther := 'Outro';
+  FButtonTextOK := 'Ok';
+  FButtonEnterConfirm := True;
   FboxWidth := '420px';
-  FIcon := 'fa fa-smile-o';
+  FIcon := 'far fa-smile-wink';
 end;
 
 destructor TUniFSConfirm.Destroy;
@@ -494,6 +520,24 @@ begin
   UniSession.Synchronize();
 end;
 
+procedure TUniFSConfirm.ShowMask(Msg, JSName: string);
+begin
+  Self.ExecJS('$('''+JSName+''').preloader({text: '''+Msg+'''});');
+  UniSession.Synchronize();
+end;
+
+procedure TUniFSConfirm.ShowMask(Msg: string; Percent: Integer);
+begin
+  Self.ExecJS('$(''body'').preloader({text: '''+Msg+''',percent:'''+IntToStr(Percent)+'''});');
+  UniSession.Synchronize();
+end;
+
+procedure TUniFSConfirm.ShowMaskUpdate(Msg: string; Percent: Integer);
+begin
+  Self.ExecJS('$(''body'').preloader(''update'',{text: '''+Msg+''',percent:'''+IntToStr(Percent)+'''});');
+  UniSession.Synchronize();
+end;
+
 procedure TUniFSConfirm.ShowMask(Msg: string);
 begin
   Self.ExecJS('$(''body'').preloader({text: '''+Msg+'''});');
@@ -548,11 +592,9 @@ begin
 end;
 
 initialization
-  {$IFDEF FolderUni}
-  UniAddCSSLibrary(CDN+'falcon/css/jquery-confirm.min.css?v=2', CDNENABLED, [upoFolderUni, upoPlatformBoth]);
-  UniAddCSSLibrary(CDN+'falcon/css/preloader.css?v=2', CDNENABLED, [upoFolderUni, upoPlatformBoth]);
-  UniAddCSSLibrary(CDN+'falcon/css/jquery-confirm-style.css?v=2', CDNENABLED, [upoFolderUni, upoPlatformBoth]);
-  UniAddJSLibrary(CDN+'falcon/js/jquery-confirm.min.js?v=2', CDNENABLED, [upoFolderUni, upoPlatformBoth]);
-  UniAddJSLibrary(CDN+'falcon/js/jquery.preloader.min.js?v=2', CDNENABLED, [upoFolderUni, upoPlatformBoth]);
-  {$ENDIF}
+  UniAddCSSLibrary(CDN+'falcon/css/jquery-confirm.min.css?v=3', CDNENABLED, [upoFolderUni, upoPlatformBoth]);
+  UniAddCSSLibrary(CDN+'falcon/css/preloader.css?v=3', CDNENABLED, [upoFolderUni, upoPlatformBoth]);
+  UniAddCSSLibrary(CDN+'falcon/css/jquery-confirm-style.css?v=8', CDNENABLED, [upoFolderUni, upoPlatformBoth]);
+  UniAddJSLibrary(CDN+'falcon/js/jquery-confirm.min.js?v=3', CDNENABLED, [upoFolderUni, upoPlatformBoth]);
+  UniAddJSLibrary(CDN+'falcon/js/jquery.preloader.js?v=1', CDNENABLED, [upoFolderUni, upoPlatformBoth]);
 end.

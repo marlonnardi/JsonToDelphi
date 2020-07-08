@@ -165,7 +165,7 @@ object MainForm: TMainForm
         Hint = ''
         TextConversion = txtHTML
         AutoSize = False
-        Caption = '<i class="fa fa-lg fa-hand-o-right" aria-hidden="true"></i>'
+        Caption = '<i class="far fa-lg fa-hand-point-right" aria-hidden="true"></i>'
         Anchors = [akTop, akRight]
         ParentFont = False
         Font.Color = clBlack
@@ -218,7 +218,7 @@ object MainForm: TMainForm
         Hint = ''
         TextConversion = txtHTML
         AutoSize = False
-        Caption = '<i class="fa fa-lg fa-github" aria-hidden="true"></i>'
+        Caption = '<i class="fab fa-lg fa-github" aria-hidden="true"></i>'
         Anchors = [akTop, akRight]
         ParentFont = False
         Font.Color = clBlack
@@ -235,7 +235,7 @@ object MainForm: TMainForm
         Hint = ''
         TextConversion = txtHTML
         AutoSize = False
-        Caption = '<i class="fa fa-lg fa-hand-o-right" aria-hidden="true"></i>'
+        Caption = '<i class="far fa-lg fa-hand-point-right" aria-hidden="true"></i>'
         Anchors = [akTop, akRight]
         ParentFont = False
         Font.Color = clBlack
@@ -252,7 +252,7 @@ object MainForm: TMainForm
         Hint = ''
         TextConversion = txtHTML
         AutoSize = False
-        Caption = '<i class="fa fa-lg fa-github" aria-hidden="true"></i>'
+        Caption = '<i class="fab fa-lg fa-github" aria-hidden="true"></i>'
         Anchors = [akTop, akRight]
         ParentFont = False
         Font.Color = clBlack
