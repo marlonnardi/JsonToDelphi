@@ -7,7 +7,7 @@ uses
   Dialogs, uniGUITypes, uniGUIAbstractClasses, uniGUIClasses, uniGUIRegClasses,
   uniGUIForm, uniLabel, uniGUIBaseClasses, uniPanel, uniMemo, uniHTMLFrame,
   uniSplitter, uniRadioGroup, uniButton, uniBitBtn, UniFSButton, uniImage,
-  UniFSConfirm, Pkg.Json.Mapper, Pkg.Json.DTO;
+  UniFSConfirm, UniFSPopup, Pkg.Json.Mapper, Pkg.Json.DTO;
 
 type
   TMainForm = class(TUniForm)
@@ -41,6 +41,7 @@ type
     lbl7: TUniLabel;
     lbl8: TUniLabel;
     lblVerionPrior: TUniLabel;
+    btnCollaborators: TUniFSButton;
     procedure UniFormAfterShow(Sender: TObject);
     procedure UniFormClose(Sender: TObject; var Action: TCloseAction);
     procedure UniFormAjaxEvent(Sender: TComponent; EventName: string; Params: TUniStrings);
@@ -48,6 +49,11 @@ type
     procedure btn1Click(Sender: TObject);
     procedure btnSampleClick(Sender: TObject);
     procedure lblVerionPriorClick(Sender: TObject);
+    procedure UniFormCreate(Sender: TObject);
+    procedure UniFormDestroy(Sender: TObject);
+  protected
+    Popup: TUniFSPopup;
+    procedure LoadCoallaborators;
   private
     { Private declarations }
     jm : TPkgJsonMapper;
@@ -167,6 +173,25 @@ begin
   UniSession.UrlRedirect('https://x_versionprior_x.jsontodelphi.com/');
 end;
 
+procedure TMainForm.LoadCoallaborators;
+var
+  SB: TStringBuilder;
+begin
+  SB := TStringBuilder.Create;
+  try
+    SB.Append('<div style=''margin:0px 0px 8px 0px'';>List of Contributors</div>');
+    SB.Append('<div class=''list-group''> ');
+    SB.Append('<a class=''fs-group-item''><i class=''far fa-thumbs-up fa-lg text-green''></i>&nbsp; 2020-07-06 - DEMORSOFT  <b>U$ 10,00</b> </a>');
+    SB.Append('<a class=''fs-group-item''><i class=''far fa-thumbs-up fa-lg text-green''></i>&nbsp; 2020-05-31 - Gordon Niessen <b>U$ 10,00</b> </a>');
+    SB.Append('<a class=''fs-group-item''><i class=''far fa-thumbs-up fa-lg text-green''></i>&nbsp; 2018-08-30 - Toni Puhakka <b>U$ 10,00</b> </a>');
+    SB.Append('</div> ');
+
+    Popup.SetHtml(SB.ToString);
+  finally
+    FreeAndNil(SB);
+  end;
+end;
+
 procedure TMainForm.ShowAlert(Title, Msg: string);
 var
   Confirm: TUniFSConfirm;
@@ -197,6 +222,21 @@ procedure TMainForm.UniFormClose(Sender: TObject; var Action: TCloseAction);
 begin
   if Assigned(jm) then
     FreeAndNil(jm);
+end;
+
+procedure TMainForm.UniFormCreate(Sender: TObject);
+begin
+  Popup := TUniFSPopup.Create(Self);
+  Popup.Width := 300;
+  Popup.RelativeY := 15;
+  Popup.RelativeX := 0;
+  Popup.Target := btnCollaborators;
+  LoadCoallaborators;
+end;
+
+procedure TMainForm.UniFormDestroy(Sender: TObject);
+begin
+  FreeAndNil(Popup);
 end;
 
 initialization

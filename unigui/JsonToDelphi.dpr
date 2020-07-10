@@ -42,7 +42,8 @@ uses
   uFrmGenerateUnit in 'web\uFrmGenerateUnit.pas' {frmGenerateUnit: TUniForm},
   uFrmSamples in 'web\uFrmSamples.pas' {frmSamples: TUniForm},
   uFrmWebNavigate in 'web\uFrmWebNavigate.pas' {frmWebNavigate: TUniForm},
-  uFrmmSamples in 'mobile\uFrmmSamples.pas' {frmmSamples: TUnimForm};
+  uFrmmSamples in 'mobile\uFrmmSamples.pas' {frmmSamples: TUnimForm},
+  UniFSPopup in 'classes\UniFSPopup.pas';
 
 {$R *.res}
 

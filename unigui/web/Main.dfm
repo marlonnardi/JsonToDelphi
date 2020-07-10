@@ -12,6 +12,8 @@ object MainForm: TMainForm
   MonitoredKeys.Keys = <>
   OnAfterShow = UniFormAfterShow
   OnAjaxEvent = UniFormAjaxEvent
+  OnCreate = UniFormCreate
+  OnDestroy = UniFormDestroy
   DesignSize = (
     1080
     624)
@@ -341,7 +343,7 @@ object MainForm: TMainForm
         62)
       object lblDoacao: TUniLabel
         AlignWithMargins = True
-        Left = 820
+        Left = 778
         Top = 13
         Width = 142
         Height = 42
@@ -368,7 +370,9 @@ object MainForm: TMainForm
         Height = 34
         Hint = ''
         StyleButton = Primary
-        CaptionIconFont = '<i class="fa fa-check-circle" aria-hidden="true"></i>'
+        CaptionIconFont = 
+          '<i class="fa fa-check-circle" aria-hidden="true"; style="font-si' +
+          'ze: 14px;"></i>'
         BadgeText.Text = '0'
         BadgeText.TextColor = '#FFFFFF'
         BadgeText.TextSize = 10
@@ -413,17 +417,20 @@ object MainForm: TMainForm
         Top = 17
         Width = 38
         Height = 34
-        Hint = ''
+        Hint = 'About donate'
+        ShowHint = True
+        ParentShowHint = False
         StyleButton = Default
+        CaptionIconFont = '<i class="fas fa-hands-helping" aria-hidden="true"></i>'
         BadgeText.Text = '0'
         BadgeText.TextColor = '#FFFFFF'
         BadgeText.TextSize = 10
         BadgeText.TextStyle = 'bold'
         BadgeText.BackgroundColor = '#D50000'
-        Caption = '?'
+        Caption = ''
         ParentFont = False
         Font.Color = clBlack
-        Font.Height = -13
+        Font.Height = -16
         TabOrder = 4
         OnClick = btn1Click
       end
@@ -447,6 +454,27 @@ object MainForm: TMainForm
         ScreenMask.WaitData = True
         ScreenMask.Message = 'Opening...'
         OnClick = btnSampleClick
+      end
+      object btnCollaborators: TUniFSButton
+        Left = 930
+        Top = 17
+        Width = 38
+        Height = 34
+        Hint = 'List of Contributors'
+        ShowHint = True
+        ParentShowHint = False
+        StyleButton = Default
+        CaptionIconFont = '<i class="fas fa-comment-dollar" aria-hidden="true"></i>'
+        BadgeText.Text = '0'
+        BadgeText.TextColor = '#FFFFFF'
+        BadgeText.TextSize = 10
+        BadgeText.TextStyle = 'bold'
+        BadgeText.BackgroundColor = '#D50000'
+        Caption = ''
+        ParentFont = False
+        Font.Color = clGreen
+        Font.Height = -16
+        TabOrder = 6
       end
     end
     object spl1: TUniSplitter
