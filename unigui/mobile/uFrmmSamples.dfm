@@ -2,7 +2,7 @@ object frmmSamples: TfrmmSamples
   Left = 0
   Top = 0
   ClientHeight = 667
-  ClientWidth = 337
+  ClientWidth = 354
   Caption = 'Sample Use'
   OnShow = UnimFormShow
   AutoHeight = False
@@ -21,7 +21,7 @@ object frmmSamples: TfrmmSamples
     AlignWithMargins = True
     Left = 15
     Top = 10
-    Width = 307
+    Width = 324
     Height = 23
     Hint = ''
     Margins.Left = 15
@@ -36,7 +36,7 @@ object frmmSamples: TfrmmSamples
     AlignWithMargins = True
     Left = 15
     Top = 36
-    Width = 307
+    Width = 324
     Height = 262
     Hint = ''
     Margins.Left = 15
@@ -63,7 +63,7 @@ object frmmSamples: TfrmmSamples
     AlignWithMargins = True
     Left = 15
     Top = 308
-    Width = 307
+    Width = 324
     Height = 23
     Hint = ''
     Margins.Left = 15
@@ -78,7 +78,7 @@ object frmmSamples: TfrmmSamples
     AlignWithMargins = True
     Left = 15
     Top = 334
-    Width = 307
+    Width = 324
     Height = 262
     Hint = ''
     Margins.Left = 15
@@ -116,7 +116,7 @@ object frmmSamples: TfrmmSamples
     AlignWithMargins = True
     Left = 15
     Top = 611
-    Width = 307
+    Width = 324
     Height = 47
     Hint = ''
     Margins.Left = 15
