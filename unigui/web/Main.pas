@@ -7,7 +7,7 @@ uses
   Dialogs, uniGUITypes, uniGUIAbstractClasses, uniGUIClasses, uniGUIRegClasses,
   uniGUIForm, uniLabel, uniGUIBaseClasses, uniPanel, uniMemo, uniHTMLFrame,
   uniSplitter, uniRadioGroup, uniButton, uniBitBtn, UniFSButton, uniImage,
-  UniFSConfirm, UniFSPopup, Pkg.Json.Mapper, Pkg.Json.DTO;
+  UniFSConfirm, UniFSPopup, Pkg.Json.Mapper, Pkg.Json.DTO, uniTimer;
 
 type
   TMainForm = class(TUniForm)
@@ -42,6 +42,8 @@ type
     lbl8: TUniLabel;
     lblVerionPrior: TUniLabel;
     btnCollaborators: TUniFSButton;
+    tmr: TUniTimer;
+    Confirm: TUniFSConfirm;
     procedure UniFormAfterShow(Sender: TObject);
     procedure UniFormClose(Sender: TObject; var Action: TCloseAction);
     procedure UniFormAjaxEvent(Sender: TComponent; EventName: string; Params: TUniStrings);
@@ -51,6 +53,7 @@ type
     procedure lblVerionPriorClick(Sender: TObject);
     procedure UniFormCreate(Sender: TObject);
     procedure UniFormDestroy(Sender: TObject);
+    procedure tmrTimer(Sender: TObject);
   protected
     Popup: TUniFSPopup;
     procedure LoadCoallaborators;
@@ -204,6 +207,20 @@ begin
   end;
 end;
 
+procedure TMainForm.tmrTimer(Sender: TObject);
+begin
+  Confirm.Alert(
+    'This site will be disabled.<br>'+
+    '-- <br>'+
+    'Este site será desativado.',
+    'We have not received any donations to keep the site up and running since 2020-07-06. <br><br>'+
+    'If you like this site and use it frequently, make a donation to keep it up and running! <br> <br>'+
+    '-- <br>'+
+    'Não recebemos nenhuma doação para manter o site no ar desde 2020-07-06. <br><br>'+
+    'Caso voce goste deste site e utiliza com frequência, faça uma doação, para mante-lo no ar!',
+    'fas fa-hands-helping',TTypeColor.red, TTheme.modern);
+end;
+
 procedure TMainForm.UniFormAfterShow(Sender: TObject);
 begin
   DefineRegrasLayout;
@@ -232,6 +249,8 @@ begin
   Popup.RelativeX := 0;
   Popup.Target := btnCollaborators;
   LoadCoallaborators;
+
+  tmr.Enabled := True;
 end;
 
 procedure TMainForm.UniFormDestroy(Sender: TObject);

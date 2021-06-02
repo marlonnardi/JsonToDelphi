@@ -556,4 +556,41 @@ object MainForm: TMainForm
       OnClick = lblVerionPriorClick
     end
   end
+  object tmr: TUniTimer
+    Interval = 3000
+    RunOnce = True
+    ClientEvent.Strings = (
+      'function(sender)'
+      '{'
+      ' '
+      '}')
+    OnTimer = tmrTimer
+    Left = 509
+    Top = 248
+  end
+  object Confirm: TUniFSConfirm
+    Theme = modern
+    TypeColor = blue
+    TypeAnimated = False
+    Draggable = False
+    EscapeKey = False
+    CloseIcon = False
+    Icon = 'far fa-smile-wink'
+    RTL = False
+    boxWidth = '420px'
+    BackgroundDismiss = False
+    ButtonTextConfirm = 'Confirma'
+    ButtonTextCancel = 'Cancela'
+    ButtonTextOther = 'Outro'
+    ButtonTextOK = 'Ok'
+    ButtonEnterConfirm = True
+    ScreenMask.Enabled = False
+    ScreenMask.Text = 'Processing'
+    PromptType.TypePrompt = text
+    PromptType.RequiredField = False
+    PromptType.TextRequiredField = 'Field riquired'
+    PromptType.CharCase = Normal_
+    Left = 509
+    Top = 320
+  end
 end
