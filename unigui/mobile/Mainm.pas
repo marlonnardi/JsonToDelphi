@@ -8,7 +8,7 @@ uses
   uniGUIClasses, uniGUImClasses, uniGUIRegClasses, uniGUIForm, uniGUImForm, uniGUImJSForm,
   uniGUIBaseClasses, uniMemo, unimMemo, unimScrollBox, uniButton, unimButton,
   uniPanel, uniHTMLFrame, unimHTMLFrame, uniImage, unimImage, unimPanel, Pkg.Json.DTO, Pkg.Json.Mapper,
-  uniLabel, unimLabel;
+  uniLabel, unimLabel, UniFSConfirm, uniTimer;
 
 type
   TMainmForm = class(TUnimForm)
@@ -20,12 +20,15 @@ type
     pnlFalcon: TUnimPanel;
     imgFalcon: TUnimImage;
     lblDoacao: TUnimLabel;
+    Confirm: TUniFSConfirm;
+    tmr: TUniTimer;
     procedure UnimFormShow(Sender: TObject);
     procedure UnimFormTitleButtonClick(Sender: TUnimTitleButton);
     procedure UnimFormResize(Sender: TObject);
     procedure btnGenerateClick(Sender: TObject);
     procedure imgFalconClick(Sender: TObject);
     procedure btnSampleClick(Sender: TObject);
+    procedure tmrTimer(Sender: TObject);
   private
     { Private declarations }
     jm : TPkgJsonMapper;
@@ -43,7 +46,7 @@ implementation
 {$R *.dfm}
 
 uses
-  uniGUIVars, MainModule, uniGUIApplication, UniFSConfirm, uFrmmGenerateUnit, uFrmmNavigation, uFrmmSamples;
+  uniGUIVars, MainModule, uniGUIApplication, uFrmmGenerateUnit, uFrmmNavigation, uFrmmSamples;
 
 function MainmForm: TMainmForm;
 begin
@@ -104,7 +107,6 @@ begin
   '<input type="hidden" name="cmd" value="_s-xclick" /> '+
   '<input type="hidden" name="hosted_button_id" value="Z3JZ3GU9SGCLU" /> '+
   '<input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif" border="0" name="submit" title="PayPal - The safer, easier way to pay online!" alt="Donate with PayPal button" /> '+
-  '<img alt="" border="0" src="https://www.paypal.com/en_BR/i/scr/pixel.gif" width="1" height="1" /> '+
   '</form> ';
 end;
 
@@ -126,6 +128,18 @@ begin
   finally
     FreeAndNil(Confirm);
   end;
+end;
+
+procedure TMainmForm.tmrTimer(Sender: TObject);
+begin
+  Confirm.boxWidth := '90%';
+  Confirm.Alert(
+    'This site will be disabled.<br>',
+    'If you like this site and use it frequently, <b>make a donation to keep it up and running !</b> <br> <br>'+
+    lblDoacao.Caption+'</br>'+
+    'Thanks</br>'+
+    '<i class=''fas fa-medal''></i> <b>Christian Späth</b> $15,00 USD',
+    'fas fa-hands-helping',TTypeColor.blue, TTheme.modern);
 end;
 
 procedure TMainmForm.UnimFormResize(Sender: TObject);

@@ -183,6 +183,7 @@ begin
   try
     SB.Append('<div style=''margin:0px 0px 8px 0px'';>List of Contributors</div>');
     SB.Append('<div class=''list-group''> ');
+    SB.Append('<a class=''fs-group-item''><i class=''far fa-thumbs-up fa-lg text-green''></i>&nbsp; 2021-06-16 - Christian Späth <b>U$ 15,00</b> </a>');
     SB.Append('<a class=''fs-group-item''><i class=''far fa-thumbs-up fa-lg text-green''></i>&nbsp; 2020-07-06 - DEMORSOFT  <b>U$ 10,00</b> </a>');
     SB.Append('<a class=''fs-group-item''><i class=''far fa-thumbs-up fa-lg text-green''></i>&nbsp; 2020-05-31 - Gordon Niessen <b>U$ 10,00</b> </a>');
     SB.Append('<a class=''fs-group-item''><i class=''far fa-thumbs-up fa-lg text-green''></i>&nbsp; 2018-08-30 - Toni Puhakka <b>U$ 10,00</b> </a>');
@@ -208,17 +209,17 @@ end;
 
 procedure TMainForm.tmrTimer(Sender: TObject);
 begin
-  Confirm.boxWidth := '660px';
+  Confirm.boxWidth := '670px';
   Confirm.Alert(
     'This site will be disabled.<br>'+
     '-- <br>'+
     'Este site será desativado.',
-    'We have not received any donations to keep the site up and running since 06/07/2020. <br><br>'+
     'If you like this site and use it frequently, <b>make a donation to keep it up and running !</b> <br> <br>'+
     '-- <br>'+
-    'Não recebemos nenhuma doação para manter o site no ar desde 06/07/2020. <br><br>'+
     'Caso voce goste deste site e utiliza com frequência, <b>faça uma doação, para mante-lo no ar !</b> <br><br>'+
-    lblDoacao.Caption,
+    lblDoacao.Caption+'</br>'+
+    'Thanks</br>'+
+    '<i class=''fas fa-medal''></i> <b>Christian Späth</b> $15,00 USD',
     'fas fa-hands-helping',TTypeColor.blue, TTheme.modern);
 end;
 

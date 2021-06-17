@@ -4,8 +4,8 @@ object MainmForm: TMainmForm
   ClientHeight = 706
   ClientWidth = 320
   Caption = 'jsontodelphi'
-  OnShow = UnimFormShow
   Color = clWhite
+  OnShow = UnimFormShow
   OnResize = UnimFormResize
   TitleFontColor = 9264680
   CloseButton.Visible = False
@@ -44,7 +44,6 @@ object MainmForm: TMainmForm
     Align = alClient
     Color = clWhite
     ScrollIndicators = False
-    ExplicitHeight = 721
     ScrollHeight = 677
     ScrollWidth = 0
     object memJson: TUnimMemo
@@ -136,7 +135,6 @@ object MainmForm: TMainmForm
       Align = alTop
       Color = clWhite
       BorderStyle = ubsNone
-      ExplicitTop = 601
       object imgFalcon: TUnimImage
         Left = 52
         Top = 14
@@ -165,7 +163,43 @@ object MainmForm: TMainmForm
       Caption = '<b>teste</b> teste'
       Align = alTop
       ParentFont = False
-      ExplicitTop = 601
     end
+  end
+  object Confirm: TUniFSConfirm
+    Theme = modern
+    TypeColor = blue
+    TypeAnimated = False
+    Draggable = False
+    EscapeKey = False
+    CloseIcon = False
+    Icon = 'far fa-smile-wink'
+    RTL = False
+    boxWidth = '420px'
+    BackgroundDismiss = False
+    ButtonTextConfirm = 'Confirma'
+    ButtonTextCancel = 'Cancela'
+    ButtonTextOther = 'Outro'
+    ButtonTextOK = 'Ok'
+    ButtonEnterConfirm = True
+    ScreenMask.Enabled = False
+    ScreenMask.Text = 'Processing'
+    PromptType.TypePrompt = text
+    PromptType.RequiredField = False
+    PromptType.TextRequiredField = 'Field riquired'
+    PromptType.CharCase = Normal_
+    Left = 144
+    Top = 246
+  end
+  object tmr: TUniTimer
+    Interval = 3000
+    RunOnce = True
+    ClientEvent.Strings = (
+      'function(sender)'
+      '{'
+      ' '
+      '}')
+    OnTimer = tmrTimer
+    Left = 144
+    Top = 304
   end
 end
