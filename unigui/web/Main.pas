@@ -163,7 +163,6 @@ begin
   '<input type="hidden" name="cmd" value="_s-xclick" /> '+
   '<input type="hidden" name="hosted_button_id" value="Z3JZ3GU9SGCLU" /> '+
   '<input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif" border="0" name="submit" title="PayPal - The safer, easier way to pay online!" alt="Donate with PayPal button" /> '+
-  '<img alt="" border="0" src="https://www.paypal.com/en_BR/i/scr/pixel.gif" width="1" height="1" /> '+
   '</form> ';
 
   lblVersion.Caption := TSistema.GetVersao(UniServerModule.StartPath + '\jsontodelphi.dll');
@@ -209,16 +208,18 @@ end;
 
 procedure TMainForm.tmrTimer(Sender: TObject);
 begin
+  Confirm.boxWidth := '660px';
   Confirm.Alert(
     'This site will be disabled.<br>'+
     '-- <br>'+
     'Este site será desativado.',
-    'We have not received any donations to keep the site up and running since 2020-07-06. <br><br>'+
-    'If you like this site and use it frequently, make a donation to keep it up and running! <br> <br>'+
+    'We have not received any donations to keep the site up and running since 06/07/2020. <br><br>'+
+    'If you like this site and use it frequently, <b>make a donation to keep it up and running !</b> <br> <br>'+
     '-- <br>'+
-    'Não recebemos nenhuma doação para manter o site no ar desde 2020-07-06. <br><br>'+
-    'Caso voce goste deste site e utiliza com frequência, faça uma doação, para mante-lo no ar!',
-    'fas fa-hands-helping',TTypeColor.red, TTheme.modern);
+    'Não recebemos nenhuma doação para manter o site no ar desde 06/07/2020. <br><br>'+
+    'Caso voce goste deste site e utiliza com frequência, <b>faça uma doação, para mante-lo no ar !</b> <br><br>'+
+    lblDoacao.Caption,
+    'fas fa-hands-helping',TTypeColor.blue, TTheme.modern);
 end;
 
 procedure TMainForm.UniFormAfterShow(Sender: TObject);
