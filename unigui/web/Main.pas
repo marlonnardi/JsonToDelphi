@@ -183,6 +183,7 @@ begin
   try
     SB.Append('<div style=''margin:0px 0px 8px 0px'';>List of Contributors</div>');
     SB.Append('<div class=''list-group''> ');
+    SB.Append('<a class=''fs-group-item''><i class=''far fa-thumbs-up fa-lg text-green''></i>&nbsp; 2021-06-25 - Pierre Demers <b>U$ 30,00</b> </a>');
     SB.Append('<a class=''fs-group-item''><i class=''far fa-thumbs-up fa-lg text-green''></i>&nbsp; 2021-06-16 - Christian Späth <b>U$ 15,00</b> </a>');
     SB.Append('<a class=''fs-group-item''><i class=''far fa-thumbs-up fa-lg text-green''></i>&nbsp; 2020-07-06 - DEMORSOFT  <b>U$ 10,00</b> </a>');
     SB.Append('<a class=''fs-group-item''><i class=''far fa-thumbs-up fa-lg text-green''></i>&nbsp; 2020-05-31 - Gordon Niessen <b>U$ 10,00</b> </a>');
@@ -219,6 +220,7 @@ begin
     'Caso voce goste deste site e utiliza com frequência, <b>faça uma doação, para mante-lo no ar !</b> <br><br>'+
     lblDoacao.Caption+'</br>'+
     'Thanks</br>'+
+    '<i class=''fas fa-medal''></i> <b>Pierre Demers</b> $30,00 USD</br> '+
     '<i class=''fas fa-medal''></i> <b>Christian Späth</b> $15,00 USD',
     'fas fa-hands-helping',TTypeColor.blue, TTheme.modern);
 end;
