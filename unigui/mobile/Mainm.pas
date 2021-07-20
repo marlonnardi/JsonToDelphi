@@ -134,7 +134,7 @@ procedure TMainmForm.tmrTimer(Sender: TObject);
 begin
   Confirm.boxWidth := '90%';
   Confirm.Alert(
-    'This site will be disabled.<br>',
+    'Thanks for the donations',
     'If you like this site and use it frequently, <b>make a donation to keep it up and running !</b> <br> <br>'+
     lblDoacao.Caption+'</br>'+
     'Thanks</br>'+

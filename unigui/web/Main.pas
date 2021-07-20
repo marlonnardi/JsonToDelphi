@@ -212,9 +212,7 @@ procedure TMainForm.tmrTimer(Sender: TObject);
 begin
   Confirm.boxWidth := '670px';
   Confirm.Alert(
-    'This site will be disabled.<br>'+
-    '-- <br>'+
-    'Este site será desativado.',
+    'Thanks for the donations',
     'If you like this site and use it frequently, <b>make a donation to keep it up and running !</b> <br> <br>'+
     '-- <br>'+
     'Caso voce goste deste site e utiliza com frequência, <b>faça uma doação, para mante-lo no ar !</b> <br><br>'+
