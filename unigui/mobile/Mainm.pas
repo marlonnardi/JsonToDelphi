@@ -1,4 +1,4 @@
-unit Mainm;
+﻿unit Mainm;
 
 interface
 
@@ -138,8 +138,9 @@ begin
     'If you like this site and use it frequently, <b>make a donation to keep it up and running !</b> <br> <br>'+
     lblDoacao.Caption+'</br>'+
     'Thanks</br>'+
+    '<i class=''fas fa-medal''></i> <b>Геннадий Малинин</b> $5,00 USD</br> '+
     '<i class=''fas fa-medal''></i> <b>Pierre Demers</b> $30,00 USD</br> '+
-    '<i class=''fas fa-medal''></i> <b>Christian Sp�th</b> $15,00 USD',
+    '<i class=''fas fa-medal''></i> <b>Christian Späth</b> $15,00 USD',
     'fas fa-hands-helping',TTypeColor.blue, TTheme.modern);
 end;
 
