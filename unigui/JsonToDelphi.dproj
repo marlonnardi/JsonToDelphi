@@ -167,8 +167,8 @@
         <VerInfo_Locale>1033</VerInfo_Locale>
         <VerInfo_MajorVer>2</VerInfo_MajorVer>
         <VerInfo_MinorVer>1</VerInfo_MinorVer>
-        <VerInfo_Keys>CompanyName=;FileDescription=$(MSBuildProjectName);FileVersion=2.1.0.77;InternalName=;LegalCopyright=;LegalTrademarks=;OriginalFilename=;ProgramID=com.embarcadero.$(MSBuildProjectName);ProductName=$(MSBuildProjectName);ProductVersion=1.0.0.0;Comments=</VerInfo_Keys>
-        <VerInfo_Build>77</VerInfo_Build>
+        <VerInfo_Keys>CompanyName=;FileDescription=$(MSBuildProjectName);FileVersion=2.1.0.83;InternalName=;LegalCopyright=;LegalTrademarks=;OriginalFilename=;ProgramID=com.embarcadero.$(MSBuildProjectName);ProductName=$(MSBuildProjectName);ProductVersion=1.0.0.0;Comments=</VerInfo_Keys>
+        <VerInfo_Build>83</VerInfo_Build>
         <AppEnableRuntimeThemes>true</AppEnableRuntimeThemes>
         <AppDPIAwarenessMode>PerMonitor</AppDPIAwarenessMode>
     </PropertyGroup>
@@ -238,6 +238,13 @@
             <DesignClass>TUnimForm</DesignClass>
         </DCCReference>
         <DCCReference Include="classes\UniFSPopup.pas"/>
+        <DCCReference Include="..\Pkg.Json.JSONName.pas"/>
+        <DCCReference Include="..\Pkg.Json.JsonValueHelper.pas"/>
+        <DCCReference Include="..\Pkg.Json.Settings.pas"/>
+        <DCCReference Include="..\Pkg.Json.Lists.pas"/>
+        <DCCReference Include="..\Pkg.Json.ReservedWords.pas"/>
+        <DCCReference Include="..\Pkg.Json.StubField.pas"/>
+        <DCCReference Include="..\Pkg.JSON.SubTypes.pas"/>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>
             <CfgParent>Base</CfgParent>

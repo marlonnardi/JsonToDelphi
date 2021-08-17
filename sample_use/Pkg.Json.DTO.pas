@@ -1,29 +1,46 @@
 unit Pkg.Json.DTO;
+
 
 interface
 
 uses
-  System.Classes, System.Json, Rest.Json;
+  System.Classes, System.Json, Rest.Json, System.Generics.Collections, Rest.JsonReflect;
 
 type
-  TJsonDTO = class
+  TArrayMapper = class
+  protected
+    procedure RefreshArray<T>(aSource: TList<T>; var aDestination: TArray<T>);
+    function List<T>(var aList: TList<T>; aSource: TArray<T>): TList<T>;
+    function ObjectList<T: class>(var aList: TObjectList<T>; aSource: TArray<T>): TObjectList<T>;
+  public
+    constructor Create; virtual;
+  end;
+
+  TJsonDTO = class(TArrayMapper)
   private
     FOptions: TJsonOptions;
-    function GetAsJson: string;
-    procedure SetAsJson(aValue: string);
     class procedure PrettyPrintPair(aJSONValue: TJSONPair; aOutputStrings: TStrings; Last: Boolean; Indent: Integer);
     class procedure PrettyPrintJSON(aJSONValue: TJsonValue; aOutputStrings: TStrings; Indent: Integer = 0); overload;
     class procedure PrettyPrintArray(aJSONValue: TJSONArray; aOutputStrings: TStrings; Last: Boolean; Indent: Integer);
+  protected
+    function GetAsJson: string; virtual;
+    procedure SetAsJson(aValue: string); virtual;
   public
-    constructor Create; virtual;
+    constructor Create; override;
     class function PrettyPrintJSON(aJson: string): string; overload;
+    function ToString : string; override;
     property AsJson: string read GetAsJson write SetAsJson;
+  end;
+
+  GenericListReflectAttribute = class(JsonReflectAttribute)
+  public
+    constructor Create;
   end;
 
 implementation
 
 uses
-  System.Sysutils, Rest.JsonReflect, System.JSONConsts, System.Rtti, System.Generics.Collections;
+  System.Sysutils, System.JSONConsts, System.Rtti;
 
 { TJsonDTO }
 
@@ -40,6 +57,7 @@ end;
 
 const
   INDENT_SIZE = 2;
+
 class procedure TJsonDTO.PrettyPrintJSON(aJSONValue: TJsonValue; aOutputStrings: TStrings; Indent: Integer);
 var
   i: Integer;
@@ -159,5 +177,74 @@ begin
   end;
 end;
 
+function TJsonDTO.ToString: string;
+begin
+  Result := AsJson;
+end;
+
+{ TArrayMapper }
+
+constructor TArrayMapper.Create;
+begin
+  inherited;
+end;
+
+function TArrayMapper.List<T>(var aList: TList<T>; aSource: TArray<T>): TList<T>;
+begin
+  if aList = nil then
+  begin
+    aList := TList<T>.Create;
+    aList.AddRange(aSource);
+  end;
+
+  Exit(aList);
+end;
+
+function TArrayMapper.ObjectList<T>(var aList: TObjectList<T>; aSource: TArray<T>): TObjectList<T>;
+var
+  Element: T;
+begin
+  if aList = nil then
+  begin
+    aList := TObjectList<T>.Create;
+    for Element in aSource do
+      aList.Add(Element);
+  end;
+
+  Exit(aList);
+end;
+
+procedure TArrayMapper.RefreshArray<T>(aSource: TList<T>; var aDestination: TArray<T>);
+begin
+  if aSource <> nil then
+    aDestination := aSource.ToArray;
+end;
+
+type
+  TGenericListFieldInterceptor = class(TJSONInterceptor)
+  public
+    function ObjectsConverter(Data: TObject; Field: string): TListOfObjects; override;
+  end;
+
+  { TListFieldInterceptor }
+
+function TGenericListFieldInterceptor.ObjectsConverter(Data: TObject; Field: string): TListOfObjects;
+var
+  ctx: TRttiContext;
+  List: TList<TObject>;
+  RttiProperty: TRttiProperty;
+begin
+  RttiProperty := ctx.GetType(Data.ClassInfo).GetProperty(Copy(Field, 2, MAXINT));
+  List := TList<TObject>(RttiProperty.GetValue(Data).AsObject);
+  Result := TListOfObjects(List.List);
+  SetLength(Result, List.Count);
+end;
+
+constructor GenericListReflectAttribute.Create;
+begin
+  inherited Create(ctObjects, rtObjects, TGenericListFieldInterceptor, nil, false);
+end;
+
 end.
 
+

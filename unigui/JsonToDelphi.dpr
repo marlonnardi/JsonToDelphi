@@ -43,7 +43,14 @@ uses
   uFrmSamples in 'web\uFrmSamples.pas' {frmSamples: TUniForm},
   uFrmWebNavigate in 'web\uFrmWebNavigate.pas' {frmWebNavigate: TUniForm},
   uFrmmSamples in 'mobile\uFrmmSamples.pas' {frmmSamples: TUnimForm},
-  UniFSPopup in 'classes\UniFSPopup.pas';
+  UniFSPopup in 'classes\UniFSPopup.pas',
+  Pkg.Json.JSONName in '..\Pkg.Json.JSONName.pas',
+  Pkg.Json.JsonValueHelper in '..\Pkg.Json.JsonValueHelper.pas',
+  Pkg.Json.Settings in '..\Pkg.Json.Settings.pas',
+  Pkg.Json.Lists in '..\Pkg.Json.Lists.pas',
+  Pkg.Json.ReservedWords in '..\Pkg.Json.ReservedWords.pas',
+  Pkg.Json.StubField in '..\Pkg.Json.StubField.pas',
+  Pkg.JSON.SubTypes in '..\Pkg.JSON.SubTypes.pas';
 
 {$R *.res}
 
