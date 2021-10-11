@@ -135,15 +135,10 @@ begin
   Confirm.boxWidth := '90%';
   Confirm.Alert(
     'Thanks for the donations',
-    'If you like this site and use it frequently, <b>make a donation to keep it up and running !</b> </br>'+
-    '<a href=''https://github.com/marlonnardi/JsonToDelphi#jsontodelphi-online'' target=''_blank''>News Fixes & Features</a> </br></br> '+
-    lblDoacao.Caption+'</br>'+
-    'Thanks</br>'+
-    '<i class=''fas fa-medal''></i> <b>Валерий Шабаков</b> $10,00 USD</br> '+
-    '<i class=''fas fa-medal''></i> <b>Геннадий Малинин</b> $5,00 USD</br> '+
-    '<i class=''fas fa-medal''></i> <b>Pierre Demers</b> $30,00 USD</br> '+
-    '<i class=''fas fa-medal''></i> <b>Christian Späth</b> $15,00 USD',
-    'fas fa-hands-helping',TTypeColor.green, TTheme.modern);
+    '<p>If you like this site and use it frequently, <b>make a donation to keep it up and running !</b></p> </br>'+
+    '<i class=''fab fa-lg fa-github''></i><a href="https://github.com/marlonnardi/JsonToDelphi#fixes--features-03h-october-2021" target="_blank"> News Fixes & Features: 03h October 2021</a> </br></br> '+
+    lblDoacao.Caption+'</br>',
+    'fas fa-rocket',TTypeColor.green, TTheme.modern);
 end;
 
 procedure TMainmForm.UnimFormResize(Sender: TObject);

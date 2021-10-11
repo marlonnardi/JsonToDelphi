@@ -70,7 +70,7 @@ object MainForm: TMainForm
         Font.Height = -16
         ParentColor = False
         Color = clGray
-        TabOrder = 2
+        TabOrder = 10
       end
       object lblDeveloper: TUniLabel
         Left = 941
@@ -106,7 +106,7 @@ object MainForm: TMainForm
         Font.Height = -13
         ParentColor = False
         Color = clBlack
-        TabOrder = 4
+        TabOrder = 6
       end
       object lbl2: TUniLabel
         Left = 817
@@ -121,7 +121,7 @@ object MainForm: TMainForm
         Font.Height = -13
         ParentColor = False
         Color = clBlack
-        TabOrder = 5
+        TabOrder = 2
       end
       object lbl3: TUniLabel
         Left = 767
@@ -142,7 +142,7 @@ object MainForm: TMainForm
           
             'click=function click(sender, eOpts)'#13#10'{'#13#10'  window.open("https://g' +
             'ithub.com/PKGeorgiev");'#13#10'}')
-        TabOrder = 6
+        TabOrder = 7
       end
       object lbl4: TUniLabel
         Left = 974
@@ -157,7 +157,7 @@ object MainForm: TMainForm
         Font.Height = -13
         ParentColor = False
         Color = clBlack
-        TabOrder = 7
+        TabOrder = 9
       end
       object lbl5: TUniLabel
         Left = 618
@@ -174,7 +174,7 @@ object MainForm: TMainForm
         Font.Height = -13
         ParentColor = False
         Color = clBlack
-        TabOrder = 8
+        TabOrder = 4
       end
       object UniLabel1: TUniLabel
         Left = 920
@@ -195,7 +195,7 @@ object MainForm: TMainForm
           
             'click=function click(sender, eOpts)'#13#10'{'#13#10'  window.open("https://g' +
             'ithub.com/ahausladen/JsonDataObjects");'#13#10'}')
-        TabOrder = 9
+        TabOrder = 16
       end
       object UniLabel2: TUniLabel
         Left = 739
@@ -210,7 +210,7 @@ object MainForm: TMainForm
         Font.Height = -13
         ParentColor = False
         Color = clBlack
-        TabOrder = 10
+        TabOrder = 13
       end
       object lbl6: TUniLabel
         Left = 640
@@ -220,14 +220,14 @@ object MainForm: TMainForm
         Hint = ''
         TextConversion = txtHTML
         AutoSize = False
-        Caption = '<i class="fab fa-lg fa-github" aria-hidden="true"></i>'
+        Caption = '<i class="fab fa-lg fa-github"></i>'
         Anchors = [akTop, akRight]
         ParentFont = False
         Font.Color = clBlack
         Font.Height = -13
         ParentColor = False
         Color = clBlack
-        TabOrder = 11
+        TabOrder = 5
       end
       object UniLabel3: TUniLabel
         Left = 876
@@ -244,7 +244,7 @@ object MainForm: TMainForm
         Font.Height = -13
         ParentColor = False
         Color = clBlack
-        TabOrder = 12
+        TabOrder = 14
       end
       object UniLabel4: TUniLabel
         Left = 898
@@ -261,7 +261,7 @@ object MainForm: TMainForm
         Font.Height = -13
         ParentColor = False
         Color = clBlack
-        TabOrder = 13
+        TabOrder = 15
       end
       object lblJsonToPascal: TUniLabel
         Left = 5
@@ -275,7 +275,7 @@ object MainForm: TMainForm
         Font.Height = -16
         ParentColor = False
         Color = clGray
-        TabOrder = 14
+        TabOrder = 12
       end
       object lbl7: TUniLabel
         Left = 857
@@ -290,7 +290,7 @@ object MainForm: TMainForm
         Font.Height = -13
         ParentColor = False
         Color = clBlack
-        TabOrder = 15
+        TabOrder = 8
       end
       object lbl8: TUniLabel
         Left = 884
@@ -311,7 +311,7 @@ object MainForm: TMainForm
           
             'click=function click(sender, eOpts)'#13#10'{'#13#10'  window.open("https://g' +
             'ithub.com/JensBorrisholt");'#13#10'}')
-        TabOrder = 16
+        TabOrder = 11
       end
     end
     object memJson: TUniMemo
@@ -334,7 +334,7 @@ object MainForm: TMainForm
       Height = 62
       Hint = ''
       Align = alTop
-      TabOrder = 3
+      TabOrder = 4
       BorderStyle = ubsNone
       Caption = ''
       Color = 15460837
@@ -431,7 +431,7 @@ object MainForm: TMainForm
         ParentFont = False
         Font.Color = clBlack
         Font.Height = -16
-        TabOrder = 4
+        TabOrder = 6
         OnClick = btn1Click
       end
       object btnSample: TUniFSButton
@@ -450,7 +450,7 @@ object MainForm: TMainForm
         ParentFont = False
         Font.Color = clBlack
         Font.Height = -13
-        TabOrder = 5
+        TabOrder = 4
         ScreenMask.WaitData = True
         ScreenMask.Message = 'Opening...'
         OnClick = btnSampleClick
@@ -474,7 +474,7 @@ object MainForm: TMainForm
         ParentFont = False
         Font.Color = clGreen
         Font.Height = -16
-        TabOrder = 6
+        TabOrder = 5
       end
     end
     object spl1: TUniSplitter
@@ -536,7 +536,7 @@ object MainForm: TMainForm
       ParentFont = False
       Font.Color = 10853781
       Font.Height = -9
-      TabOrder = 2
+      TabOrder = 3
     end
     object lblVerionPrior: TUniLabel
       Left = 26
@@ -552,7 +552,7 @@ object MainForm: TMainForm
       ParentFont = False
       Font.Color = 10853781
       Font.Height = -9
-      TabOrder = 3
+      TabOrder = 2
       OnClick = lblVerionPriorClick
     end
   end
