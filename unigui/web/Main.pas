@@ -183,6 +183,7 @@ begin
   try
     SB.Append('<div style=''margin:0px 0px 8px 0px'';>List of Contributors</div>');
     SB.Append('<div class=''list-group''> ');
+    SB.Append('<a class=''fs-group-item''><i class=''far fa-thumbs-up fa-lg text-green''></i>&nbsp; 2021-10-30 - Christian Späth <b>U$ 15,00</b> </a>');
     SB.Append('<a class=''fs-group-item''><i class=''far fa-thumbs-up fa-lg text-green''></i>&nbsp; 2021-08-06 - Валерий Шабаков <b>U$ 10,00</b> </a>');
     SB.Append('<a class=''fs-group-item''><i class=''far fa-thumbs-up fa-lg text-green''></i>&nbsp; 2021-07-24 - Геннадий Малинин <b>U$ 5,00</b> </a>');
     SB.Append('<a class=''fs-group-item''><i class=''far fa-thumbs-up fa-lg text-green''></i>&nbsp; 2021-06-25 - Pierre Demers <b>U$ 30,00</b> </a>');
@@ -214,7 +215,7 @@ procedure TMainForm.tmrTimer(Sender: TObject);
 begin
   Confirm.boxWidth := '500px';
   Confirm.Alert(
-    'Thanks for the donations',
+    'jsontodelphi',
     '<p>"If you like this site and use it frequently, <b>make a donation to keep it up and running !</b>"</p> </br> '+
     '<p><i class="fab fa-lg fa-github"></i><a href="https://github.com/marlonnardi/JsonToDelphi#fixes--features-03h-october-2021" target="_blank"> News Fixes & Features: 03h October 2021</a></p></br> '+
     lblDoacao.Caption+'</br>',
@@ -245,8 +246,10 @@ procedure TMainForm.UniFormCreate(Sender: TObject);
 begin
   Popup := TUniFSPopup.Create(Self);
   Popup.Width := 350;
-  Popup.RelativeY := 15;
+  Popup.RelativeY := -15;
   Popup.RelativeX := 0;
+  Popup.RelativePosition := TRelativePosition.b_t;
+  Popup.ArrowLocation := TArrowLocation.bottom;
   Popup.Target := btnCollaborators;
   LoadCoallaborators;
 end;

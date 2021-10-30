@@ -134,7 +134,7 @@ procedure TMainmForm.tmrTimer(Sender: TObject);
 begin
   Confirm.boxWidth := '90%';
   Confirm.Alert(
-    'Thanks for the donations',
+    'jsontodelphi',
     '<p>If you like this site and use it frequently, <b>make a donation to keep it up and running !</b></p> </br>'+
     '<i class=''fab fa-lg fa-github''></i><a href="https://github.com/marlonnardi/JsonToDelphi#fixes--features-03h-october-2021" target="_blank"> News Fixes & Features: 03h October 2021</a> </br></br> '+
     lblDoacao.Caption+'</br>',
