@@ -14,22 +14,25 @@ object MainForm: TMainForm
   OnAjaxEvent = UniFormAjaxEvent
   OnCreate = UniFormCreate
   OnDestroy = UniFormDestroy
+  PixelsPerInch = 96
   DesignSize = (
     1080
     624)
-  PixelsPerInch = 96
-  TextHeight = 13
+  TextHeight = 15
   object pnlMaster: TUniPanel
     Left = 21
     Top = 8
     Width = 1024
-    Height = 521
+    Height = 544
     Hint = ''
     Anchors = [akTop]
     TabOrder = 0
     BorderStyle = ubsNone
     Caption = ''
     Color = 15460837
+    DesignSize = (
+      1024
+      544)
     object pnlTop: TUniPanel
       Left = 0
       Top = 0
@@ -47,8 +50,8 @@ object MainForm: TMainForm
       object lblTitle: TUniLabel
         Left = 4
         Top = 16
-        Width = 176
-        Height = 40
+        Width = 180
+        Height = 45
         Hint = ''
         Caption = 'jsontodelphi'
         ParentFont = False
@@ -61,8 +64,8 @@ object MainForm: TMainForm
       object lblSubTitle: TUniLabel
         Left = 4
         Top = 57
-        Width = 236
-        Height = 19
+        Width = 231
+        Height = 21
         Hint = ''
         Caption = 'generate delphi classes from json'
         ParentFont = False
@@ -70,13 +73,13 @@ object MainForm: TMainForm
         Font.Height = -16
         ParentColor = False
         Color = clGray
-        TabOrder = 10
+        TabOrder = 11
       end
       object lblDeveloper: TUniLabel
         Left = 941
         Top = 23
-        Width = 73
-        Height = 16
+        Width = 79
+        Height = 17
         Cursor = crHandPoint
         Hint = ''
         TextConversion = txtHTML
@@ -97,7 +100,7 @@ object MainForm: TMainForm
         Left = 659
         Top = 56
         Width = 106
-        Height = 16
+        Height = 17
         Hint = ''
         Caption = 'with thanks to the '
         Anchors = [akTop, akRight]
@@ -111,8 +114,8 @@ object MainForm: TMainForm
       object lbl2: TUniLabel
         Left = 817
         Top = 23
-        Width = 118
-        Height = 16
+        Width = 122
+        Height = 17
         Hint = ''
         Caption = 'web development by'
         Anchors = [akTop, akRight]
@@ -126,8 +129,8 @@ object MainForm: TMainForm
       object lbl3: TUniLabel
         Left = 767
         Top = 56
-        Width = 84
-        Height = 16
+        Width = 87
+        Height = 17
         Cursor = crHandPoint
         Hint = ''
         TextConversion = txtHTML
@@ -147,8 +150,8 @@ object MainForm: TMainForm
       object lbl4: TUniLabel
         Left = 974
         Top = 56
-        Width = 40
-        Height = 16
+        Width = 41
+        Height = 17
         Hint = ''
         Caption = 'project'
         Anchors = [akTop, akRight]
@@ -157,7 +160,7 @@ object MainForm: TMainForm
         Font.Height = -13
         ParentColor = False
         Color = clBlack
-        TabOrder = 9
+        TabOrder = 10
       end
       object lbl5: TUniLabel
         Left = 618
@@ -179,8 +182,8 @@ object MainForm: TMainForm
       object UniLabel1: TUniLabel
         Left = 920
         Top = 88
-        Width = 94
-        Height = 16
+        Width = 97
+        Height = 17
         Cursor = crHandPoint
         Hint = ''
         TextConversion = txtHTML
@@ -200,8 +203,8 @@ object MainForm: TMainForm
       object UniLabel2: TUniLabel
         Left = 739
         Top = 88
-        Width = 127
-        Height = 16
+        Width = 129
+        Height = 17
         Hint = ''
         Caption = 'I also recommend this'
         Anchors = [akTop, akRight]
@@ -266,8 +269,8 @@ object MainForm: TMainForm
       object lblJsonToPascal: TUniLabel
         Left = 5
         Top = 82
-        Width = 97
-        Height = 19
+        Width = 94
+        Height = 21
         Hint = ''
         Caption = 'json to pascal'
         ParentFont = False
@@ -280,8 +283,8 @@ object MainForm: TMainForm
       object lbl7: TUniLabel
         Left = 857
         Top = 56
-        Width = 21
-        Height = 16
+        Width = 22
+        Height = 17
         Hint = ''
         Caption = 'and'
         Anchors = [akTop, akRight]
@@ -293,10 +296,10 @@ object MainForm: TMainForm
         TabOrder = 8
       end
       object lbl8: TUniLabel
-        Left = 884
-        Top = 57
-        Width = 83
-        Height = 16
+        Left = 883
+        Top = 56
+        Width = 85
+        Height = 17
         Cursor = crHandPoint
         Hint = ''
         TextConversion = txtHTML
@@ -311,7 +314,7 @@ object MainForm: TMainForm
           
             'click=function click(sender, eOpts)'#13#10'{'#13#10'  window.open("https://g' +
             'ithub.com/JensBorrisholt");'#13#10'}')
-        TabOrder = 11
+        TabOrder = 9
       end
     end
     object memJson: TUniMemo
@@ -413,7 +416,7 @@ object MainForm: TMainForm
         ScreenMask.Message = 'Opening...'
       end
       object btn1: TUniFSButton
-        Left = 976
+        Left = 983
         Top = 17
         Width = 38
         Height = 34
@@ -456,7 +459,7 @@ object MainForm: TMainForm
         OnClick = btnSampleClick
       end
       object btnCollaborators: TUniFSButton
-        Left = 930
+        Left = 934
         Top = 17
         Width = 38
         Height = 34
@@ -487,6 +490,32 @@ object MainForm: TMainForm
       Align = alTop
       ParentColor = False
       Color = clBtnFace
+    end
+    object lblNews: TUniLabel
+      Left = 624
+      Top = 523
+      Width = 397
+      Height = 17
+      Cursor = crHandPoint
+      Hint = ''
+      Alignment = taRightJustify
+      TextConversion = txtHTML
+      AutoSize = False
+      Caption = 
+        '<i class="fab fa-lg fa-github"></i> News Fixes & Features: 03h O' +
+        'ctober 2021'
+      Anchors = [akTop, akRight]
+      ParentFont = False
+      Font.Color = clHighlight
+      Font.Height = -13
+      ParentColor = False
+      Color = clBlack
+      ClientEvents.ExtEvents.Strings = (
+        
+          'click=function click(sender, eOpts)'#13#10'{'#13#10'  window.open("https://g' +
+          'ithub.com/marlonnardi/JsonToDelphi#fixes--features-03h-october-2' +
+          '021");'#13#10'}')
+      TabOrder = 5
     end
   end
   object pnlBottom: TUniPanel
@@ -536,24 +565,7 @@ object MainForm: TMainForm
       ParentFont = False
       Font.Color = 10853781
       Font.Height = -9
-      TabOrder = 3
-    end
-    object lblVerionPrior: TUniLabel
-      Left = 26
-      Top = 34
-      Width = 89
-      Height = 11
-      Cursor = crHandPoint
-      Hint = 'Version Old of JsonToDelphi'
-      ShowHint = True
-      ParentShowHint = False
-      AutoSize = False
-      Caption = 'Version Old'
-      ParentFont = False
-      Font.Color = 10853781
-      Font.Height = -9
       TabOrder = 2
-      OnClick = lblVerionPriorClick
     end
   end
   object tmr: TUniTimer
