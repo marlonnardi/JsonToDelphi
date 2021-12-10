@@ -11,7 +11,7 @@ uses
   Pkg.Json.Mapper, NetEncoding,
   FMX.ConstrainedForm,
   uUpdate, System.Threading, uGitHub, FMX.Objects, uUpdateForm, SyncObjs,
-  System.Actions, FMX.ActnList;
+  System.Actions, FMX.ActnList, FMX.Memo.Types;
 
 const
   JsonValidatorUrl = 'http://jsonlint.com';
@@ -100,7 +100,7 @@ implementation
 uses
   uSaveUnitForm, Pkg.Json.Visualizer, Pkg.Json.DTO,
 {$IFDEF MSWINDOWS}
-  Winapi.ShellAPI, Winapi.Windows;
+  Winapi.ShellAPI, Winapi.Windows, Pkg.Json.StubField;
 {$ENDIF MSWINDOWS}
 {$IFDEF POSIX}
 Posix.Stdlib;

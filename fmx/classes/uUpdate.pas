@@ -7,8 +7,8 @@ uses REST.Client, uGitHub, REST.JSON, JSON,
 
 const
   ProgramVersion: double = 1;
-  UpdateUrl = 'https://api.github.com/repos/JensBorrisholt/Delphi-JsonToDelphiClass/releases';
-  ProgramUrl = 'https://github.com/JensBorrisholt/Delphi-JsonToDelphiClass';
+  UpdateUrl = 'https://api.github.com/repos/marlonnardi/JsonToDelphi/releases';
+  ProgramUrl = 'https://github.com/marlonnardi/JsonToDelphi';
 
 function InternalCheckForUpdate: TObject;
 procedure NewCheckForUpdateTask(AOnFinish: TProc<TObject>);
