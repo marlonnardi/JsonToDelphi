@@ -4,12 +4,13 @@ object frmWebNavigate: TfrmWebNavigate
   ClientHeight = 561
   ClientWidth = 1008
   Caption = 'Json Validate'
+  Color = 16447477
   OnShow = UniFormShow
   OldCreateOrder = False
   BorderIcons = [biSystemMenu, biMaximize]
   MonitoredKeys.Keys = <>
   PixelsPerInch = 96
-  TextHeight = 13
+  TextHeight = 15
   object urlf: TUniURLFrame
     Left = 0
     Top = 0

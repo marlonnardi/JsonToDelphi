@@ -7,7 +7,8 @@ uses
   Dialogs, uniGUITypes, uniGUIAbstractClasses, uniGUIClasses, uniGUIRegClasses,
   uniGUIForm, uniLabel, uniGUIBaseClasses, uniPanel, uniMemo, uniHTMLFrame,
   uniSplitter, uniRadioGroup, uniButton, uniBitBtn, UniFSButton, uniImage,
-  UniFSConfirm, UniFSPopup, Pkg.Json.Mapper, Pkg.Json.DTO, uniTimer;
+  UniFSConfirm, UniFSPopup, Pkg.Json.Mapper, Pkg.Json.DTO, Pkg.Json.Settings,
+  uniTimer, uniCheckBox, uniGroupBox;
 
 type
   TMainForm = class(TUniForm)
@@ -18,32 +19,36 @@ type
     lblDeveloper: TUniLabel;
     memJson: TUniMemo;
     lbl1: TUniLabel;
-    pnlControl: TUniPanel;
     lbl2: TUniLabel;
     lbl3: TUniLabel;
     lbl4: TUniLabel;
     lbl5: TUniLabel;
     spl1: TUniSplitter;
-    lblDoacao: TUniLabel;
-    btnGenerate: TUniFSButton;
-    btnValidate: TUniFSButton;
-    btn1: TUniFSButton;
     UniLabel1: TUniLabel;
     UniLabel2: TUniLabel;
     lbl6: TUniLabel;
     UniLabel3: TUniLabel;
     UniLabel4: TUniLabel;
     lblJsonToPascal: TUniLabel;
-    btnSample: TUniFSButton;
     pnlBottom: TUniPanel;
     imgFalconSistemas: TUniImage;
     lblVersion: TUniLabel;
     lbl7: TUniLabel;
     lbl8: TUniLabel;
-    btnCollaborators: TUniFSButton;
     tmr: TUniTimer;
     Confirm: TUniFSConfirm;
+    btnCollaborators: TUniFSButton;
+    btn1: TUniFSButton;
     lblNews: TUniLabel;
+    btnGenerate: TUniFSButton;
+    btnValidate: TUniFSButton;
+    btnSample: TUniFSButton;
+    grpSettings: TUniGroupBox;
+    chkUsePascalCase: TUniCheckBox;
+    chkAddJsonPropertyAttributes: TUniCheckBox;
+    chkSuppressZeroDate: TUniCheckBox;
+    chkPostfixClassNames: TUniCheckBox;
+    lblDoacao: TUniLabel;
     procedure UniFormAfterShow(Sender: TObject);
     procedure UniFormClose(Sender: TObject; var Action: TCloseAction);
     procedure UniFormAjaxEvent(Sender: TComponent; EventName: string; Params: TUniStrings);
@@ -58,7 +63,8 @@ type
     procedure LoadCoallaborators;
   private
     { Private declarations }
-    jm : TPkgJsonMapper;
+    JsonMapper : TPkgJsonMapper;
+    JsonSettings : TSettings;
 
     procedure DefineRegrasLayout;
     procedure AlinhamentoCenter;
@@ -132,13 +138,18 @@ begin
   end;
 
   try
-    if jm = nil then
-      jm := TPkgJsonMapper.Create();
+    JsonSettings.UsePascalCase := chkUsePascalCase.Checked;
+    JsonSettings.SuppressZeroDate := chkSuppressZeroDate.Checked;
+    JsonSettings.AddJsonPropertyAttributes := chkAddJsonPropertyAttributes.Checked;
+    JsonSettings.PostFixClassNames := chkPostfixClassNames.Checked;
 
-    jm.DestinationUnitName := 'RootUnit';
-    jm.Parse(memJson.Text);
+    if JsonMapper = nil then
+      JsonMapper := TPkgJsonMapper.Create();
 
-    frmGenerateUnit.synx.Text := jm.GenerateUnit;
+    JsonMapper.DestinationUnitName := 'RootUnit';
+    JsonMapper.Parse(memJson.Text);
+
+    frmGenerateUnit.synx.Text := JsonMapper.GenerateUnit;
     frmGenerateUnit.ShowModal();
   except
     on e: Exception do
@@ -234,12 +245,14 @@ end;
 
 procedure TMainForm.UniFormClose(Sender: TObject; var Action: TCloseAction);
 begin
-  if Assigned(jm) then
-    FreeAndNil(jm);
+  if Assigned(JsonMapper) then
+    FreeAndNil(JsonMapper);
 end;
 
 procedure TMainForm.UniFormCreate(Sender: TObject);
 begin
+  JsonSettings := TSettings.Instance;
+
   Popup := TUniFSPopup.Create(Self);
   Popup.Width := 350;
   Popup.RelativeY := -15;
