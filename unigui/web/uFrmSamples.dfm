@@ -1,15 +1,19 @@
 object frmSamples: TfrmSamples
   Left = 0
   Top = 0
-  ClientHeight = 686
+  ClientHeight = 675
   ClientWidth = 1024
   Caption = 'Sample Use'
-  Color = 15460837
+  Color = 16447477
   OldCreateOrder = False
   MonitoredKeys.Keys = <>
   OnAfterShow = UniFormAfterShow
+  OnCreate = UniFormCreate
   PixelsPerInch = 96
-  TextHeight = 13
+  DesignSize = (
+    1024
+    675)
+  TextHeight = 15
   object lbl7: TUniLabel
     AlignWithMargins = True
     Left = 15
@@ -73,7 +77,7 @@ object frmSamples: TfrmSamples
     Left = 15
     Top = 293
     Width = 994
-    Height = 324
+    Height = 314
     Hint = ''
     Margins.Left = 15
     Margins.Top = 10
@@ -103,24 +107,28 @@ object frmSamples: TfrmSamples
       '  end;')
     Font.Name = 'Courier New'
     Align = alTop
+    Anchors = [akLeft, akTop, akRight, akBottom]
+    ExplicitHeight = 324
   end
   object btnDownload: TUniFSButton
     Left = 15
-    Top = 635
+    Top = 625
     Width = 186
     Height = 34
     Hint = ''
-    StyleButton = Success
+    StyleButton = GoogleGreen
     BadgeText.Text = '0'
     BadgeText.TextColor = '#FFFFFF'
     BadgeText.TextSize = 10
     BadgeText.TextStyle = 'bold'
     BadgeText.BackgroundColor = '#D50000'
     Caption = 'Download Project Sample'
+    Anchors = [akLeft, akBottom]
     ParentFont = False
     Font.Color = clWhite
     Font.Height = -13
     TabOrder = 4
     OnClick = btnDownloadClick
+    ExplicitTop = 635
   end
 end

@@ -21,6 +21,8 @@ type
     chkandClassDTO: TUniCheckBox;
     procedure btnDownloadClick(Sender: TObject);
     procedure UniFormShow(Sender: TObject);
+    procedure edtUnitNameChange(Sender: TObject);
+    procedure UniFormCreate(Sender: TObject);
   private
     { Private declarations }
   public
@@ -34,7 +36,7 @@ implementation
 {$R *.dfm}
 
 uses
-  MainModule, uniGUIApplication, ServerModule;
+  MainModule, uniGUIApplication, ServerModule, Main;
 
 function frmGenerateUnit: TfrmGenerateUnit;
 begin
@@ -58,6 +60,18 @@ begin
       PWideChar(UniServerModule.LocalCachePath+'Pkg.Json.DTO.pas'),False);
     UniSession.SendFile(UniServerModule.LocalCachePath+'Pkg.Json.DTO.pas');
   end;
+end;
+
+procedure TfrmGenerateUnit.edtUnitNameChange(Sender: TObject);
+begin
+  synx.Lines.Delete(0);
+  synx.Lines.Insert(0,'unit ' + edtUnitName.Text + ';');
+end;
+
+procedure TfrmGenerateUnit.UniFormCreate(Sender: TObject);
+begin
+  Self.Top := 15;
+  Self.Height := MainForm.Height - 30;
 end;
 
 procedure TfrmGenerateUnit.UniFormShow(Sender: TObject);
