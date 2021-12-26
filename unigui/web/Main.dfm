@@ -449,8 +449,8 @@ object MainForm: TMainForm
       TextConversion = txtHTML
       AutoSize = False
       Caption = 
-        '<i class="fab fa-lg fa-github"></i> News Fixes & Features: 03h O' +
-        'ctober 2021'
+        '<i class="fab fa-lg fa-github"></i> News Fixes & Features: 26h D' +
+        'ecember 2021'
       Anchors = [akTop, akRight]
       ParentFont = False
       Font.Color = clHighlight
@@ -461,8 +461,8 @@ object MainForm: TMainForm
       ClientEvents.ExtEvents.Strings = (
         
           'click=function click(sender, eOpts)'#13#10'{'#13#10'  window.open("https://g' +
-          'ithub.com/marlonnardi/JsonToDelphi#fixes--features-03h-october-2' +
-          '021");'#13#10'}')
+          'ithub.com/marlonnardi/JsonToDelphi#fixes--features-26h-december-' +
+          '2021");'#13#10'}')
       TabOrder = 11
     end
     object btnGenerate: TUniFSButton
