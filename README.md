@@ -8,6 +8,17 @@ https://jsontodelphi.com
 
 Origin [Jens Borrisholt] (https://github.com/JensBorrisholt/Delphi-JsonToDelphiClass)
 
+## Fixes & Features: 26h December 2021
+
+### Features
+
+- Added new class generation options
+
+### Bugs:
+
+- Fixed rename unit on generation screen
+- Fixed screen alignment
+
 ## Fixes & Features: 03h October 2021
 
 ### Bugs:
