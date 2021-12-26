@@ -1,5 +1,4 @@
 object UniServerModule: TUniServerModule
-  OldCreateOrder = False
   TempFolder = 'temp\'
   ExtRoot = 'c:\unigui\[ext]\'
   UniRoot = 'c:\unigui\[uni]\'
@@ -3168,6 +3167,9 @@ object UniServerModule: TUniServerModule
     '.x-mask .x-mask-message {'
     '    bottom: 50px !important;'
     '    color: #fff !important;'
+    '}'
+    '.x-tool-tool-el {'
+    '    color: #ffffff !important;'
     '}')
   CustomMeta.Strings = (
     '')
@@ -3195,4 +3197,5 @@ object UniServerModule: TUniServerModule
   UniMobileRoot = 'c:\unigui\[unim]\'
   Height = 555
   Width = 725
+  PixelsPerInch = 96
 end
