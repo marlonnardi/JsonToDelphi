@@ -1,28 +1,31 @@
-Delphi-JsonToDelphiClass
-========================
+# Delphi-JsonToDelphiClass
 
-## This is a fork of Petar Georgiev with improvements of Jens Borrisholt  ##
+## This is a fork of Petar Georgiev with improvements of Jens Borrisholt
 
-## JsonToDelphi Online  ##
+## JsonToDelphi Online
+
 https://jsontodelphi.com
 
 Origin [Jens Borrisholt] (https://github.com/JensBorrisholt/Delphi-JsonToDelphiClass)
 
-## Fixes & Features: 03h October 2021 ##
+## Fixes & Features: 03h October 2021
 
-### Bugs: ###
-* Wrong type detection. '2019-08-29' wasn't recognized as a Date, but a string
-* All unittests didn't pass
-* In the generator main form, the correct JSON wans't allways read from the MEMO 
-* In the generator main form, the JSON wasn't allways updated
+### Bugs:
 
-### Features ###
-* Upgraded to Delphi 11
-* New property attribute : ```[SuppressZero]```
+- Wrong type detection. '2019-08-29' wasn't recognized as a Date, but a string
+- All unittests didn't pass
+- In the generator main form, the correct JSON wans't allways read from the MEMO
+- In the generator main form, the JSON wasn't allways updated
+
+### Features
+
+- Upgraded to Delphi 11
+- New property attribute : `[SuppressZero]`
   Delphi doesn't support Nullable types, so use this attribute to strip TDateTime property where value is 0.
 
 A Small example:
-```  
+
+```delphi
 type
   TDateTimeDTO = class(TJsonDTO)
   private
@@ -34,111 +37,120 @@ type
     property NoDateSuppress: TDateTime read FNoSuppressDate write FNoSuppressDate;
   end;
 ```
-The above class will generate the following JSON, if both properties is 0 
 
+The above class will generate the following JSON, if both properties is 0
+
+```json
+{
+  "suppressDate": "",
+  "noSuppressDate": "1899-12-30T00:00:00.000Z"
+}
 ```
-  {
-    "suppressDate":"",
-    "noSuppressDate":"1899-12-30T00:00:00.000Z"
-  }
-```
-NOTE: You can turn off this feature in the settings form 
 
-## Fixes & Features: 04th June 2021 ##
+NOTE: You can turn off this feature in the settings form
 
-### Bugs: ###
-* An error message occured when switching between the diffrent demo files
-* Dates without timestamp wasn't recognized within  the RegEx
-* Compile error in unit tests
-* Updated elements in a list wasn't applied to the generated json.
-* Issue #2 [Out of memory error and High CPU usage](https://github.com/JensBorrisholt/Delphi-JsonToDelphiClass/pull/2) - Thank You [MarkRSill](https://github.com/MarkRSill)
+## Fixes & Features: 04th June 2021
 
-### Features ###
-* Added unit tests for updating elements in lists.
+### Bugs:
 
-## Fixes & Features: 26th Marts 2021 ##
+- An error message occured when switching between the diffrent demo files
+- Dates without timestamp wasn't recognized within the RegEx
+- Compile error in unit tests
+- Updated elements in a list wasn't applied to the generated json.
+- Issue #2 [Out of memory error and High CPU usage](https://github.com/JensBorrisholt/Delphi-JsonToDelphiClass/pull/2) - Thank You [MarkRSill](https://github.com/MarkRSill)
 
-### Bugs: ###
-* The same class name could appear multiple times:
+### Features
+
+- Added unit tests for updating elements in lists.
+
+## Fixes & Features: 26th Marts 2021
+
+### Bugs:
+
+- The same class name could appear multiple times:
 
 E.g this JSON generated faulty code:
 
-```
+```json
 {
-    "/": {
-        "readonly": true
+  "/": {
+    "readonly": true
+  },
+  "\\": {
+    "readonly": true
+  }
+}
+```
+
+## Fixes & Features: 22th December 2020
+
+### Bugs:
+
+### Features
+
+- New main form. Completly rewritten.
+- Support for BSON
+- Support for Minify JSON
+- Support for multiblt output formats
+- JSON are now minifyed before posted to the validator. Means support for larger JSONs to be validated.
+- Version 3.0 released.
+
+## Fixes & Features: 11th December 2020
+
+### Bugs:
+
+- "id": "01010101" faulty generated a TDateTime property not string.
+- Settings.AddJsonPropertyAttributes didn't generate a Property Attribute
+
+### Features
+
+- JSON are now posted directly to the validator
+- Better property name generator
+- More unit tests
+
+## Fixes & Features: 24th November 2020
+
+### Bugs:
+
+### Features
+
+- Possibility to change the postfix of ClassNames, via Settings Dialog. Default: DTO
+- Settings Dialog rewritten to use LiveBindings
+- Create a Demo Project, using _your_ Json Data
+
+## Fixes & Features: 22th November 2020
+
+### Bugs:
+
+- Demo generator didn't allways generate valid code
+- Stopped the generator from generating surplus classes.
+
+### Features
+
+- Non object arrays are now mapped into a TList<T> instead of TArray<T>
+- Added a settings dialog and settings class
+- Properties in PascalCase (Setting)
+- Allways use JsonName property annotation (Setting)
+- Support for objects with diffrents properties in an Array
+
+Eg this JSON
+
+```json
+{
+  "ArrayTest": [
+    {
+      "S1": "5102"
     },
-    "\\": {
-        "readonly": true
+    {
+      "S2": "True"
     }
-} 
-```
-
-## Fixes & Features: 22th December 2020 ##
-
-### Bugs: ###
-
-### Features ###
-
-* New main form. Completly rewritten. 
-* Support for BSON
-* Support for Minify JSON
-* Support for multiblt output formats
-* JSON are now minifyed before posted to the validator. Means support for larger JSONs to be validated. 
-* Version 3.0 released.
-
-## Fixes & Features: 11th December 2020 ##
-
-### Bugs: ###
-
-* "id": "01010101" faulty generated a TDateTime property not string. 
-* Settings.AddJsonPropertyAttributes didn't generate a Property Attribute 
-
-### Features ###
-
-* JSON are now posted directly to the validator
-* Better property name generator
-* More unit tests
-
-## Fixes & Features: 24th November 2020 ##
-
-### Bugs: ###
-
-### Features ###
-
-* Possibility to change the postfix of ClassNames, via Settings Dialog. Default: DTO
-* Settings Dialog rewritten to use LiveBindings
-* Create a Demo Project, using *your* Json Data
-
-## Fixes & Features: 22th November 2020 ##
-
-### Bugs: ###
-* Demo generator didn't allways generate valid code
-* Stopped the generator from generating surplus classes. 
-
-### Features ###
-* Non object arrays are now mapped into a TList<T> instead of TArray<T>
-* Added a settings dialog and settings class
-* Properties in PascalCase (Setting)
-* Allways use JsonName property annotation  (Setting)
-* Support for objects with diffrents properties in an Array
-
-Eg this JSON 
-```
-{
-   "ArrayTest":[
-      {
-           "S1":"5102"
-      },
-      {
-           "S2":"True"
-      }      
-   ]
+  ]
 }
 ```
 
 Generates the following DTO:
-```
+
+```delphi
   TArrayTestDTO = class
   private
     FS1: string;
@@ -149,22 +161,21 @@ Generates the following DTO:
   end;
 ```
 
+## Previous changes
 
-## Previous changes ##
+- Only floating point numbers are mapped to Double
+- Numbers are mapped to Integer or Int64 depending on their size
+- Generated code restructored, and simplified
+- Generated classes inheriteds from TJsonDTO
+- Socurce Code restructored
+- Parser logic seperated from GUI logic
+- Fixed bug in the RegEx for recognizing an ISO8601 Date
+- Serialization removed the "noise" of List<T> i.e. includes internal properties that did not exist in the original JSON string.
+- Generated code uses TObjectList<T>
 
-* Only floating point numbers are mapped to Double
-* Numbers are mapped to Integer or Int64 depending on their size
-* Generated code restructored, and simplified
-* Generated classes inheriteds from TJsonDTO
-* Socurce Code restructored
-* Parser logic seperated from GUI logic
-* Fixed bug in the RegEx for recognizing an ISO8601 Date
-* Serialization removed the "noise" of List<T> i.e. includes internal properties that did not exist in the original JSON string.
-* Generated code uses TObjectList<T>
-  
 Generates Delphi Classes based on JSON string. Just like XML Data Binding, but for JSON.
 
-## Main features ##
+## Main features
 
 - Build entirely on the RTL (no external dependencies) so it's cross-platform;
 - Accepts any valid JSON string, no matter how complex the object is;
@@ -187,6 +198,6 @@ Generates Delphi Classes based on JSON string. Just like XML Data Binding, but f
 
 * If the JSON array is empty the contained type is unknown. Unit generation works only with known and supported types.
 
-*** The releases of JsonToDelphiClass (source and binaries) are public and reside on GitHub. The update unit uses GitHub's REST API to enumerate tags/releases.
+\*\*\* The releases of JsonToDelphiClass (source and binaries) are public and reside on GitHub. The update unit uses GitHub's REST API to enumerate tags/releases.
 
 Report any problems/suggestions using GitHub's facilities.
