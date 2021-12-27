@@ -30,7 +30,6 @@ object frmGenerateUnit: TfrmGenerateUnit
       Font.Height = -13
       Font.Name = 'Courier New'
       Align = alClient
-      ExplicitHeight = 489
     end
     object pnlBottom: TUniPanel
       Left = 1
@@ -42,7 +41,6 @@ object frmGenerateUnit: TfrmGenerateUnit
       TabOrder = 2
       Caption = ''
       Color = 16447477
-      ExplicitTop = 483
       object lblUnitName: TUniLabel
         Left = 19
         Top = 18

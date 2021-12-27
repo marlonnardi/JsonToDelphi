@@ -607,6 +607,7 @@ object MainForm: TMainForm
       AutoSize = False
       Caption = 'lblDoacao'
       TabOrder = 7
+      OnClick = lblDoacaoClick
     end
   end
   object tmr: TUniTimer

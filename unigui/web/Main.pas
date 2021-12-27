@@ -58,6 +58,7 @@ type
     procedure UniFormCreate(Sender: TObject);
     procedure UniFormDestroy(Sender: TObject);
     procedure tmrTimer(Sender: TObject);
+    procedure lblDoacaoClick(Sender: TObject);
   protected
     Popup: TUniFSPopup;
     procedure LoadCoallaborators;
@@ -180,6 +181,11 @@ begin
   lblJsonToPascal.Visible := False;
 end;
 
+procedure TMainForm.lblDoacaoClick(Sender: TObject);
+begin
+  UniSession.AddJS('gtag(''event'',''donation'',{"transaction_id": "paypal"});');
+end;
+
 procedure TMainForm.LoadCoallaborators;
 var
   SB: TStringBuilder;
@@ -232,8 +238,7 @@ end;
 procedure TMainForm.UniFormAfterShow(Sender: TObject);
 begin
   DefineRegrasLayout;
-  UniSession.AddJS('ga(''set'',''page'', ''/'+Self.Name+'.html'');');
-  UniSession.AddJS('ga(''send'',''pageview'');');
+  UniMainModule.SetGA4(Self.Name);
 end;
 
 procedure TMainForm.UniFormAjaxEvent(Sender: TComponent; EventName: string;

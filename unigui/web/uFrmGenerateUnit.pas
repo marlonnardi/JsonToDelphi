@@ -76,8 +76,7 @@ end;
 
 procedure TfrmGenerateUnit.UniFormShow(Sender: TObject);
 begin
-  UniSession.AddJS('ga(''set'',''page'', ''/'+Self.Name+'.html'');');
-  UniSession.AddJS('ga(''send'',''pageview'');');
+  UniMainModule.SetGA4(Self.Name);
 end;
 
 end.

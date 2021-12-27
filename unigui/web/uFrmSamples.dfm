@@ -108,7 +108,6 @@ object frmSamples: TfrmSamples
     Font.Name = 'Courier New'
     Align = alTop
     Anchors = [akLeft, akTop, akRight, akBottom]
-    ExplicitHeight = 324
   end
   object btnDownload: TUniFSButton
     Left = 15
@@ -129,6 +128,5 @@ object frmSamples: TfrmSamples
     Font.Height = -13
     TabOrder = 4
     OnClick = btnDownloadClick
-    ExplicitTop = 635
   end
 end

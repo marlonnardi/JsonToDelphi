@@ -43,7 +43,7 @@ SessionTimeout
 }
 
 uses
-  UniGUIVars, uniGUIDialogs, uniGUIClasses;
+  UniGUIVars, uniGUIDialogs, uniGUIClasses, UniFSCommon;
 
 function UniServerModule: TUniServerModule;
 begin
@@ -80,8 +80,6 @@ begin
 end;
 
 procedure TUniServerModule.UniGUIServerModuleBeforeInit(Sender: TObject);
-var
-  vJs, vCss: string;
 begin
   {$IFDEF DEBUG}
   SuppressErrors := [];
@@ -115,13 +113,10 @@ begin
   end;
   {$ENDREGION}
   {$REGION 'Carregando JS e CSS'}
-  {copy folder "falcon" into "c:\program files (x86)\fmsoft\framework\unigui\uni-VERSION"}
-  vJs := '\uni-'+UniGUIVersion+'\falcon\js\';
-  vCss := '\uni-'+UniGUIVersion+'\falcon\css\';
+  UniAddCSSLibrary(CDN+'falcon/css/style/financas.css', CDNENABLED, [upoFolderUni, upoPlatformBoth]);
 
-  CustomFiles.Add(vCss+'style\financas.css?v=2');
-  UniAddJSLibrary('https://www.google-analytics.com/analytics.js', True, [upoAsync, upoPlatformBoth]);
-  CustomFiles.Add(vJs+'falcon.google.ua.52856584-4.js?v=1');
+  UniAddJSLibrary('https://www.googletagmanager.com/gtag/js?id=G-VSH6WJS3B3', True, [upoAsync, upoPlatformBoth]);
+  UniAddJSLibrary(CDN+'falcon/js/jsontodelphi_google_ga4.js', CDNENABLED, [upoAsync, upoFolderUni, upoPlatformBoth]);
   {$ENDREGION}
 end;
 

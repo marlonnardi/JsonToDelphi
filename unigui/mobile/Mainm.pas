@@ -149,8 +149,7 @@ end;
 procedure TMainmForm.UnimFormShow(Sender: TObject);
 begin
   DefineRegrasLayout;
-  UniSession.AddJS('ga(''set'',''page'', ''/'+Self.Name+'.html'');');
-  UniSession.AddJS('ga(''send'',''pageview'');');
+  UniMainModule.SetGA4(Self.Name);
 end;
 
 procedure TMainmForm.UnimFormTitleButtonClick(Sender: TUnimTitleButton);

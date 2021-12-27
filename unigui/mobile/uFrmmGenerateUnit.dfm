@@ -11,7 +11,7 @@ object frmmGenerateUnit: TfrmmGenerateUnit
   TitleButtons = <>
   ShowAnimation = 'slideOut'
   PixelsPerInch = 96
-  TextHeight = 13
+  TextHeight = 15
   ScrollPosition = 0
   ScrollHeight = 47
   PlatformData = {}
@@ -23,10 +23,6 @@ object frmmGenerateUnit: TfrmmGenerateUnit
     Hint = ''
     Align = alClient
     TabOrder = 0
-    ExplicitLeft = 64
-    ExplicitTop = 136
-    ExplicitWidth = 225
-    ExplicitHeight = 235
   end
   object btnGenerate: TUnimButton
     AlignWithMargins = True
