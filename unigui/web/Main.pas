@@ -123,7 +123,10 @@ begin
   vJson := Trim(memJson.Lines.Text);
 
   if Length(vJson) <= 4 then
+  begin
+    Confirm.Alert('Enter JSON', 'Input Json to generate class', 'far fa-lightbulb', TTypeColor.green, TTheme.modern);
     Exit;
+  end;
 
   try
     vJson := TJsonDTO.PrettyPrintJSON(vJson);
