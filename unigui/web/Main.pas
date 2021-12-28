@@ -23,7 +23,6 @@ type
     lbl3: TUniLabel;
     lbl4: TUniLabel;
     lbl5: TUniLabel;
-    spl1: TUniSplitter;
     UniLabel1: TUniLabel;
     UniLabel2: TUniLabel;
     lbl6: TUniLabel;

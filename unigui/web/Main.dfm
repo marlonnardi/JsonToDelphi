@@ -82,9 +82,6 @@ object MainForm: TMainForm
     BorderStyle = ubsNone
     Caption = ''
     Color = 16447477
-    DesignSize = (
-      1024
-      587)
     object pnlTop: TUniPanel
       Left = 0
       Top = 0
@@ -382,20 +379,9 @@ object MainForm: TMainForm
       TabOrder = 2
       EmptyText = 'Enter JSON'
     end
-    object spl1: TUniSplitter
-      Left = 0
-      Top = 439
-      Width = 1024
-      Height = 6
-      Cursor = crVSplit
-      Hint = ''
-      Align = alTop
-      ParentColor = False
-      Color = 16447477
-    end
     object btnCollaborators: TUniFSButton
       Left = 932
-      Top = 452
+      Top = 449
       Width = 38
       Height = 34
       Hint = 'List of Contributors'
@@ -413,11 +399,11 @@ object MainForm: TMainForm
       Font.Color = clGreen
       Font.Height = -16
       Font.Name = 'Roboto'
-      TabOrder = 8
+      TabOrder = 7
     end
     object btn1: TUniFSButton
       Left = 981
-      Top = 452
+      Top = 449
       Width = 38
       Height = 34
       Hint = 'About donate'
@@ -435,7 +421,7 @@ object MainForm: TMainForm
       Font.Color = clBlack
       Font.Height = -16
       Font.Name = 'Roboto'
-      TabOrder = 9
+      TabOrder = 8
       OnClick = btn1Click
     end
     object lblNews: TUniLabel
@@ -451,7 +437,6 @@ object MainForm: TMainForm
       Caption = 
         '<i class="fab fa-lg fa-github"></i> News Fixes & Features: 26h D' +
         'ecember 2021'
-      Anchors = [akTop, akRight]
       ParentFont = False
       Font.Color = clHighlight
       Font.Height = -13
@@ -463,11 +448,11 @@ object MainForm: TMainForm
           'click=function click(sender, eOpts)'#13#10'{'#13#10'  window.open("https://g' +
           'ithub.com/marlonnardi/JsonToDelphi#fixes--features-26h-december-' +
           '2021");'#13#10'}')
-      TabOrder = 11
+      TabOrder = 10
     end
     object btnGenerate: TUniFSButton
       Left = 2
-      Top = 452
+      Top = 449
       Width = 140
       Height = 34
       Hint = ''
@@ -485,7 +470,7 @@ object MainForm: TMainForm
       Font.Color = clWhite
       Font.Height = -13
       Font.Name = 'Roboto'
-      TabOrder = 4
+      TabOrder = 3
       ScreenMask.Enabled = True
       ScreenMask.WaitData = True
       ScreenMask.Message = 'Generating unit...'
@@ -493,7 +478,7 @@ object MainForm: TMainForm
     end
     object btnValidate: TUniFSButton
       Left = 150
-      Top = 452
+      Top = 449
       Width = 115
       Height = 34
       Hint = ''
@@ -508,7 +493,7 @@ object MainForm: TMainForm
       Font.Color = clBlack
       Font.Height = -13
       Font.Name = 'Roboto'
-      TabOrder = 5
+      TabOrder = 4
       ClientEvents.ExtEvents.Strings = (
         
           'click=function click(sender, e, eOpts)'#13#10'{'#13#10'  window.open("https:' +
@@ -518,7 +503,7 @@ object MainForm: TMainForm
     end
     object btnSample: TUniFSButton
       Left = 272
-      Top = 452
+      Top = 449
       Width = 115
       Height = 34
       Hint = ''
@@ -533,7 +518,7 @@ object MainForm: TMainForm
       Font.Color = clBlack
       Font.Height = -13
       Font.Name = 'Roboto'
-      TabOrder = 6
+      TabOrder = 5
       ScreenMask.WaitData = True
       ScreenMask.Message = 'Opening...'
       OnClick = btnSampleClick
@@ -545,7 +530,7 @@ object MainForm: TMainForm
       Height = 76
       Hint = ''
       Caption = 'Delphi class generation options'
-      TabOrder = 10
+      TabOrder = 9
       ParentFont = False
       Font.Name = 'Roboto'
       object chkUsePascalCase: TUniCheckBox
@@ -599,14 +584,14 @@ object MainForm: TMainForm
     end
     object lblDoacao: TUniLabel
       Left = 758
-      Top = 452
+      Top = 449
       Width = 162
       Height = 45
       Hint = ''
       TextConversion = txtHTML
       AutoSize = False
       Caption = 'lblDoacao'
-      TabOrder = 7
+      TabOrder = 6
       OnClick = lblDoacaoClick
     end
   end
