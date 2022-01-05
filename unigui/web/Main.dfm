@@ -540,7 +540,7 @@ object MainForm: TMainForm
         Height = 17
         Hint = ''
         Checked = True
-        Caption = 'Use PascalCase'
+        Caption = 'Use Pascal Case'
         ParentFont = False
         Font.Name = 'Roboto'
         TabOrder = 1
