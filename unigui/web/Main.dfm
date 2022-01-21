@@ -111,8 +111,8 @@ object MainForm: TMainForm
         TabOrder = 1
       end
       object lblSubTitle: TUniLabel
-        Left = 4
-        Top = 57
+        Left = 3
+        Top = 55
         Width = 231
         Height = 21
         Hint = ''
@@ -122,7 +122,7 @@ object MainForm: TMainForm
         Font.Height = -16
         ParentColor = False
         Color = clGray
-        TabOrder = 11
+        TabOrder = 4
       end
       object lblDeveloper: TUniLabel
         Left = 941
@@ -158,7 +158,7 @@ object MainForm: TMainForm
         Font.Height = -13
         ParentColor = False
         Color = clBlack
-        TabOrder = 6
+        TabOrder = 7
       end
       object lbl2: TUniLabel
         Left = 817
@@ -194,7 +194,7 @@ object MainForm: TMainForm
           
             'click=function click(sender, eOpts)'#13#10'{'#13#10'  window.open("https://g' +
             'ithub.com/PKGeorgiev");'#13#10'}')
-        TabOrder = 7
+        TabOrder = 8
       end
       object lbl4: TUniLabel
         Left = 974
@@ -209,7 +209,7 @@ object MainForm: TMainForm
         Font.Height = -13
         ParentColor = False
         Color = clBlack
-        TabOrder = 10
+        TabOrder = 11
       end
       object lbl5: TUniLabel
         Left = 618
@@ -226,7 +226,7 @@ object MainForm: TMainForm
         Font.Height = -13
         ParentColor = False
         Color = clBlack
-        TabOrder = 4
+        TabOrder = 5
       end
       object UniLabel1: TUniLabel
         Left = 920
@@ -279,7 +279,7 @@ object MainForm: TMainForm
         Font.Height = -13
         ParentColor = False
         Color = clBlack
-        TabOrder = 5
+        TabOrder = 6
       end
       object UniLabel3: TUniLabel
         Left = 876
@@ -315,20 +315,6 @@ object MainForm: TMainForm
         Color = clBlack
         TabOrder = 15
       end
-      object lblJsonToPascal: TUniLabel
-        Left = 5
-        Top = 82
-        Width = 94
-        Height = 21
-        Hint = ''
-        Caption = 'json to pascal'
-        ParentFont = False
-        Font.Color = clGray
-        Font.Height = -16
-        ParentColor = False
-        Color = clGray
-        TabOrder = 12
-      end
       object lbl7: TUniLabel
         Left = 857
         Top = 56
@@ -342,7 +328,7 @@ object MainForm: TMainForm
         Font.Height = -13
         ParentColor = False
         Color = clBlack
-        TabOrder = 8
+        TabOrder = 9
       end
       object lbl8: TUniLabel
         Left = 883
@@ -363,7 +349,21 @@ object MainForm: TMainForm
           
             'click=function click(sender, eOpts)'#13#10'{'#13#10'  window.open("https://g' +
             'ithub.com/PKGeorgiev");'#13#10'}')
-        TabOrder = 9
+        TabOrder = 10
+      end
+      object lblJsonToPascal: TUniLabel
+        Left = 5
+        Top = 82
+        Width = 306
+        Height = 21
+        Hint = ''
+        Caption = 'json to pascal, delphi json object, delphi json'
+        ParentFont = False
+        Font.Color = 16447477
+        Font.Height = -16
+        ParentColor = False
+        Color = 16447477
+        TabOrder = 12
       end
     end
     object memJson: TUniMemo

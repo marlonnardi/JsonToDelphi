@@ -61,6 +61,7 @@ type
   protected
     Popup: TUniFSPopup;
     procedure LoadCoallaborators;
+    procedure RandomNotification();
   private
     { Private declarations }
     JsonMapper : TPkgJsonMapper;
@@ -180,7 +181,7 @@ begin
 
   lblVersion.Caption := TSistema.GetVersao(UniServerModule.StartPath + '\jsontodelphi.dll');
 
-  lblJsonToPascal.Visible := False;
+  //lblJsonToPascal.Visible := False;
 end;
 
 procedure TMainForm.lblDoacaoClick(Sender: TObject);
@@ -214,6 +215,11 @@ begin
   end;
 end;
 
+procedure TMainForm.RandomNotification;
+begin
+
+end;
+
 procedure TMainForm.ShowAlert(Title, Msg: string);
 var
   Confirm: TUniFSConfirm;
@@ -228,13 +234,14 @@ end;
 
 procedure TMainForm.tmrTimer(Sender: TObject);
 begin
-  Confirm.boxWidth := '500px';
-  Confirm.Alert(
-    'jsontodelphi',
-    '<p>"If you like this site and use it frequently, <b>make a donation to keep it up and running !</b>"</p> </br> '+
-    '<p><i class="fab fa-lg fa-github"></i><a href="https://github.com/marlonnardi/JsonToDelphi#fixes--features-03h-october-2021" target="_blank"> News Fixes & Features: 03h October 2021</a></p></br> '+
-    lblDoacao.Caption+'</br>',
-    'fas fa-rocket',TTypeColor.green, TTheme.modern);
+//  Confirm.boxWidth := '500px';
+//  Confirm.Alert(
+//    'jsontodelphi',
+//    '<p>"If you like this site and use it frequently, <b>make a donation to keep it up and running !</b>"</p> </br> '+
+//    '<p><i class="fab fa-lg fa-github"></i><a href="https://github.com/marlonnardi/JsonToDelphi#fixes--features-03h-october-2021" target="_blank"> News Fixes & Features: 03h October 2021</a></p></br> '+
+//    lblDoacao.Caption+'</br>',
+//    'fas fa-rocket',TTypeColor.green, TTheme.modern);
+  RandomNotification;
 end;
 
 procedure TMainForm.UniFormAfterShow(Sender: TObject);
