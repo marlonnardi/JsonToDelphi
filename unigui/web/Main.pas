@@ -8,7 +8,7 @@ uses
   uniGUIForm, uniLabel, uniGUIBaseClasses, uniPanel, uniMemo, uniHTMLFrame,
   uniSplitter, uniRadioGroup, uniButton, uniBitBtn, UniFSButton, uniImage,
   UniFSConfirm, UniFSPopup, Pkg.Json.Mapper, Pkg.Json.DTO, Pkg.Json.Settings,
-  uniTimer, uniCheckBox, uniGroupBox;
+  uniTimer, uniCheckBox, uniGroupBox, UniFSToast;
 
 type
   TMainForm = class(TUniForm)
@@ -48,6 +48,7 @@ type
     chkSuppressZeroDate: TUniCheckBox;
     chkPostfixClassNames: TUniCheckBox;
     lblDoacao: TUniLabel;
+    Toast: TUniFSToast;
     procedure UniFormAfterShow(Sender: TObject);
     procedure UniFormClose(Sender: TObject; var Action: TCloseAction);
     procedure UniFormAjaxEvent(Sender: TComponent; EventName: string; Params: TUniStrings);
@@ -58,10 +59,14 @@ type
     procedure UniFormDestroy(Sender: TObject);
     procedure tmrTimer(Sender: TObject);
     procedure lblDoacaoClick(Sender: TObject);
+    procedure ToastButtonCustomClickPopup(Sender: TObject);
+  protected
+    FIdMessage: Integer;
+    procedure RandomNotification();
   protected
     Popup: TUniFSPopup;
     procedure LoadCoallaborators;
-    procedure RandomNotification();
+
   private
     { Private declarations }
     JsonMapper : TPkgJsonMapper;
@@ -216,8 +221,36 @@ begin
 end;
 
 procedure TMainForm.RandomNotification;
+  procedure Message0();
+  begin
+    Toast.ButtonCustomActive := True;
+    Toast.ButtonCustomText := 'Falcon Store';
+    Toast.ButtonCustomURL := 'https://store.falconsistemas.com.br';
+    Toast.Title := 'Components for uniGUI';
+    Toast.Msg := 'Also check out beautiful components for uniGUI';
+    Toast.Image := 'https://store.falconsistemas.com.br/imagens/falcon_store_200.png';
+    Toast.ProgressBar := False;
+    Toast.TimeOut := 0;
+    Toast.Show();
+  end;
+  procedure Message1();
+  begin
+    Toast.ButtonCustomActive := True;
+    Toast.ButtonCustomText := 'Falcon Finanças';
+    Toast.ButtonCustomURL := 'https://financeiro.app/';
+    Toast.Title := 'Gerenciador financeiro';
+    Toast.Msg := 'Tenha um controle eficiente de suas finanças ';
+    Toast.Image := 'https://financeiro.app/imagens/falcon_financas_200_new.png';
+    Toast.ProgressBar := False;
+    Toast.TimeOut := 0;
+    Toast.Show();
+  end;
 begin
-
+  FIdMessage := Random(2);
+  case FIdMessage of
+    0: Message0();
+    1: Message1();
+  end;
 end;
 
 procedure TMainForm.ShowAlert(Title, Msg: string);
@@ -242,6 +275,15 @@ begin
 //    lblDoacao.Caption+'</br>',
 //    'fas fa-rocket',TTypeColor.green, TTheme.modern);
   RandomNotification;
+end;
+
+procedure TMainForm.ToastButtonCustomClickPopup(Sender: TObject);
+begin
+  case FIdMessage of
+    0: Inc(UniServerModule.v1);
+    1: Inc(UniServerModule.v2);
+  end;
+  Toast.CloseAll;
 end;
 
 procedure TMainForm.UniFormAfterShow(Sender: TObject);
@@ -275,6 +317,14 @@ begin
   Popup.ArrowLocation := TArrowLocation.bottom;
   Popup.Target := btnCollaborators;
   LoadCoallaborators;
+
+  if UniApplication.Parameters.Values['Analytics'] <> EmptyStr then
+  begin
+    ShowMessage(
+      'Store: '+ UniServerModule.v1.ToString + '</br>'+
+      'Finanças: '+ UniServerModule.v2.ToString + '</br>')
+  end;
+
 end;
 
 procedure TMainForm.UniFormDestroy(Sender: TObject);

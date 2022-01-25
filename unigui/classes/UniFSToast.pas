@@ -31,7 +31,7 @@ uses
 
 const
   FSAbout = 'store.falconsistemas.com.br';
-  PackageVersion = '1.2.3.50';
+  PackageVersion = '1.2.3.55';
 
 type
   TToastTheme = (Dark, Light);
@@ -132,6 +132,7 @@ type
     FOnButtonCustomClickPopup: TOnButtonCustomClickPopup;
     FButtonCustomActive: Boolean;
     FButtonCustomText: string;
+    FButtonCustomURL: string;
   published
     property Id: string read FId write FId;
     property Title: string read FTitle write FTitle;
@@ -180,6 +181,7 @@ type
     property ButtonTextNo: string read FButtonTextNo write FButtonTextNo;
     property ButtonCustomActive: Boolean read FButtonCustomActive write FButtonCustomActive;
     property ButtonCustomText: string read FButtonCustomText write FButtonCustomText;
+    property ButtonCustomURL: string read FButtonCustomURL write FButtonCustomURL;
 
     property About : string read GetAbout;
     property Version : string read GetVersion;
@@ -285,6 +287,8 @@ begin
           Append(' buttons: [ ');
           Append('     [''<button>'+FButtonCustomText+'</button>'', function (instance, toast) { ');
           Append('         ajaxRequest('+Self.JSName+', "Toast", ["ButtonCustomClick="+"Yes"]); ');
+          if FButtonCustomURL <> EmptyStr then
+            Append('       window.open("'+FButtonCustomURL+'"); ');
           Append('     }, true] ');
           Append(' ], ');
         end;

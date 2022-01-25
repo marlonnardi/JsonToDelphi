@@ -26,6 +26,7 @@ type
     procedure FirstInit; override;
   public
     { Public declarations }
+    v1, v2: Integer;
   end;
 
 function UniServerModule: TUniServerModule;

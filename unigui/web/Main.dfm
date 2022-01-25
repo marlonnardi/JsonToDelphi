@@ -52,17 +52,16 @@ object MainForm: TMainForm
       LayoutConfig.Cls = 'card card-radius'
     end
     object lblVersion: TUniLabel
-      Left = 970
-      Top = 23
+      Left = 24
+      Top = 22
       Width = 89
       Height = 11
       Hint = 'Version'
       ShowHint = True
       ParentShowHint = False
-      Alignment = taRightJustify
       AutoSize = False
       Caption = '1.0.0.2'
-      Anchors = [akRight, akBottom]
+      Anchors = [akLeft, akBottom]
       ParentFont = False
       Font.Color = 10853781
       Font.Height = -9
@@ -597,7 +596,6 @@ object MainForm: TMainForm
   end
   object tmr: TUniTimer
     Interval = 3000
-    Enabled = False
     RunOnce = True
     ClientEvent.Strings = (
       'function(sender)'
@@ -606,7 +604,7 @@ object MainForm: TMainForm
       '}')
     OnTimer = tmrTimer
     Left = 509
-    Top = 248
+    Top = 208
   end
   object Confirm: TUniFSConfirm
     Theme = modern
@@ -631,6 +629,43 @@ object MainForm: TMainForm
     PromptType.TextRequiredField = 'Field riquired'
     PromptType.CharCase = Normal_
     Left = 509
-    Top = 320
+    Top = 264
+  end
+  object Toast: TUniFSToast
+    TitleSize = 13
+    TitleLineHeight = 0
+    MsgSize = 12
+    MsgLineHeight = 0
+    Theme = Dark
+    ImageWidth = 0
+    MaxWidth = 0
+    zIndex = 99999
+    Layout = SmallInt
+    Balloon = False
+    Close = True
+    CloseOnEscape = False
+    CloseOnClick = False
+    RTL = False
+    Position = bottomRight
+    TimeOut = 5000
+    Drag = True
+    Overlay = False
+    ToastOnce = False
+    PauseOnHover = True
+    ResetOnHover = False
+    ProgressBar = True
+    ProgressBarColor = 'rgb(0, 255, 184)'
+    ScreenMask.Enabled = False
+    Animateinside = True
+    TransitionIn = fadeInUp
+    TransitionOut = fadeOut
+    TransitionInMobile = fadeInUp
+    TransitionOutMobile = fadeOutDown
+    ButtonTextYes = 'Confirma'
+    ButtonTextNo = 'Cancela'
+    ButtonCustomActive = False
+    OnButtonCustomClickPopup = ToastButtonCustomClickPopup
+    Left = 511
+    Top = 322
   end
 end
