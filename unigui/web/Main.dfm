@@ -14,7 +14,6 @@ object MainForm: TMainForm
   OnAjaxEvent = UniFormAjaxEvent
   OnCreate = UniFormCreate
   OnDestroy = UniFormDestroy
-  PixelsPerInch = 96
   DesignSize = (
     1080
     647)

@@ -63,6 +63,7 @@ type
   protected
     FIdMessage: Integer;
     procedure RandomNotification();
+    procedure DonationNotification();
   protected
     Popup: TUniFSPopup;
     procedure LoadCoallaborators;
@@ -189,6 +190,17 @@ begin
   //lblJsonToPascal.Visible := False;
 end;
 
+procedure TMainForm.DonationNotification;
+begin
+  Confirm.boxWidth := '500px';
+  Confirm.Alert(
+    'jsontodelphi',
+    '<p>"If you like this site and use it frequently, <b>make a donation to keep it up and running !</b>"</p> </br> '+
+    '<p><i class="fab fa-lg fa-github"></i><a href="https://github.com/marlonnardi/JsonToDelphi#fixes--features-26h-december-2021" target="_blank"> News Fixes & Features</a></p></br> '+
+    lblDoacao.Caption+'</br>',
+    'fas fa-rocket',TTypeColor.green, TTheme.modern);
+end;
+
 procedure TMainForm.lblDoacaoClick(Sender: TObject);
 begin
   UniSession.AddJS('gtag(''event'',''donation'',{"transaction_id": "paypal"});');
@@ -267,14 +279,8 @@ end;
 
 procedure TMainForm.tmrTimer(Sender: TObject);
 begin
-//  Confirm.boxWidth := '500px';
-//  Confirm.Alert(
-//    'jsontodelphi',
-//    '<p>"If you like this site and use it frequently, <b>make a donation to keep it up and running !</b>"</p> </br> '+
-//    '<p><i class="fab fa-lg fa-github"></i><a href="https://github.com/marlonnardi/JsonToDelphi#fixes--features-03h-october-2021" target="_blank"> News Fixes & Features: 03h October 2021</a></p></br> '+
-//    lblDoacao.Caption+'</br>',
-//    'fas fa-rocket',TTypeColor.green, TTheme.modern);
-  RandomNotification;
+  DonationNotification();
+  //RandomNotification();
 end;
 
 procedure TMainForm.ToastButtonCustomClickPopup(Sender: TObject);
