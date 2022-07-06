@@ -25,8 +25,7 @@ object MainmForm: TMainmForm
       IconCls = 'team'
     end>
   OnTitleButtonClick = UnimFormTitleButtonClick
-  PixelsPerInch = 96
-  TextHeight = 13
+  TextHeight = 15
   ScrollPosition = 0
   ScrollHeight = 47
   PlatformData = {}

@@ -133,6 +133,7 @@ end;
 procedure TMainmForm.tmrTimer(Sender: TObject);
 begin
   Confirm.boxWidth := '90%';
+  Confirm.ButtonTextOK := 'No thank you';
   Confirm.Alert(
     'jsontodelphi',
     '<p>If you like this site and use it frequently, <b>make a donation to keep it up and running !</b></p> </br>'+

@@ -193,6 +193,7 @@ end;
 procedure TMainForm.DonationNotification;
 begin
   Confirm.boxWidth := '500px';
+  Confirm.ButtonTextOK := 'No thank you';
   Confirm.Alert(
     'jsontodelphi',
     '<p>"If you like this site and use it frequently, <b>make a donation to keep it up and running !</b>"</p> </br> '+
