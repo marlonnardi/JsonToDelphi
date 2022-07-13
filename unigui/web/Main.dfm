@@ -432,9 +432,7 @@ object MainForm: TMainForm
       Alignment = taRightJustify
       TextConversion = txtHTML
       AutoSize = False
-      Caption = 
-        '<i class="fab fa-lg fa-github"></i> News Fixes & Features: 26h D' +
-        'ecember 2021'
+      Caption = '<i class="fab fa-lg fa-github"></i> News Fixes & Features'
       ParentFont = False
       Font.Color = clHighlight
       Font.Height = -13
