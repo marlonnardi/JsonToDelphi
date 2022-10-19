@@ -64,6 +64,8 @@ type
     FIdMessage: Integer;
     procedure RandomNotification();
     procedure DonationNotification();
+
+    procedure OnClickPopup(Sender: TObject);
   protected
     Popup: TUniFSPopup;
     procedure LoadCoallaborators;
@@ -215,6 +217,8 @@ begin
   try
     SB.Append('<div style=''margin:0px 0px 8px 0px'';>List of Contributors</div>');
     SB.Append('<div class=''list-group''> ');
+    SB.Append('<a class=''fs-group-item''><i class=''far fa-thumbs-up fa-lg text-green''></i>&nbsp; 2022-10-14 - Rodrigo Pysklyvicz <b>R$ 10,00</b> </a>');
+    SB.Append('<a class=''fs-group-item''><i class=''far fa-thumbs-up fa-lg text-green''></i>&nbsp; 2022-10-10 - Thomas Scheidegger <b>U$ 100,00</b> </a>');
     SB.Append('<a class=''fs-group-item''><i class=''far fa-thumbs-up fa-lg text-green''></i>&nbsp; 2022-07-06 - CM SOLUÇÕES LTDA <b>R$ 120,00</b> </a>');
     SB.Append('<a class=''fs-group-item''><i class=''far fa-thumbs-up fa-lg text-green''></i>&nbsp; 2021-12-05 - Leon Siepman <b>U$ 25,00</b> </a>');
     SB.Append('<a class=''fs-group-item''><i class=''far fa-thumbs-up fa-lg text-green''></i>&nbsp; 2021-11-06 - Samuel Herzog <b>U$ 20,00</b> </a>');
@@ -223,14 +227,22 @@ begin
     SB.Append('<a class=''fs-group-item''><i class=''far fa-thumbs-up fa-lg text-green''></i>&nbsp; 2021-07-24 - Геннадий Малинин <b>U$ 5,00</b> </a>');
     SB.Append('<a class=''fs-group-item''><i class=''far fa-thumbs-up fa-lg text-green''></i>&nbsp; 2021-06-25 - Pierre Demers <b>U$ 30,00</b> </a>');
     SB.Append('<a class=''fs-group-item''><i class=''far fa-thumbs-up fa-lg text-green''></i>&nbsp; 2021-06-16 - Christian Späth <b>U$ 15,00</b> </a>');
-    SB.Append('<a class=''fs-group-item''><i class=''far fa-thumbs-up fa-lg text-green''></i>&nbsp; 2020-07-06 - DEMORSOFT  <b>U$ 10,00</b> </a>');
-    SB.Append('<a class=''fs-group-item''><i class=''far fa-thumbs-up fa-lg text-green''></i>&nbsp; 2020-05-31 - Gordon Niessen <b>U$ 10,00</b> </a>');
-    SB.Append('<a class=''fs-group-item''><i class=''far fa-thumbs-up fa-lg text-green''></i>&nbsp; 2018-08-30 - Toni Puhakka <b>U$ 10,00</b> </a>');
+    //SB.Append('<a class=''fs-group-item''><i class=''far fa-thumbs-up fa-lg text-green''></i>&nbsp; 2020-07-06 - DEMORSOFT  <b>U$ 10,00</b> </a>');
+    //SB.Append('<a class=''fs-group-item''><i class=''far fa-thumbs-up fa-lg text-green''></i>&nbsp; 2020-05-31 - Gordon Niessen <b>U$ 10,00</b> </a>');
+    //SB.Append('<a class=''fs-group-item''><i class=''far fa-thumbs-up fa-lg text-green''></i>&nbsp; 2018-08-30 - Toni Puhakka <b>U$ 10,00</b> </a>');
     SB.Append('</div> ');
 
     Popup.SetHtml(SB.ToString);
   finally
     FreeAndNil(SB);
+  end;
+end;
+
+procedure TMainForm.OnClickPopup(Sender: TObject);
+begin
+  case FIdMessage of
+    0: UniSession.UrlRedirect('https://store.falconsistemas.com.br');
+    1: UniSession.UrlRedirect('https://financeiro.app/');
   end;
 end;
 
@@ -245,6 +257,7 @@ procedure TMainForm.RandomNotification;
     Toast.Image := 'https://store.falconsistemas.com.br/imagens/falcon_store_200.png';
     Toast.ProgressBar := False;
     Toast.TimeOut := 0;
+    Toast.OnClickPopup := OnClickPopup;
     Toast.Show();
   end;
   procedure Message1();
@@ -252,11 +265,12 @@ procedure TMainForm.RandomNotification;
     Toast.ButtonCustomActive := True;
     Toast.ButtonCustomText := 'Falcon Finanças';
     Toast.ButtonCustomURL := 'https://financeiro.app/';
-    Toast.Title := 'Gerenciador financeiro';
+    Toast.Title := 'Gerenciador Financeiro';
     Toast.Msg := 'Tenha um controle eficiente de suas finanças ';
     Toast.Image := 'https://financeiro.app/imagens/falcon_financas_200_new.png';
     Toast.ProgressBar := False;
     Toast.TimeOut := 0;
+    Toast.OnClickPopup := OnClickPopup;
     Toast.Show();
   end;
 begin
@@ -281,8 +295,8 @@ end;
 
 procedure TMainForm.tmrTimer(Sender: TObject);
 begin
-  DonationNotification();
-  //RandomNotification();
+  //DonationNotification();
+  RandomNotification();
 end;
 
 procedure TMainForm.ToastButtonCustomClickPopup(Sender: TObject);
