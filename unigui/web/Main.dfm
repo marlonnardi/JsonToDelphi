@@ -593,6 +593,7 @@ object MainForm: TMainForm
   end
   object tmr: TUniTimer
     Interval = 3000
+    Enabled = False
     RunOnce = True
     ClientEvent.Strings = (
       'function(sender)'

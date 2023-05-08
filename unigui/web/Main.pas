@@ -297,7 +297,7 @@ end;
 procedure TMainForm.tmrTimer(Sender: TObject);
 begin
   //DonationNotification();
-  RandomNotification();
+  //RandomNotification();
 end;
 
 procedure TMainForm.ToastButtonCustomClickPopup(Sender: TObject);

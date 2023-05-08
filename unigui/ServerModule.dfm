@@ -3197,5 +3197,4 @@ object UniServerModule: TUniServerModule
   UniMobileRoot = 'c:\unigui\[unim]\'
   Height = 555
   Width = 725
-  PixelsPerInch = 96
 end

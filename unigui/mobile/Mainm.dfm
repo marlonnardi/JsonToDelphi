@@ -43,6 +43,8 @@ object MainmForm: TMainmForm
     Align = alClient
     Color = clWhite
     ScrollIndicators = False
+    ExplicitWidth = 316
+    ExplicitHeight = 699
     ScrollHeight = 677
     ScrollWidth = 0
     object memJson: TUnimMemo
@@ -60,6 +62,7 @@ object MainmForm: TMainmForm
       EmptyText = 'Enter JSON'
       LayoutConfig.Cls = 'border-radius-8'
       TabOrder = 0
+      ExplicitWidth = 284
     end
     object btnGenerate: TUnimButton
       AlignWithMargins = True
@@ -79,6 +82,7 @@ object MainmForm: TMainmForm
       ScreenMask.Message = 'Processing...'
       LayoutConfig.Cls = 'button-style'
       OnClick = btnGenerateClick
+      ExplicitWidth = 284
     end
     object btnValidate: TUnimButton
       AlignWithMargins = True
@@ -101,6 +105,7 @@ object MainmForm: TMainmForm
       ScreenMask.WaitData = True
       ScreenMask.Message = 'Processing...'
       LayoutConfig.Cls = 'button-style'
+      ExplicitWidth = 284
     end
     object btnSample: TUnimButton
       AlignWithMargins = True
@@ -120,6 +125,7 @@ object MainmForm: TMainmForm
       ScreenMask.Message = 'Processing...'
       LayoutConfig.Cls = 'button-style'
       OnClick = btnSampleClick
+      ExplicitWidth = 284
     end
     object pnlFalcon: TUnimPanel
       AlignWithMargins = True
@@ -134,6 +140,7 @@ object MainmForm: TMainmForm
       Align = alTop
       Color = clWhite
       BorderStyle = ubsNone
+      ExplicitWidth = 284
       object imgFalcon: TUnimImage
         Left = 52
         Top = 14
@@ -162,6 +169,7 @@ object MainmForm: TMainmForm
       Caption = '<b>teste</b> teste'
       Align = alTop
       ParentFont = False
+      ExplicitWidth = 284
     end
   end
   object Confirm: TUniFSConfirm
@@ -191,6 +199,7 @@ object MainmForm: TMainmForm
   end
   object tmr: TUniTimer
     Interval = 3000
+    Enabled = False
     RunOnce = True
     ClientEvent.Strings = (
       'function(sender)'

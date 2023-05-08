@@ -1,5 +1,8 @@
+Sitemap: https://financeiro.app/sitemap.xml
+
 User-Agent: *
 Allow: /
 
 Disallow: /erro
 Disallow: /email/
+Disallow: /cdn-cgi/l/email-protection
