@@ -1,7 +1,7 @@
 object MainmForm: TMainmForm
   Left = 0
   Top = 0
-  ClientHeight = 706
+  ClientHeight = 796
   ClientWidth = 320
   Caption = 'jsontodelphi'
   Color = clWhite
@@ -34,7 +34,7 @@ object MainmForm: TMainmForm
     Left = 0
     Top = 6
     Width = 320
-    Height = 700
+    Height = 790
     Hint = ''
     Margins.Left = 0
     Margins.Top = 6
@@ -110,7 +110,7 @@ object MainmForm: TMainmForm
     object btnSample: TUnimButton
       AlignWithMargins = True
       Left = 15
-      Top = 481
+      Top = 541
       Width = 288
       Height = 47
       Hint = ''
@@ -125,12 +125,13 @@ object MainmForm: TMainmForm
       ScreenMask.Message = 'Processing...'
       LayoutConfig.Cls = 'button-style'
       OnClick = btnSampleClick
+      ExplicitTop = 481
       ExplicitWidth = 284
     end
     object pnlFalcon: TUnimPanel
       AlignWithMargins = True
       Left = 15
-      Top = 610
+      Top = 670
       Width = 288
       Height = 67
       Hint = ''
@@ -140,6 +141,7 @@ object MainmForm: TMainmForm
       Align = alTop
       Color = clWhite
       BorderStyle = ubsNone
+      ExplicitTop = 610
       ExplicitWidth = 284
       object imgFalcon: TUnimImage
         Left = 52
@@ -157,7 +159,7 @@ object MainmForm: TMainmForm
     object lblDoacao: TUnimLabel
       AlignWithMargins = True
       Left = 15
-      Top = 541
+      Top = 601
       Width = 288
       Height = 56
       Hint = ''
@@ -169,6 +171,31 @@ object MainmForm: TMainmForm
       Caption = '<b>teste</b> teste'
       Align = alTop
       ParentFont = False
+      ExplicitTop = 541
+      ExplicitWidth = 284
+    end
+    object btnComponents: TUnimButton
+      AlignWithMargins = True
+      Left = 15
+      Top = 481
+      Width = 288
+      Height = 47
+      Hint = ''
+      Margins.Left = 15
+      Margins.Top = 10
+      Margins.Right = 15
+      Align = alTop
+      Caption = 'Components Delphi'
+      ClientEvents.ExtEvents.Strings = (
+        
+          'tap=function tap(sender, e, eOpts)'#13#10'{'#13#10'   window.open("https://c' +
+          'omponents.falconsistemas.com.br/");'#13#10'}')
+      UI = 'round'
+      ScreenMask.Enabled = True
+      ScreenMask.WaitData = True
+      ScreenMask.Message = 'Processing...'
+      LayoutConfig.Cls = 'button-style'
+      OnClick = btnSampleClick
       ExplicitWidth = 284
     end
   end

@@ -22,6 +22,7 @@ type
     lblDoacao: TUnimLabel;
     Confirm: TUniFSConfirm;
     tmr: TUniTimer;
+    btnComponents: TUnimButton;
     procedure UnimFormShow(Sender: TObject);
     procedure UnimFormTitleButtonClick(Sender: TUnimTitleButton);
     procedure UnimFormResize(Sender: TObject);

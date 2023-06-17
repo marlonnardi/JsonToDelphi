@@ -350,17 +350,23 @@ object MainForm: TMainForm
         TabOrder = 10
       end
       object lblJsonToPascal: TUniLabel
-        Left = 5
+        Left = 3
         Top = 82
-        Width = 306
-        Height = 21
+        Width = 213
+        Height = 20
+        Cursor = crHandPoint
         Hint = ''
-        Caption = 'json to pascal, delphi json object, delphi json'
+        Caption = 'The best components for Delphi'
         ParentFont = False
-        Font.Color = 16447477
-        Font.Height = -16
+        Font.Color = 15748954
+        Font.Height = -15
+        Font.Style = [fsUnderline]
         ParentColor = False
         Color = 16447477
+        ClientEvents.ExtEvents.Strings = (
+          
+            'click=function click(sender, eOpts)'#13#10'{'#13#10'  window.open("https://c' +
+            'omponents.falconsistemas.com.br/")'#13#10'}')
         TabOrder = 12
       end
     end
