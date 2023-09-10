@@ -38,7 +38,7 @@ object MainForm: TMainForm
       Width = 150
       Height = 39
       Cursor = crHandPoint
-      Hint = 'http://www.falconsistemas.com.br'
+      Hint = 'www.falconsistemas.com.br'
       ShowHint = True
       ParentShowHint = False
       AutoSize = True
@@ -97,10 +97,11 @@ object MainForm: TMainForm
       object lblTitle: TUniLabel
         Left = 4
         Top = 16
-        Width = 180
+        Width = 790
         Height = 45
         Hint = ''
-        Caption = 'jsontodelphi'
+        TextConversion = txtHTML
+        Caption = '<a href="https://jsontodelphi.com">jsontodelphi</a>'
         ParentFont = False
         Font.Color = 9264680
         Font.Height = -33
@@ -125,22 +126,20 @@ object MainForm: TMainForm
       object lblDeveloper: TUniLabel
         Left = 941
         Top = 23
-        Width = 79
+        Width = 590
         Height = 17
         Cursor = crHandPoint
         Hint = ''
         TextConversion = txtHTML
-        Caption = 'Marlon Nardi'
+        Caption = 
+          '<a style="color: #3399ff;" href="https://github.com/marlonnardi"' +
+          ' target="_blank">Marlon Nardi</a>'
         Anchors = [akTop, akRight]
         ParentFont = False
         Font.Color = clHighlight
         Font.Height = -13
         ParentColor = False
         Color = clBlack
-        ClientEvents.ExtEvents.Strings = (
-          
-            'click=function click(sender, eOpts)'#13#10'{'#13#10'  window.open("https://g' +
-            'ithub.com/marlonnardi")'#13#10'}')
         TabOrder = 3
       end
       object lbl1: TUniLabel
@@ -229,22 +228,20 @@ object MainForm: TMainForm
       object UniLabel1: TUniLabel
         Left = 920
         Top = 88
-        Width = 97
+        Width = 705
         Height = 17
         Cursor = crHandPoint
         Hint = ''
         TextConversion = txtHTML
-        Caption = 'JsonDataObjects'
+        Caption = 
+          '<a style="color: #3399ff;" href="https://github.com/ahausladen/J' +
+          'sonDataObjects" target="_blank">JsonDataObjects</a>'
         Anchors = [akTop, akRight]
         ParentFont = False
         Font.Color = clHighlight
         Font.Height = -13
         ParentColor = False
         Color = clBlack
-        ClientEvents.ExtEvents.Strings = (
-          
-            'click=function click(sender, eOpts)'#13#10'{'#13#10'  window.open("https://g' +
-            'ithub.com/ahausladen/JsonDataObjects");'#13#10'}')
         TabOrder = 16
       end
       object UniLabel2: TUniLabel
@@ -351,22 +348,21 @@ object MainForm: TMainForm
       end
       object lblJsonToPascal: TUniLabel
         Left = 3
-        Top = 82
-        Width = 213
+        Top = 84
+        Width = 997
         Height = 20
         Cursor = crHandPoint
         Hint = ''
-        Caption = 'The best components for Delphi'
+        TextConversion = txtHTML
+        Caption = 
+          '<a style="color: #3399ff;" href="https://store.falconsistemas.co' +
+          'm.br" target="_blank"><i class="fas fa-star"></i> The best compo' +
+          'nents for Delphi</a>'
         ParentFont = False
         Font.Color = 15748954
         Font.Height = -15
-        Font.Style = [fsUnderline]
         ParentColor = False
         Color = 16447477
-        ClientEvents.ExtEvents.Strings = (
-          
-            'click=function click(sender, eOpts)'#13#10'{'#13#10'  window.open("https://c' +
-            'omponents.falconsistemas.com.br/")'#13#10'}')
         TabOrder = 12
       end
     end
