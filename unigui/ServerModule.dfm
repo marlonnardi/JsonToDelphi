@@ -3170,6 +3170,15 @@ object UniServerModule: TUniServerModule
     '}'
     '.x-tool-tool-el {'
     '    color: #ffffff !important;'
+    '}'
+    '.x-progress-default .x-progress-bar-default {'
+    '    background-color: #008052 !important;'
+    '}'
+    '.x-progress-default {'
+    '    border-radius: 12px;'
+    '}'
+    '.x-progress-default .x-progress-text {'
+    '    font-weight: 600 !important;'
     '}')
   CustomMeta.Strings = (
     '')

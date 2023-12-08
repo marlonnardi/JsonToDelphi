@@ -8,7 +8,8 @@ uses
   uniGUIForm, uniLabel, uniGUIBaseClasses, uniPanel, uniMemo, uniHTMLFrame,
   uniSplitter, uniRadioGroup, uniButton, uniBitBtn, UniFSButton, uniImage,
   UniFSConfirm, UniFSPopup, Pkg.Json.Mapper, Pkg.Json.DTO, Pkg.Json.Settings,
-  uniTimer, uniCheckBox, uniGroupBox, UniFSToast;
+  uniTimer, uniCheckBox, uniGroupBox, UniFSToast, uniPageControl, uniProgressBar,
+  uniDBNavigator, Data.DB, Datasnap.DBClient, uniBasicGrid, uniDBGrid, System.DateUtils;
 
 type
   TMainForm = class(TUniForm)
@@ -17,7 +18,6 @@ type
     lblTitle: TUniLabel;
     lblSubTitle: TUniLabel;
     lblDeveloper: TUniLabel;
-    memJson: TUniMemo;
     lbl1: TUniLabel;
     lbl2: TUniLabel;
     lbl3: TUniLabel;
@@ -37,7 +37,6 @@ type
     tmr: TUniTimer;
     Confirm: TUniFSConfirm;
     btnCollaborators: TUniFSButton;
-    btn1: TUniFSButton;
     lblNews: TUniLabel;
     btnGenerate: TUniFSButton;
     btnValidate: TUniFSButton;
@@ -49,18 +48,39 @@ type
     chkPostfixClassNames: TUniCheckBox;
     lblDoacao: TUniLabel;
     Toast: TUniFSToast;
+    pgcJson: TUniPageControl;
+    tabJson: TUniTabSheet;
+    tabDonate: TUniTabSheet;
+    memJson: TUniMemo;
+    lblDonate: TUniLabel;
+    lblDonate1: TUniLabel;
+    pgrWizardDonate: TUniProgressBar;
+    tabConfig: TUniTabSheet;
+    dbgDonate: TUniDBGrid;
+    CDS: TClientDataSet;
+    intgrfldCDSid: TIntegerField;
+    strngfldCDSLat: TStringField;
+    DS: TDataSource;
+    fltfldCDSValue: TFloatField;
+    AggregateCDSSumValue: TAggregateField;
+    Navigator: TUniDBNavigator;
+    dtfldCDSDate: TDateField;
+    btnDonate: TUniFSButton;
     procedure UniFormAfterShow(Sender: TObject);
     procedure UniFormClose(Sender: TObject; var Action: TCloseAction);
     procedure UniFormAjaxEvent(Sender: TComponent; EventName: string; Params: TUniStrings);
     procedure btnGenerateClick(Sender: TObject);
-    procedure btn1Click(Sender: TObject);
     procedure btnSampleClick(Sender: TObject);
     procedure UniFormCreate(Sender: TObject);
     procedure UniFormDestroy(Sender: TObject);
     procedure tmrTimer(Sender: TObject);
     procedure lblDoacaoClick(Sender: TObject);
     procedure ToastButtonCustomClickPopup(Sender: TObject);
+    procedure lblVersionClick(Sender: TObject);
+    procedure UniFormKeyDown(Sender: TObject; var Key: Word;
+      Shift: TShiftState);
   protected
+    Admin: Boolean;
     FIdMessage: Integer;
     procedure RandomNotification();
     procedure DonationNotification();
@@ -103,26 +123,6 @@ end;
 procedure TMainForm.AlinhamentoCenter;
 begin
   pnlMaster.Left   := (Self.Width div 2) - (pnlMaster.Width div 2);
-end;
-
-procedure TMainForm.btn1Click(Sender: TObject);
-var
-  Confirm: TUniFSConfirm;
-begin
-  Confirm := TUniFSConfirm.Create(Self);
-  try
-    Confirm.Alert('About Donate',
-      '*Project Open Source, disponible in github.</br>'+
-      '*Help keep domain https://jsontodelphi.com online.</br>'+
-      '*Help keep hosting server online. </br> '+
-      '*Help get new features. </br></br> '+
-
-      'All the amount collected will be kept for these purposes and others if they arise. </br></br>'+
-      'suporte@falconsistemas.com.br </br></br>',
-      'fas fa-hands-helping',TTypeColor.blue, TTheme.supervan);
-  finally
-    FreeAndNil(Confirm);
-  end;
 end;
 
 procedure TMainForm.btnGenerateClick(Sender: TObject);
@@ -209,6 +209,12 @@ begin
   UniSession.AddJS('gtag(''event'',''donation'',{"transaction_id": "paypal"});');
 end;
 
+procedure TMainForm.lblVersionClick(Sender: TObject);
+begin
+  if Admin then
+    pgcJson.ActivePage := tabConfig;
+end;
+
 procedure TMainForm.LoadCoallaborators;
 var
   SB: TStringBuilder;
@@ -217,20 +223,13 @@ begin
   try
     SB.Append('<div style=''margin:0px 0px 8px 0px'';>List of Contributors</div>');
     SB.Append('<div class=''list-group''> ');
-    SB.Append('<a class=''fs-group-item''><i class=''far fa-thumbs-up fa-lg text-green''></i>&nbsp; 2023-01-09 - Mitchell Reid <b>U$ 12,00</b> </a>');
-    SB.Append('<a class=''fs-group-item''><i class=''far fa-thumbs-up fa-lg text-green''></i>&nbsp; 2022-10-14 - Rodrigo Pysklyvicz <b>R$ 10,00</b> </a>');
-    SB.Append('<a class=''fs-group-item''><i class=''far fa-thumbs-up fa-lg text-green''></i>&nbsp; 2022-10-10 - Thomas Scheidegger <b>U$ 100,00</b> </a>');
-    SB.Append('<a class=''fs-group-item''><i class=''far fa-thumbs-up fa-lg text-green''></i>&nbsp; 2022-07-06 - CM SOLUÇÕES LTDA <b>R$ 120,00</b> </a>');
-    SB.Append('<a class=''fs-group-item''><i class=''far fa-thumbs-up fa-lg text-green''></i>&nbsp; 2021-12-05 - Leon Siepman <b>U$ 25,00</b> </a>');
-    SB.Append('<a class=''fs-group-item''><i class=''far fa-thumbs-up fa-lg text-green''></i>&nbsp; 2021-11-06 - Samuel Herzog <b>U$ 20,00</b> </a>');
-    SB.Append('<a class=''fs-group-item''><i class=''far fa-thumbs-up fa-lg text-green''></i>&nbsp; 2021-10-30 - Christian Späth <b>U$ 15,00</b> </a>');
-    SB.Append('<a class=''fs-group-item''><i class=''far fa-thumbs-up fa-lg text-green''></i>&nbsp; 2021-08-06 - Валерий Шабаков <b>U$ 10,00</b> </a>');
-    SB.Append('<a class=''fs-group-item''><i class=''far fa-thumbs-up fa-lg text-green''></i>&nbsp; 2021-07-24 - Геннадий Малинин <b>U$ 5,00</b> </a>');
-    SB.Append('<a class=''fs-group-item''><i class=''far fa-thumbs-up fa-lg text-green''></i>&nbsp; 2021-06-25 - Pierre Demers <b>U$ 30,00</b> </a>');
-    //SB.Append('<a class=''fs-group-item''><i class=''far fa-thumbs-up fa-lg text-green''></i>&nbsp; 2021-06-16 - Christian Späth <b>U$ 15,00</b> </a>');
-    //SB.Append('<a class=''fs-group-item''><i class=''far fa-thumbs-up fa-lg text-green''></i>&nbsp; 2020-07-06 - DEMORSOFT  <b>U$ 10,00</b> </a>');
-    //SB.Append('<a class=''fs-group-item''><i class=''far fa-thumbs-up fa-lg text-green''></i>&nbsp; 2020-05-31 - Gordon Niessen <b>U$ 10,00</b> </a>');
-    //SB.Append('<a class=''fs-group-item''><i class=''far fa-thumbs-up fa-lg text-green''></i>&nbsp; 2018-08-30 - Toni Puhakka <b>U$ 10,00</b> </a>');
+    CDS.Last;
+    while not CDS.Bof do
+    begin
+      SB.Append('<a class=''fs-group-item''><i class=''far fa-thumbs-up fa-lg text-green''></i>&nbsp; '+
+      ''+CDS.FieldByName('Date').AsString+' | '+CDS.FieldByName('Name').AsString+' | <b>$'+CDS.FieldByName('Value').AsString+'</b> </a>');
+      CDS.Prior;
+    end;
     SB.Append('</div> ');
 
     Popup.SetHtml(SB.ToString);
@@ -324,11 +323,14 @@ end;
 
 procedure TMainForm.UniFormClose(Sender: TObject; var Action: TCloseAction);
 begin
+  CDS.Close;
   if Assigned(JsonMapper) then
     FreeAndNil(JsonMapper);
 end;
 
 procedure TMainForm.UniFormCreate(Sender: TObject);
+var
+  Value: Float64;
 begin
   JsonSettings := TSettings.Instance;
 
@@ -339,20 +341,41 @@ begin
   Popup.RelativePosition := TRelativePosition.b_t;
   Popup.ArrowLocation := TArrowLocation.bottom;
   Popup.Target := btnCollaborators;
-  LoadCoallaborators;
 
-  if UniApplication.Parameters.Values['Analytics'] <> EmptyStr then
+  CDS.FileName := UniServerModule.StartPath + '\dados.dat';
+  if not FileExists(CDS.FileName) then
+    CDS.CreateDataSet;
+  CDS.LoadFromFile(CDS.FileName);
+  CDS.Open;
+  CDS.Filter := 'AND Year = ' + YearOf(Now).ToString;
+
+  if AggregateCDSSumValue.AsVariant = Null then
+    Value := 0
+  else
+    Value := AggregateCDSSumValue.AsVariant;
+
+  if (Value < 175) and (MonthOf(Now) = 12) then
   begin
-    ShowMessage(
-      'Store: '+ UniServerModule.v1.ToString + '</br>'+
-      'Finanças: '+ UniServerModule.v2.ToString + '</br>')
-  end;
+    pgcJson.ActivePage := tabDonate;
+    pgrWizardDonate.Position := Round(Value);
+    pgrWizardDonate.Text := 'Donated so far $' + Value.ToString;
+  end
+  else
+    pgcJson.ActivePage := tabJson;
 
+  LoadCoallaborators;
 end;
 
 procedure TMainForm.UniFormDestroy(Sender: TObject);
 begin
   FreeAndNil(Popup);
+end;
+
+procedure TMainForm.UniFormKeyDown(Sender: TObject; var Key: Word;
+  Shift: TShiftState);
+begin
+  if Key = VK_F9 then
+    Admin := True;
 end;
 
 initialization

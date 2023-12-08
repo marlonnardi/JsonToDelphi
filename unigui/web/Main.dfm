@@ -8,6 +8,7 @@ object MainForm: TMainForm
   BorderStyle = bsNone
   OldCreateOrder = False
   OnClose = UniFormClose
+  OnKeyDown = UniFormKeyDown
   AutoScroll = True
   MonitoredKeys.Keys = <>
   OnAfterShow = UniFormAfterShow
@@ -65,6 +66,7 @@ object MainForm: TMainForm
       Font.Color = 10853781
       Font.Height = -9
       TabOrder = 2
+      OnClick = lblVersionClick
     end
   end
   object pnlMaster: TUniPanel
@@ -366,22 +368,9 @@ object MainForm: TMainForm
         TabOrder = 12
       end
     end
-    object memJson: TUniMemo
-      AlignWithMargins = True
-      Left = 3
-      Top = 116
-      Width = 1018
-      Height = 320
-      Hint = ''
-      ParentFont = False
-      Font.Height = -13
-      Align = alTop
-      TabOrder = 2
-      EmptyText = 'Enter JSON'
-    end
     object btnCollaborators: TUniFSButton
-      Left = 932
-      Top = 449
+      Left = 984
+      Top = 446
       Width = 38
       Height = 34
       Hint = 'List of Contributors'
@@ -399,39 +388,15 @@ object MainForm: TMainForm
       Font.Color = clGreen
       Font.Height = -16
       Font.Name = 'Roboto'
-      TabOrder = 7
-    end
-    object btn1: TUniFSButton
-      Left = 981
-      Top = 449
-      Width = 38
-      Height = 34
-      Hint = 'About donate'
-      ShowHint = True
-      ParentShowHint = False
-      StyleButton = GoogleSilver
-      CaptionIconFont = '<i class="fas fa-hands-helping" aria-hidden="true"></i>'
-      BadgeText.Text = '0'
-      BadgeText.TextColor = '#FFFFFF'
-      BadgeText.TextSize = 10
-      BadgeText.TextStyle = 'bold'
-      BadgeText.BackgroundColor = '#D50000'
-      Caption = ''
-      ParentFont = False
-      Font.Color = clBlack
-      Font.Height = -16
-      Font.Name = 'Roboto'
-      TabOrder = 8
-      OnClick = btn1Click
+      TabOrder = 3
     end
     object lblNews: TUniLabel
-      Left = 622
-      Top = 514
-      Width = 397
+      Left = 400
+      Top = 458
+      Width = 193
       Height = 17
       Cursor = crHandPoint
       Hint = ''
-      Alignment = taRightJustify
       TextConversion = txtHTML
       AutoSize = False
       Caption = '<i class="fab fa-lg fa-github"></i> News Fixes & Features'
@@ -446,7 +411,7 @@ object MainForm: TMainForm
           'click=function click(sender, eOpts)'#13#10'{'#13#10'  window.open("https://g' +
           'ithub.com/marlonnardi/JsonToDelphi#fixes--features-26h-december-' +
           '2021");'#13#10'}')
-      TabOrder = 10
+      TabOrder = 9
     end
     object btnGenerate: TUniFSButton
       Left = 2
@@ -468,7 +433,7 @@ object MainForm: TMainForm
       Font.Color = clWhite
       Font.Height = -13
       Font.Name = 'Roboto'
-      TabOrder = 3
+      TabOrder = 4
       ScreenMask.Enabled = True
       ScreenMask.WaitData = True
       ScreenMask.Message = 'Generating unit...'
@@ -491,7 +456,7 @@ object MainForm: TMainForm
       Font.Color = clBlack
       Font.Height = -13
       Font.Name = 'Roboto'
-      TabOrder = 4
+      TabOrder = 5
       ClientEvents.ExtEvents.Strings = (
         
           'click=function click(sender, e, eOpts)'#13#10'{'#13#10'  window.open("https:' +
@@ -516,7 +481,7 @@ object MainForm: TMainForm
       Font.Color = clBlack
       Font.Height = -13
       Font.Name = 'Roboto'
-      TabOrder = 5
+      TabOrder = 6
       ScreenMask.WaitData = True
       ScreenMask.Message = 'Opening...'
       OnClick = btnSampleClick
@@ -528,7 +493,7 @@ object MainForm: TMainForm
       Height = 76
       Hint = ''
       Caption = 'Delphi class generation options'
-      TabOrder = 9
+      TabOrder = 10
       ParentFont = False
       Font.Name = 'Roboto'
       object chkUsePascalCase: TUniCheckBox
@@ -581,7 +546,7 @@ object MainForm: TMainForm
       end
     end
     object lblDoacao: TUniLabel
-      Left = 758
+      Left = 814
       Top = 449
       Width = 162
       Height = 45
@@ -589,8 +554,154 @@ object MainForm: TMainForm
       TextConversion = txtHTML
       AutoSize = False
       Caption = 'lblDoacao'
-      TabOrder = 6
+      TabOrder = 7
       OnClick = lblDoacaoClick
+    end
+    object pgcJson: TUniPageControl
+      Left = 0
+      Top = 113
+      Width = 1024
+      Height = 327
+      Hint = ''
+      ActivePage = tabDonate
+      TabBarVisible = False
+      Align = alTop
+      TabOrder = 2
+      object tabJson: TUniTabSheet
+        Hint = ''
+        Caption = 'tabJson'
+        object memJson: TUniMemo
+          AlignWithMargins = True
+          Left = 3
+          Top = 3
+          Width = 1010
+          Height = 320
+          Hint = ''
+          ParentFont = False
+          Font.Height = -13
+          Font.Name = 'Roboto'
+          Align = alTop
+          TabOrder = 0
+          EmptyText = 'Enter JSON'
+        end
+      end
+      object tabDonate: TUniTabSheet
+        Hint = ''
+        Caption = 'tabDonate'
+        object lblDonate: TUniLabel
+          AlignWithMargins = True
+          Left = 3
+          Top = 126
+          Width = 1010
+          Height = 43
+          Hint = ''
+          Margins.Top = 30
+          Alignment = taCenter
+          TextConversion = txtHTML
+          AutoSize = False
+          Caption = 'you can help with any amount'
+          Align = alTop
+          ParentFont = False
+          Font.Color = clGreen
+          Font.Height = -19
+          Font.Name = 'Roboto'
+          ParentColor = False
+          Color = clGray
+          TabOrder = 1
+        end
+        object lblDonate1: TUniLabel
+          AlignWithMargins = True
+          Left = 3
+          Top = 50
+          Width = 1010
+          Height = 43
+          Hint = ''
+          Margins.Top = 50
+          Alignment = taCenter
+          TextConversion = txtHTML
+          AutoSize = False
+          Caption = 
+            'We need your support to keep the server and domain up and runnin' +
+            'g for years to come.'
+          Align = alTop
+          ParentFont = False
+          Font.Color = clGreen
+          Font.Height = -21
+          Font.Name = 'Roboto'
+          ParentColor = False
+          Color = clGray
+          TabOrder = 0
+        end
+        object pgrWizardDonate: TUniProgressBar
+          AlignWithMargins = True
+          Left = 20
+          Top = 207
+          Width = 976
+          Height = 26
+          Hint = ''
+          Margins.Left = 20
+          Margins.Top = 35
+          Margins.Right = 20
+          Max = 175
+          Position = 2
+          Align = alTop
+          Text = 'Donated so far $'
+          TabOrder = 2
+        end
+      end
+      object tabConfig: TUniTabSheet
+        Hint = ''
+        Caption = 'tabConfig'
+        object dbgDonate: TUniDBGrid
+          Left = 0
+          Top = 0
+          Width = 1016
+          Height = 268
+          Hint = ''
+          RowEditor = True
+          DataSource = DS
+          LoadMask.Message = 'Loading data...'
+          RowHeight = 30
+          ForceFit = True
+          Align = alClient
+          TabOrder = 0
+        end
+        object Navigator: TUniDBNavigator
+          AlignWithMargins = True
+          Left = 3
+          Top = 271
+          Width = 1010
+          Height = 25
+          Hint = ''
+          DataSource = DS
+          Align = alBottom
+          TabOrder = 1
+        end
+      end
+    end
+    object btnDonate: TUniFSButton
+      Left = 691
+      Top = 451
+      Width = 108
+      Height = 24
+      Hint = ''
+      StyleButton = GoogleOrangeRound
+      BadgeText.Text = '0'
+      BadgeText.TextColor = '#FFFFFF'
+      BadgeText.TextSize = 10
+      BadgeText.TextStyle = 'bold'
+      BadgeText.BackgroundColor = '#D50000'
+      Caption = 'Donate in BRL'
+      ParentFont = False
+      Font.Color = clBlack
+      Font.Height = -13
+      Font.Name = 'Roboto'
+      Font.Style = [fsBold]
+      TabOrder = 8
+      ClientEvents.ExtEvents.Strings = (
+        
+          'click=function click(sender, e, eOpts)'#13#10'{'#13#10'  window.open("https:' +
+          '//www.asaas.com/c/909894685171");'#13#10'}')
     end
   end
   object tmr: TUniTimer
@@ -603,8 +714,8 @@ object MainForm: TMainForm
       ' '
       '}')
     OnTimer = tmrTimer
-    Left = 509
-    Top = 208
+    Left = 373
+    Top = 176
   end
   object Confirm: TUniFSConfirm
     Theme = modern
@@ -628,8 +739,8 @@ object MainForm: TMainForm
     PromptType.RequiredField = False
     PromptType.TextRequiredField = 'Field riquired'
     PromptType.CharCase = Normal_
-    Left = 509
-    Top = 264
+    Left = 421
+    Top = 176
   end
   object Toast: TUniFSToast
     TitleSize = 13
@@ -665,7 +776,40 @@ object MainForm: TMainForm
     ButtonTextNo = 'Cancela'
     ButtonCustomActive = False
     OnButtonCustomClickPopup = ToastButtonCustomClickPopup
-    Left = 511
-    Top = 322
+    Left = 472
+    Top = 175
+  end
+  object CDS: TClientDataSet
+    Aggregates = <>
+    AggregatesActive = True
+    Params = <>
+    Left = 576
+    Top = 176
+    object intgrfldCDSid: TIntegerField
+      FieldName = 'Year'
+    end
+    object strngfldCDSLat: TStringField
+      FieldName = 'Name'
+      Size = 100
+    end
+    object dtfldCDSDate: TDateField
+      FieldName = 'Date'
+    end
+    object fltfldCDSValue: TFloatField
+      FieldName = 'Value'
+    end
+    object AggregateCDSSumValue: TAggregateField
+      FieldName = 'SumValue'
+      Visible = True
+      Active = True
+      currency = True
+      DisplayName = ''
+      Expression = 'SUM(Value)'
+    end
+  end
+  object DS: TDataSource
+    DataSet = CDS
+    Left = 616
+    Top = 176
   end
 end
