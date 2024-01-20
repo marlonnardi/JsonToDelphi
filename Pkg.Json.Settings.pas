@@ -2,8 +2,11 @@ unit Pkg.Json.Settings;
 
 interface
 
+uses
+  Pkg.Json.DTO;
+
 Type
-  TSettings = class
+  TSettings = class(TJsonDTO)
   private
     class var FInstance: TSettings;
 
@@ -27,7 +30,8 @@ Type
 
 implementation
 
-uses System.SysUtils, System.Strutils;
+uses
+  System.SysUtils, System.Strutils;
 
 { TSettings }
 

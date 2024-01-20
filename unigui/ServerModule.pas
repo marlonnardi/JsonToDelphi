@@ -105,11 +105,11 @@ begin
     Add('<meta name="keywords" content="json, delphi, pascal, convert, generate, json to delphi, json to pascal, json to delphi object, json to delphi class">');
     Add('<meta name="description" content="generate delphi classes from a json."/>');
 
-    Add('<meta property="og:url" content="https://jsontodelphi.com">');
+    Add('<meta property="og:url" content="https://www.jsontodelphi.com">');
     Add('<meta property="og:title" content="generate delphi classes from a json.">');
     Add('<meta property="og:site_name" content="Json To Delphi Class">');
     Add('<meta property="og:description" content="generate delphi classes from a json.">');
-    Add('<meta property="og:image" content="https://jsontodelphi.com/imagens/json.png">');
+    Add('<meta property="og:image" content="https://www.jsontodelphi.com/imagens/json.png">');
     Add('<meta property="og:image:type" content="image/png">');
   end;
   {$ENDREGION}

@@ -8,6 +8,22 @@ https://jsontodelphi.com
 
 Origin [Jens Borrisholt] (https://github.com/JensBorrisholt/Delphi-JsonToDelphiClass)
 
+## Fixes & Features: 19th January 2024 ##
+
+### Features ###
+* Upgrade to Delphi 12
+* Added Clone function on TJsonDTO class
+
+### Bugs: ###
+* Unittest TestDateTime didnt pass under Delphi 12
+* Added missing Reserved words
+
+## Fixes & Features: 06th February 2022 ##
+
+### Features ###
+* More interceptors where published in a new repo: https://github.com/JensBorrisholt/Json-Interceptors
+* Added the possibility to download Pkg.Json.DTO.pas from https://jsontodelphi.com/
+
 ## Fixes & Features: 26h December 2021
 
 ### Features
