@@ -409,8 +409,8 @@ object MainForm: TMainForm
       ClientEvents.ExtEvents.Strings = (
         
           'click=function click(sender, eOpts)'#13#10'{'#13#10'  window.open("https://g' +
-          'ithub.com/marlonnardi/JsonToDelphi#fixes--features-26h-december-' +
-          '2021");'#13#10'}')
+          'ithub.com/marlonnardi/JsonToDelphi?tab=readme-ov-file#fixes--fea' +
+          'tures-19th-january-2024");'#13#10'}')
       TabOrder = 9
     end
     object btnGenerate: TUniFSButton
