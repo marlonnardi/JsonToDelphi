@@ -563,7 +563,7 @@ object MainForm: TMainForm
       Width = 1024
       Height = 327
       Hint = ''
-      ActivePage = tabDonate
+      ActivePage = tabJson
       TabBarVisible = False
       Align = alTop
       TabOrder = 2

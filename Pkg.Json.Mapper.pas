@@ -1,4 +1,4 @@
-unit Pkg.Json.Mapper;
+﻿unit Pkg.Json.Mapper;
 
 interface
 
@@ -52,7 +52,7 @@ uses
 const
   INDENT_SIZE = 2;
 
-{ TPkgJsonMapper }
+  { TPkgJsonMapper }
 
 procedure TPkgJsonMapper.ProcessJsonObject(aJsonValue: TJsonValue; aParentClass: TStubClass);
 var
@@ -66,17 +66,6 @@ begin
   if aJsonValue = nil then
     exit;
 
-  if not(aJsonValue is TJSONObject) then
-  begin
-    JsonType := GetJsonType(aJsonValue);
-    var name := (aJsonValue as TJsonString).Value;
-    if Name = '' then
-      Name := 'Element';
-
-    TStubField.Create(aParentClass, Name, JsonType);
-    exit;
-  end;
-
   JSONObject := aJsonValue as TJSONObject;
   for JsonPair in JSONObject do
   begin
@@ -84,8 +73,6 @@ begin
     JsonType := GetJsonType(JSONValue);
 
     case JsonType of
-      jtUnknown:
-        { do nothing };
       jtObject:
         begin
           StubClass := TStubClass.Construct(aParentClass, JsonPair.JsonString.Value, Self.FStubClasses);
@@ -143,11 +130,13 @@ begin
     for i := FStubClasses.Count - 1 downto 1 do
       SubTypes.AddSubTypes(FStubClasses[i], SubClasslist);
 
-    for Tmp in SubClasslist do
-      StringList.Addformat('  %s = class;', [Tmp]);
+    if SubClasslist.Count > 1 then
+    begin
+      for Tmp in SubClasslist do
+        StringList.Addformat('  %s = class;', [Tmp]);
 
-    if SubClasslist.Count > 0 then
       StringList.Add('');
+    end;
 
     SubClasslist.Free;
 
@@ -273,7 +262,7 @@ end;
 
 function TPkgJsonMapper.IsValid(aJsonString: string): boolean;
 var
-  Value: TJSONValue;
+  Value: TJsonValue;
 begin
   Value := TJSONObject.ParseJSONValue(aJsonString);
   Result := Value <> nil;
