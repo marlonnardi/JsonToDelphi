@@ -199,7 +199,7 @@ begin
   Confirm.Alert(
     'jsontodelphi',
     '<p>"If you like this site and use it frequently, <b>make a donation to keep it up and running !</b>"</p> </br> '+
-    '<p><i class="fab fa-lg fa-github"></i><a href="https://github.com/marlonnardi/JsonToDelphi#fixes--features-26h-december-2021" target="_blank"> News Fixes & Features</a></p></br> '+
+    '<p><i class="fab fa-lg fa-github"></i><a href="https://github.com/marlonnardi/JsonToDelphi?tab=readme-ov-file#fixes--features-16th-june-2024" target="_blank"> News Fixes & Features</a></p></br> '+
     lblDoacao.Caption+'</br>',
     'fas fa-rocket',TTypeColor.green, TTheme.modern);
 end;

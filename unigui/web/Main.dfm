@@ -393,13 +393,15 @@ object MainForm: TMainForm
     object lblNews: TUniLabel
       Left = 400
       Top = 458
-      Width = 193
+      Width = 215
       Height = 17
       Cursor = crHandPoint
       Hint = ''
       TextConversion = txtHTML
       AutoSize = False
-      Caption = '<i class="fab fa-lg fa-github"></i> News Fixes & Features'
+      Caption = 
+        '<i class="fab fa-lg fa-github"></i> News Fixes & Features June 2' +
+        '024'
       ParentFont = False
       Font.Color = clHighlight
       Font.Height = -13
@@ -410,7 +412,7 @@ object MainForm: TMainForm
         
           'click=function click(sender, eOpts)'#13#10'{'#13#10'  window.open("https://g' +
           'ithub.com/marlonnardi/JsonToDelphi?tab=readme-ov-file#fixes--fea' +
-          'tures-19th-january-2024");'#13#10'}')
+          'tures-16th-june-2024");'#13#10'}')
       TabOrder = 9
     end
     object btnGenerate: TUniFSButton
@@ -546,9 +548,9 @@ object MainForm: TMainForm
       end
     end
     object lblDoacao: TUniLabel
-      Left = 814
+      Left = 709
       Top = 449
-      Width = 162
+      Width = 151
       Height = 45
       Hint = ''
       TextConversion = txtHTML
@@ -680,8 +682,8 @@ object MainForm: TMainForm
       end
     end
     object btnDonate: TUniFSButton
-      Left = 691
-      Top = 451
+      Left = 863
+      Top = 450
       Width = 108
       Height = 24
       Hint = ''
