@@ -30,7 +30,6 @@ type
     UniLabel4: TUniLabel;
     lblJsonToPascal: TUniLabel;
     pnlBottom: TUniPanel;
-    imgFalconSistemas: TUniImage;
     lblVersion: TUniLabel;
     lbl7: TUniLabel;
     lbl8: TUniLabel;
@@ -66,6 +65,11 @@ type
     Navigator: TUniDBNavigator;
     dtfldCDSDate: TDateField;
     btnDonate: TUniFSButton;
+    grpPartners: TUniGroupBox;
+    lbl1Password: TUniLabel;
+    lblPipedrive: TUniLabel;
+    lblFalconFinancas: TUniLabel;
+    lblFalconSistemas: TUniLabel;
     procedure UniFormAfterShow(Sender: TObject);
     procedure UniFormClose(Sender: TObject; var Action: TCloseAction);
     procedure UniFormAjaxEvent(Sender: TComponent; EventName: string; Params: TUniStrings);

@@ -33,24 +33,6 @@ object MainForm: TMainForm
     DesignSize = (
       1080
       46)
-    object imgFalconSistemas: TUniImage
-      Left = 442
-      Top = 1
-      Width = 150
-      Height = 39
-      Cursor = crHandPoint
-      Hint = 'www.falconsistemas.com.br'
-      ShowHint = True
-      ParentShowHint = False
-      AutoSize = True
-      Url = '/imagens/Falcon_Sistemas_Powered_by.png'
-      Anchors = [akBottom]
-      ClientEvents.ExtEvents.Strings = (
-        
-          'click=function click(sender, eOpts)'#13#10'{'#13#10'  window.open("https://f' +
-          'alconsistemas.com.br");'#13#10'}')
-      LayoutConfig.Cls = 'card card-radius'
-    end
     object lblVersion: TUniLabel
       Left = 24
       Top = 22
@@ -68,6 +50,30 @@ object MainForm: TMainForm
       TabOrder = 2
       OnClick = lblVersionClick
     end
+    object lblFalconSistemas: TUniLabel
+      Left = 452
+      Top = 8
+      Width = 130
+      Height = 32
+      Cursor = crHandPoint
+      Hint = ''
+      TextConversion = txtHTML
+      AutoSize = False
+      Caption = 
+        '<a href="https://www.falconsistemas.com.br" target="_blank" alt=' +
+        '"Falcon Sistemas - Desenvolvimento de solu'#231#245'es em software"> <im' +
+        'g src="https://jsontodelphi.com/imagens/Falcon_Sistemas_Powered_' +
+        'by.png" title="Falcon Sistemas - Desenvolvimento de solu'#231#245'es em ' +
+        'software"></a>'
+      Anchors = []
+      ParentFont = False
+      Font.Color = clDefault
+      Font.Height = -13
+      Font.Name = 'Roboto'
+      ParentColor = False
+      Color = clBlack
+      TabOrder = 1
+    end
   end
   object pnlMaster: TUniPanel
     Left = 21
@@ -82,6 +88,9 @@ object MainForm: TMainForm
     BorderStyle = ubsNone
     Caption = ''
     Color = 16447477
+    DesignSize = (
+      1024
+      587)
     object pnlTop: TUniPanel
       Left = 0
       Top = 0
@@ -704,6 +713,86 @@ object MainForm: TMainForm
         
           'click=function click(sender, e, eOpts)'#13#10'{'#13#10'  window.open("https:' +
           '//www.asaas.com/c/909894685171");'#13#10'}')
+    end
+    object grpPartners: TUniGroupBox
+      AlignWithMargins = True
+      Left = 400
+      Top = 494
+      Width = 622
+      Height = 76
+      Hint = ''
+      Caption = 'Partners'
+      Anchors = [akLeft, akTop, akRight]
+      TabOrder = 11
+      object lbl1Password: TUniLabel
+        Left = 166
+        Top = 24
+        Width = 130
+        Height = 34
+        Cursor = crHandPoint
+        Hint = ''
+        TextConversion = txtHTML
+        AutoSize = False
+        Caption = 
+          '<a href="https://1password.partnerlinks.io/tzvgyyqd3rr3" target=' +
+          '"_blank" alt="1Password - O Melhor Gerenciador de Senhas">'#10'  <im' +
+          'g src="https://1password.com/logo-images/1password-logo-desktop-' +
+          'dark@2x.png" style="height:34px" title="1Password - O Melhor Ger' +
+          'enciador de Senhas">'#10'</a>'
+        ParentFont = False
+        Font.Color = clHighlight
+        Font.Height = -13
+        Font.Name = 'Roboto'
+        ParentColor = False
+        Color = clBlack
+        TabOrder = 2
+      end
+      object lblPipedrive: TUniLabel
+        Left = 21
+        Top = 24
+        Width = 130
+        Height = 34
+        Cursor = crHandPoint
+        Hint = ''
+        TextConversion = txtHTML
+        AutoSize = False
+        Caption = 
+          '<a href="https://aff.trypipedrive.com/23yha0go7t8z" target="_bla' +
+          'nk" alt="Pipedrive - CRM N'#186' 1 do mundo, feche mais neg'#243'cios"> <i' +
+          'mg src="https://falconsistemas.com.br/assets/img/Pipedrive_Logo_' +
+          'Green.png" style="height:34px" title="Pipedrive - CRM N'#186' 1 do mu' +
+          'ndo, feche mais neg'#243'cios"></a>'
+        ParentFont = False
+        Font.Color = clDefault
+        Font.Height = -13
+        Font.Name = 'Roboto'
+        ParentColor = False
+        Color = clBlack
+        TabOrder = 1
+      end
+      object lblFalconFinancas: TUniLabel
+        Left = 322
+        Top = 24
+        Width = 130
+        Height = 34
+        Cursor = crHandPoint
+        Hint = ''
+        TextConversion = txtHTML
+        AutoSize = False
+        Caption = 
+          '<a href="https://www.financeiro.app" target="_blank" alt="Falcon' +
+          ' Finan'#231'as - Gerenciador Financeiro">'#10'  <img src="https://www.fin' +
+          'anceiro.app/wp-content/uploads/2023/07/logo-falcon-financas.svg"' +
+          ' style="height:30px; margin-top:1px;" title="Falcon Finan'#231'as - G' +
+          'erenciador Financeiro">'#10'</a>'
+        ParentFont = False
+        Font.Color = clHighlight
+        Font.Height = -13
+        Font.Name = 'Roboto'
+        ParentColor = False
+        Color = clBlack
+        TabOrder = 3
+      end
     end
   end
   object tmr: TUniTimer
