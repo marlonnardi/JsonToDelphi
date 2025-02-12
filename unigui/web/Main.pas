@@ -66,7 +66,6 @@ type
     dtfldCDSDate: TDateField;
     btnDonate: TUniFSButton;
     grpPartners: TUniGroupBox;
-    lbl1Password: TUniLabel;
     lblPipedrive: TUniLabel;
     lblFalconFinancas: TUniLabel;
     lblFalconSistemas: TUniLabel;
@@ -83,6 +82,7 @@ type
     procedure lblVersionClick(Sender: TObject);
     procedure UniFormKeyDown(Sender: TObject; var Key: Word;
       Shift: TShiftState);
+    procedure btnCollaboratorsClick(Sender: TObject);
   protected
     Admin: Boolean;
     FIdMessage: Integer;
@@ -91,7 +91,7 @@ type
 
     procedure OnClickPopup(Sender: TObject);
   protected
-    Popup: TUniFSPopup;
+    //Popup: TUniFSPopup;
     procedure LoadCoallaborators;
 
   private
@@ -127,6 +127,20 @@ end;
 procedure TMainForm.AlinhamentoCenter;
 begin
   pnlMaster.Left   := (Self.Width div 2) - (pnlMaster.Width div 2);
+end;
+
+procedure TMainForm.btnCollaboratorsClick(Sender: TObject);
+var
+  vColab: string;
+begin
+  CDS.Last;
+  while not CDS.Bof do
+  begin
+    vColab := vColab + CDS.FieldByName('Date').AsString+' | '+CDS.FieldByName('Name').AsString+' | <b>$'+CDS.FieldByName('Value').AsString+'</b></br>';
+    CDS.Prior;
+  end;
+
+  Confirm.Alert('Collaborators', ''+vColab+'', 'far fa-thumbs-up', TTypeColor.green, TTheme.modern);
 end;
 
 procedure TMainForm.btnGenerateClick(Sender: TObject);
@@ -236,7 +250,7 @@ begin
     end;
     SB.Append('</div> ');
 
-    Popup.SetHtml(SB.ToString);
+    //Popup.SetHtml(SB.ToString);
   finally
     FreeAndNil(SB);
   end;
@@ -338,13 +352,13 @@ var
 begin
   JsonSettings := TSettings.Instance;
 
-  Popup := TUniFSPopup.Create(Self);
-  Popup.Width := 350;
-  Popup.RelativeY := -15;
-  Popup.RelativeX := 0;
-  Popup.RelativePosition := TRelativePosition.b_t;
-  Popup.ArrowLocation := TArrowLocation.bottom;
-  Popup.Target := btnCollaborators;
+//  Popup := TUniFSPopup.Create(Self);
+//  Popup.Width := 350;
+//  Popup.RelativeY := 60;
+//  Popup.RelativeX := -200;
+//  Popup.RelativePosition := TRelativePosition.b_t;
+//  Popup.ArrowLocation := TArrowLocation.right;
+//  Popup.Target := btnCollaborators;
 
   CDS.FileName := UniServerModule.StartPath + '\dados.dat';
   if not FileExists(CDS.FileName) then
@@ -372,7 +386,7 @@ end;
 
 procedure TMainForm.UniFormDestroy(Sender: TObject);
 begin
-  FreeAndNil(Popup);
+  //FreeAndNil(Popup);
 end;
 
 procedure TMainForm.UniFormKeyDown(Sender: TObject; var Key: Word;

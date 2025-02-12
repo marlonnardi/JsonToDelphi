@@ -398,11 +398,12 @@ object MainForm: TMainForm
       Font.Height = -16
       Font.Name = 'Roboto'
       TabOrder = 3
+      OnClick = btnCollaboratorsClick
     end
     object lblNews: TUniLabel
       Left = 400
       Top = 458
-      Width = 215
+      Width = 268
       Height = 17
       Cursor = crHandPoint
       Hint = ''
@@ -521,9 +522,9 @@ object MainForm: TMainForm
         Color = 16447477
       end
       object chkAddJsonPropertyAttributes: TUniCheckBox
-        Left = 186
+        Left = 182
         Top = 21
-        Width = 182
+        Width = 195
         Height = 17
         Hint = ''
         Caption = 'Add JsonProperty Attributes'
@@ -544,9 +545,9 @@ object MainForm: TMainForm
         Color = 16447477
       end
       object chkPostfixClassNames: TUniCheckBox
-        Left = 186
+        Left = 182
         Top = 46
-        Width = 182
+        Width = 195
         Height = 17
         Hint = ''
         Caption = 'Postfix class names'
@@ -724,31 +725,8 @@ object MainForm: TMainForm
       Caption = 'Partners'
       Anchors = [akLeft, akTop, akRight]
       TabOrder = 11
-      object lbl1Password: TUniLabel
-        Left = 166
-        Top = 24
-        Width = 130
-        Height = 34
-        Cursor = crHandPoint
-        Hint = ''
-        TextConversion = txtHTML
-        AutoSize = False
-        Caption = 
-          '<a href="https://1password.partnerlinks.io/tzvgyyqd3rr3" target=' +
-          '"_blank" alt="1Password - O Melhor Gerenciador de Senhas">'#10'  <im' +
-          'g src="https://1password.com/logo-images/1password-logo-desktop-' +
-          'dark@2x.png" style="height:34px" title="1Password - O Melhor Ger' +
-          'enciador de Senhas">'#10'</a>'
-        ParentFont = False
-        Font.Color = clHighlight
-        Font.Height = -13
-        Font.Name = 'Roboto'
-        ParentColor = False
-        Color = clBlack
-        TabOrder = 2
-      end
       object lblPipedrive: TUniLabel
-        Left = 21
+        Left = 207
         Top = 24
         Width = 130
         Height = 34
@@ -768,10 +746,10 @@ object MainForm: TMainForm
         Font.Name = 'Roboto'
         ParentColor = False
         Color = clBlack
-        TabOrder = 1
+        TabOrder = 2
       end
       object lblFalconFinancas: TUniLabel
-        Left = 322
+        Left = 18
         Top = 24
         Width = 130
         Height = 34
@@ -791,7 +769,7 @@ object MainForm: TMainForm
         Font.Name = 'Roboto'
         ParentColor = False
         Color = clBlack
-        TabOrder = 3
+        TabOrder = 1
       end
     end
   end
@@ -806,7 +784,7 @@ object MainForm: TMainForm
       '}')
     OnTimer = tmrTimer
     Left = 373
-    Top = 176
+    Top = 144
   end
   object Confirm: TUniFSConfirm
     Theme = modern
@@ -817,7 +795,7 @@ object MainForm: TMainForm
     CloseIcon = False
     Icon = 'far fa-smile-wink'
     RTL = False
-    boxWidth = '420px'
+    boxWidth = '450px'
     BackgroundDismiss = False
     ButtonTextConfirm = 'Confirma'
     ButtonTextCancel = 'Cancela'
@@ -831,7 +809,7 @@ object MainForm: TMainForm
     PromptType.TextRequiredField = 'Field riquired'
     PromptType.CharCase = Normal_
     Left = 421
-    Top = 176
+    Top = 144
   end
   object Toast: TUniFSToast
     TitleSize = 13
@@ -868,14 +846,14 @@ object MainForm: TMainForm
     ButtonCustomActive = False
     OnButtonCustomClickPopup = ToastButtonCustomClickPopup
     Left = 472
-    Top = 175
+    Top = 143
   end
   object CDS: TClientDataSet
     Aggregates = <>
     AggregatesActive = True
     Params = <>
     Left = 576
-    Top = 176
+    Top = 144
     object intgrfldCDSid: TIntegerField
       FieldName = 'Year'
     end
@@ -901,6 +879,6 @@ object MainForm: TMainForm
   object DS: TDataSource
     DataSet = CDS
     Left = 616
-    Top = 176
+    Top = 144
   end
 end

@@ -62,40 +62,49 @@ var
   JsonType: TJsonType;
   StubClass: TStubClass;
   JsonArray: TJSONArray;
+  vValid: Boolean;
 begin
   if aJsonValue = nil then
-    exit;
+    Exit;
 
-  JSONObject := aJsonValue as TJSONObject;
-  for JsonPair in JSONObject do
-  begin
-    JSONValue := JsonPair.JSONValue;
-    JsonType := GetJsonType(JSONValue);
+  vValid := True;
 
-    case JsonType of
-      jtObject:
-        begin
-          StubClass := TStubClass.Construct(aParentClass, JsonPair.JsonString.Value, Self.FStubClasses);
-          TStubObjectField.Create(aParentClass, JsonPair.JsonString.Value, StubClass);
-          ProcessJsonObject(JSONValue, StubClass);
-        end;
-
-      jtArray:
-        begin
-          JsonArray := TJSONArray(JSONValue);
-          JSONValue := GetFirstArrayItem(JsonArray);
-          JsonType := GetJsonType(JSONValue);
-
-          StubClass := TStubClass.Construct(aParentClass, JsonPair.JsonString.Value, Self.FStubClasses, '', JsonType = jtObject);
-          TStubArrayField.Create(aParentClass, JsonPair.JsonString.Value, JsonType, StubClass);
-
-          for JSONValue in JsonArray do
-            ProcessJsonObject(JSONValue, StubClass);
-        end;
-    else
-      TStubField.Create(aParentClass, JsonPair.JsonString.Value, JsonType);
-    end;
+  try
+    JSONObject := aJsonValue as TJSONObject;
+  except
+    vValid := False;
   end;
+
+  if vValid then
+    for JsonPair in JSONObject do
+    begin
+      JSONValue := JsonPair.JSONValue;
+      JsonType := GetJsonType(JSONValue);
+
+      case JsonType of
+        jtObject:
+          begin
+            StubClass := TStubClass.Construct(aParentClass, JsonPair.JsonString.Value, Self.FStubClasses);
+            TStubObjectField.Create(aParentClass, JsonPair.JsonString.Value, StubClass);
+            ProcessJsonObject(JSONValue, StubClass);
+          end;
+
+        jtArray:
+          begin
+            JsonArray := TJSONArray(JSONValue);
+            JSONValue := GetFirstArrayItem(JsonArray);
+            JsonType := GetJsonType(JSONValue);
+
+            StubClass := TStubClass.Construct(aParentClass, JsonPair.JsonString.Value, Self.FStubClasses, '', JsonType = jtObject);
+            TStubArrayField.Create(aParentClass, JsonPair.JsonString.Value, JsonType, StubClass);
+
+            for JSONValue in JsonArray do
+              ProcessJsonObject(JSONValue, StubClass);
+          end;
+      else
+        TStubField.Create(aParentClass, JsonPair.JsonString.Value, JsonType);
+      end;
+    end;
 
   aParentClass.SortFields;
 end;
