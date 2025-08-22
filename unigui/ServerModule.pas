@@ -114,10 +114,10 @@ begin
   end;
   {$ENDREGION}
   {$REGION 'Carregando JS e CSS'}
-  UniAddCSSLibrary(CDN+'falcon/css/style/financas.css', CDNENABLED, [upoFolderUni, upoPlatformBoth]);
+  UniAddCSSLibrary(CDN+'falcon/css/style/financas.css?v=1', CDNENABLED, [upoFolderUni, upoPlatformBoth]);
 
-  UniAddJSLibrary('https://www.googletagmanager.com/gtag/js?id=G-VSH6WJS3B3', True, [upoAsync, upoPlatformBoth]);
-  UniAddJSLibrary(CDN+'falcon/js/jsontodelphi_google_ga4.js', CDNENABLED, [upoAsync, upoFolderUni, upoPlatformBoth]);
+  UniAddJSLibrary('https://www.googletagmanager.com/gtag/js?id=G-VSH6WJS3B3', True, [upoFolderUni, upoPlatformBoth]);
+  UniAddJSLibrary(CDN+'falcon/js/jsontodelphi_google_ga4.js', CDNENABLED, [upoFolderUni, upoPlatformBoth]);
   {$ENDREGION}
 end;
 
