@@ -410,8 +410,8 @@ object MainForm: TMainForm
       TextConversion = txtHTML
       AutoSize = False
       Caption = 
-        '<i class="fab fa-lg fa-github"></i> News Fixes & Features June 2' +
-        '024'
+        '<i class="fab fa-lg fa-github"></i> News Fixes & Features Decemb' +
+        'er 2025'
       ParentFont = False
       Font.Color = clHighlight
       Font.Height = -13
@@ -421,8 +421,8 @@ object MainForm: TMainForm
       ClientEvents.ExtEvents.Strings = (
         
           'click=function click(sender, eOpts)'#13#10'{'#13#10'  window.open("https://g' +
-          'ithub.com/marlonnardi/JsonToDelphi?tab=readme-ov-file#fixes--fea' +
-          'tures-16th-june-2024");'#13#10'}')
+          'ithub.com/marlonnardi/JsonToDelphi/tree/master?tab=readme-ov-fil' +
+          'e#fixes--features-7th-december-2025");'#13#10'}')
       TabOrder = 9
     end
     object btnGenerate: TUniFSButton
