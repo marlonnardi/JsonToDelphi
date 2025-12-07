@@ -1,6 +1,6 @@
 # Delphi-JsonToDelphiClass
 
-## This is a fork of Petar Georgiev with improvements of Jens Borrisholt
+## This is a fork of Petar Georgiev with improvements of Jens Borrisholt and Marlon Nardi
 
 ## JsonToDelphi Online
 
