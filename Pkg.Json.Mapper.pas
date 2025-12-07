@@ -205,8 +205,21 @@ begin
 end;
 
 destructor TPkgJsonMapper.Destroy;
+var
+  StubClass: TStubClass;
 begin
-  FreeAndNil(FStubClasses);
+  if Assigned(FStubClasses) then
+  begin
+    // Libera todas as classes criadas pelo parser
+    for StubClass in FStubClasses do
+      StubClass.Free;
+
+    FStubClasses.Clear;
+    FreeAndNil(FStubClasses);
+  end;
+
+  FRootClass := nil; // só para não ficar pendurado
+
   inherited;
 end;
 
