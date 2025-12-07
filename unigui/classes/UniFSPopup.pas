@@ -1,9 +1,11 @@
-{*******************************************************************************
+﻿{*******************************************************************************
                                  Falcon Sistemas
 
                            www.falconsistemas.com.br
                          suporte@falconsistemas.com.br
                  Written by Marlon Nardi - ALL RIGHTS RESERVED.
+
+              https://github.com/CC-Archived/Ext.ux.callout.Callout
 
 *******************************************************************************}
 
@@ -16,28 +18,40 @@ unit UniFSPopup;
 interface
 
 uses
-  Classes, TypInfo, SysUtils, System.UITypes, uniGUIApplication, uniGUITypes,
-  uniGUIClasses, uniButton, UniFSCommon;
+  System.Classes, 
+  System.TypInfo, 
+  System.SysUtils, 
+  System.UITypes, 
+  uniGUIApplication, 
+  uniGUITypes,
+  uniGUIClasses, 
+  uniButton,
+  uniPanel,
+  uniLabel,
+  UniFSCommon;
 
 const
   FSAbout = 'store.falconsistemas.com.br';
-  PackageVersion = '1.0.0.15';
+  PackageVersion = '1.0.2.44';
 
 type
-  TArrowLocation = (top, bottom, left, right);
+  TArrowLocation = (top, bottom, left, right, none);
   TPopupEvent = (click);
   TRelativePosition = (t_b, c_c, b_t, l_r, r_l, t_t, b_b, l_l, r_r, tr_bl, tr_br, bl_tr, br_tl);
 
   TOnEvents = procedure(EventName: string; Params: TUniStrings) of object;
+  TOnPopupClose = procedure(Sender: TObject) of object;
+  TOnPopupShow = procedure(Sender: TObject) of object;
 
   {$IF CompilerVersion >= 23.0}
   [ComponentPlatformsAttribute(pidWin32 or pidWin64 {$IF CompilerVersion >= 34.0}or pidLinux64{$IFEND})]
   {$IFEND}
   TUniFSPopup = class(TUniComponent)
   private
-    FTarget: TUniBaseButton;
+    FTarget: TUniControl;
     FLoaded: Boolean;
     FWidth: Integer;
+    FMaxHeight: Integer;
     FArrowLocation: TArrowLocation;
     FHtml: string;
     FFadeInDuration: Integer;
@@ -46,8 +60,12 @@ type
     FPopupEvent: TPopupEvent;
     FRelativeY: Integer;
     FRelativeX: Integer;
-    FOnEvents: TOnEvents;
     FRelativePosition: TRelativePosition;
+    FCloseOnClick: Boolean;
+
+    FOnEvents: TOnEvents;
+    FOnPopupClose: TOnPopupClose;
+    FOnPopupShow: TOnPopupShow;
   protected
     function GetVersion: string;
     function GetAbout: string;
@@ -69,8 +87,9 @@ type
 
     procedure SetHtml(Value: string);
   published
-    property Target: TUniBaseButton read FTarget write FTarget;
+    property Target: TUniControl read FTarget write FTarget;
     property Width: Integer read FWidth write FWidth;
+    property MaxHeight: Integer read FMaxHeight write FMaxHeight;
     property ArrowLocation: TArrowLocation read FArrowLocation write FArrowLocation;
     property Html: string read FHtml write SetHtml;
     property FadeInDuration: Integer read FFadeInDuration write FFadeInDuration;
@@ -80,8 +99,11 @@ type
     property RelativeY: Integer read FRelativeY write FRelativeY;
     property RelativeX: Integer read FRelativeX write FRelativeX;
     property RelativePosition: TRelativePosition read FRelativePosition write FRelativePosition;
+    property CloseOnClick: Boolean read FCloseOnClick write FCloseOnClick;
 
     property OnEvents: TOnEvents read FOnEvents write FOnEvents;
+    property OnPopupClose: TOnPopupClose read FOnPopupClose write FOnPopupClose;
+    property OnPopupShow: TOnPopupShow read FOnPopupShow write FOnPopupShow;
 
     property About : string read GetAbout;
     property Version : string read GetVersion;
@@ -116,11 +138,10 @@ begin
     StrBuilder := TStringBuilder.Create;
     try
       StrBuilder.Append('function '+GetStrPopupEvent(FPopupEvent)+'(sender, eOpts) { ');
-      StrBuilder.Append('  console.log("click"); ');
-      StrBuilder.Append('  Ext.widget(''callout'', { ');
+      StrBuilder.Append(' var vExt'+Self.JSName+' = Ext.widget(''callout'', { ');
       StrBuilder.Append('     cls: "cartoon", ');
       StrBuilder.Append('     width: '+IntToStr(FWidth)+', ');
-      StrBuilder.Append('     html: va_'+Self.JSName+', ');
+      StrBuilder.Append('     html: "<div class=\"fsp-popup-body\">"+va_'+Self.JSName+'+"</div>", ');
       StrBuilder.Append('     calloutArrowLocation: "'+GetStrAllowLocation(FArrowLocation)+'", ');
       StrBuilder.Append('     target: "#'+Target.JSName+'_id", ');
       StrBuilder.Append('     relativePosition: "'+GetStrRelativePosition(FRelativePosition)+'", ');
@@ -128,7 +149,53 @@ begin
       StrBuilder.Append('     fadeInDuration: '+IntToStr(FFadeInDuration)+', ');
       StrBuilder.Append('     fadeOutDuration: '+IntToStr(FFadeOutDuration)+', ');
       StrBuilder.Append('     dismissDelay: '+IntToStr(FDimissDelay)+', ');
+
+      StrBuilder.Append('     listeners: { ');
+      StrBuilder.Append('				hide: function () { ');
+      StrBuilder.Append('         ajaxRequest('+Self.JSName+', "closePopup", []); ');
+      StrBuilder.Append('					this.destroy(); ');
+      StrBuilder.Append('				}, ');
+
+      StrBuilder.Append('				show: function () { ');
+
+      if FMaxHeight > 0 then
+      begin
+        StrBuilder.Append(
+          '         var root = this.el ? this.el.dom : null;' +
+          '         if (root) {' +
+          '           var node = root.querySelector(".fsp-popup-body");' +
+          '           if (node) {' +
+          '             var limit = '+IntToStr(FMaxHeight)+';' +
+          '             var tolerance = 8;' + // folga pra evitar scroll por 1–2px
+          '             if (node.scrollHeight > (limit + tolerance)) {' +
+          '               node.style.maxHeight = limit + "px";' +
+          '               node.style.overflowY = "auto";' +
+          '             } else {' +
+          '               node.style.maxHeight = "none";' +
+          '               node.style.overflowY = "visible";' +
+          '             }' +
+          //'             node.style.overflowX = "hidden";' +
+          '           }' +
+          '         }'
+        );
+      end;
+
+      StrBuilder.Append('         ajaxRequest('+Self.JSName+', "showPopup", []); ');
+      StrBuilder.Append('				}, ');
+      StrBuilder.Append('			} ');
+
       StrBuilder.Append('  }).show(); ');
+
+      {Como o popup não possui eventos mousedown, a maneira mais fácil é adicionar ouvintes para esses eventos }
+      if CloseOnClick then
+      begin
+        StrBuilder.Append('  vExt'+Self.JSName+'.mon(vExt'+Self.JSName+'.getEl(), { ');
+        StrBuilder.Append('     mousedown: function() { ');
+        StrBuilder.Append('       setTimeout(() => this.hide(), 250); ');
+        StrBuilder.Append('     } ');
+        StrBuilder.Append('  }); ');
+      end;
+
       StrBuilder.Append('} ');
 
       SetTypeCastControl(Target, StrBuilder.ToString);
@@ -142,6 +209,7 @@ constructor TUniFSPopup.Create(AOwner: TComponent);
 begin
   inherited;
   Self.FWidth := 100;
+  Self.FMaxHeight := 400; // 0 = sem limite / sem scroll
   Self.FFadeInDuration := 200;
   Self.FFadeOutDuration := 200;
   Self.FDimissDelay := 0;
@@ -161,6 +229,10 @@ begin
   inherited;
   if Assigned(FOnEvents) then
     FOnEvents(EventName, Params);
+  if (EventName = 'showPopup') and (Assigned(FOnPopupShow)) then
+    FOnPopupShow(Self);
+  if (EventName = 'closePopup') and (Assigned(FOnPopupClose)) then
+    FOnPopupClose(Self);
 end;
 
 procedure TUniFSPopup.ExecJS(JS: string);
@@ -209,6 +281,10 @@ begin
   if Control is TUniSpeedButton then
     TUniSpeedButton(Control).ClientEvents.ExtEvents.Values[Self.GetStrPopupEvent(FPopupEvent)] := Command;
   if Control is TUniFSButton then
+    TUniFSButton(Control).ClientEvents.ExtEvents.Values[Self.GetStrPopupEvent(FPopupEvent)] := Command;
+  if Control is TUniPanel then
+    TUniFSButton(Control).ClientEvents.ExtEvents.Values[Self.GetStrPopupEvent(FPopupEvent)] := Command;
+  if Control is TUniLabel then
     TUniFSButton(Control).ClientEvents.ExtEvents.Values[Self.GetStrPopupEvent(FPopupEvent)] := Command;
 end;
 

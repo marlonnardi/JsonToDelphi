@@ -24,18 +24,18 @@ uses
   System.TypInfo, 
   System.SysUtils, 
   Controls, 
-  uniGUIApplication, 
+  uniGUIApplication,
   uniGUITypes, 
   uniGUIClasses, 
   UniFSCommon;
 
 const
   FSAbout = 'store.falconsistemas.com.br';
-  PackageVersion = '1.2.3.55';
+  PackageVersion = '1.2.3.68';
 
 type
   TToastTheme = (Dark, Light);
-  TToastLayout = (SmallInt, Medium);
+  TToastLayout = (Small, Medium);
   TToastPosition = (bottomRight, bottomLeft, topRight, topLeft, topCenter, bottomCenter, center);
   TToastTransitionIn = (bounceInLeft, bounceInRight, bounceInUp, bounceInDown, fadeIn, fadeInDown, fadeInUp, fadeInLeft, fadeInRight, flipInX);
   TToastTransitionOut = (fadeOut, fadeOutUp, fadeOutDown, fadeOutLeft, fadeOutRight, flipIntX, flipOutX);
@@ -133,6 +133,8 @@ type
     FButtonCustomActive: Boolean;
     FButtonCustomText: string;
     FButtonCustomURL: string;
+
+    FRemoveInaldChar: Boolean;
   published
     property Id: string read FId write FId;
     property Title: string read FTitle write FTitle;
@@ -186,6 +188,8 @@ type
     property About : string read GetAbout;
     property Version : string read GetVersion;
 
+    property RemoveInaldChar: Boolean read FRemoveInaldChar write FRemoveInaldChar;
+
     property OnClosePopup: TOnClosePopup read FOnClosePopup write FOnClosePopup;
     property OnShowPopup: TOnShowPopup read FOnShowPopup write FOnShowPopup;
     property OnClickPopup: TOnClickPopup read FOnClickPopup write FOnClickPopup;
@@ -230,8 +234,12 @@ function TUniFSToast.BuildJS(Type_: TToastType): string;
 var
   StrBuilder: TStringBuilder;
 begin
-  RemoveInvalidChar(FTitle);
-  RemoveInvalidChar(FMsg);
+  if RemoveInaldChar then
+  begin
+    RemoveInvalidChar(FTitle);
+    RemoveInvalidChar(FMsg);
+  end;
+
   StrBuilder := TStringBuilder.Create;
   try
     with StrBuilder do
@@ -413,8 +421,6 @@ begin
   FColor := EmptyStr;
   FMsgColor := EmptyStr;
   FBackgroundColor := EmptyStr;
-  FButtonTextYes := 'Confirma';
-  FButtonTextNo := 'Cancela';
   FTimeOut := 5000;
   FTitleSize := 13;
   FMsgSize := 12;
@@ -443,7 +449,9 @@ begin
   inherited Create(AOwner);
   Self.Clear;
   Self.FScreenMask := TUniFSScreenMask.Create;
-  Self.Layout := TToastLayout.SmallInt;
+  Self.Layout := TToastLayout.Small;
+
+  FRemoveInaldChar := True;
 end;
 
 destructor TUniFSToast.Destroy;
@@ -670,7 +678,7 @@ begin
 end;
 
 initialization
-  UniAddCSSLibrary(CDN+'falcon/css/preloader.css?v=3', CDNENABLED, [upoAsync, upoFolderUni, upoPlatformBoth]);
+  UniAddCSSLibrary(CDN+'falcon/css/preloader.css?v=4', CDNENABLED, [upoAsync, upoFolderUni, upoPlatformBoth]);
   UniAddCSSLibrary(CDN+'falcon/css/iziToast.min.css?v=3', CDNENABLED, [upoAsync, upoFolderUni, upoPlatformBoth]);
   UniAddJSLibrary(CDN+'falcon/js/iziToast.min.js?v=3', CDNENABLED, [upoFolderUni, upoPlatformBoth]);
   UniAddJSLibrary(CDN+'falcon/js/jquery.preloader.js?v=1', CDNENABLED, [upoFolderUni, upoPlatformBoth]);

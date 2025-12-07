@@ -1,5 +1,5 @@
-{*******************************************************************************
-                                 Falcon Sistemas
+﻿{*******************************************************************************
+                                Falcon Sistemas
 
                            www.falconsistemas.com.br
                          suporte@falconsistemas.com.br
@@ -18,24 +18,35 @@ unit UniFSConfirm;
 interface
 
 uses
-  Classes, TypInfo, SysUtils, System.UITypes, uniGUIApplication, uniGUITypes,
-  uniGUIClasses, UniFSCommon;
+  System.Classes,
+  System.TypInfo, 
+  System.SysUtils, 
+  System.UITypes, 
+  uniGUIApplication, 
+  uniGUITypes,
+  uniGUIClasses, 
+  UniFSCommon;
 
 const
   FSAbout = 'store.falconsistemas.com.br';
-  PackageVersion = '1.0.2.45';
+  PackageVersion = '1.1.3.85';
 
 type
-  TTypeConfirm = (Confirm, ConfirmOther, Alert, Dialog, Prompt);
+  TTypeConfirm = (Confirm, ConfirmOther, Alert, Dialog, Prompt, Video);
   TTypeColor = (blue, green, orange, purple, dark_, red);
   TTheme = (light, dark, modern, supervan, material, bootstrap);
   TConfirmButton = (Other, Yes, No, Ok);
-  TTypePrompt = (text, password);
+  TTypePrompt = (text, password, number);
   TTypeCharCase = (LowerCase_, Normal_, UpperCase_);
+  TFocusButton = (fbNone, fbConfirm, fbCancel, fbOther, fbOK);
 
   TButtonCallBack = reference to procedure(ConfirmButton: TConfirmButton);
   TPromptCallBack = reference to procedure(ConfirmButton: TConfirmButton; Result: string);
   TMaskCallBack = reference to procedure();
+
+  TOnConfirm = procedure(Sender: TObject) of object;
+  TOnCancel = procedure(Sender: TObject) of object;
+  TOnOther = procedure(Sender: TObject) of object;
 
   TUniFSScreenMask = class(TPersistent)
   private
@@ -54,6 +65,7 @@ type
     FRequiredField: Boolean;
     FTextRequiredField: string;
     FCharCase: TTypeCharCase;
+    FDefaultValue: string;
   public
     constructor Create;
   published
@@ -61,7 +73,7 @@ type
     property RequiredField: Boolean read FRequiredField write FRequiredField;
     property TextRequiredField: string read FTextRequiredField write FTextRequiredField;
     property CharCase: TTypeCharCase read FCharCase write FCharCase;
-
+    property DefaultValue: string read FDefaultValue write FDefaultValue;
   end;
 
   {$IF CompilerVersion >= 23.0}
@@ -82,13 +94,17 @@ type
     procedure DOHandleEvent(EventName: string; Params: TUniStrings); override;
     procedure LoadCompleted; override;
 
-    procedure RemoveInvalidChar(var InputText: string);
+    procedure RemoveInvalidChar(var InputText: string); virtual;
 
     function BoolToStr(const value: boolean): string; {Versions Old Delphi}
     function BuildJS(TypeConfirm: TTypeConfirm): string;
 
     procedure ExecJS(JS: string);
   private
+    FOnConfirm: TOnConfirm;
+    FOnCancel: TOnCancel;
+    FOnOther: TOnOther;
+
     FTitle: string;
     FContent: string;
     FTheme: TTheme;
@@ -110,9 +126,18 @@ type
     FPromptType: TUniFSPrompt;
     FMsgPrompt: string;
 
+    FAutoFocusButton: TFocusButton;
+    FButtonIdCancel: string;
+    FButtonIdConfirm: string;
+    FButtonIdOK: string;
+    FButtonIdOther: string;
+
     FButtonCallBack: TButtonCallBack;
     FPromptCallBack: TPromptCallBack;
   published
+    property About : string read GetAbout;
+    property Version : string read GetVersion;
+
     property Title: string read FTitle write FTitle;
     property Content: string read FContent write FContent;
     property Theme: TTheme read FTheme write FTheme;
@@ -135,8 +160,15 @@ type
     property ScreenMask: TUniFSScreenMask read FScreenMask write FScreenMask;
     property PromptType: TUniFSPrompt read FPromptType write FPromptType;
 
-    property About : string read GetAbout;
-    property Version : string read GetVersion;
+    property OnConfirm: TOnConfirm read FOnConfirm write FOnConfirm;
+    property OnCancel: TOnCancel read FOnCancel write FOnCancel;
+    property OnOther: TOnOther read FOnOther write FOnOther;
+
+    property AutoFocusButton: TFocusButton read FAutoFocusButton write FAutoFocusButton;
+    property ButtonIdConfirm: string read FButtonIdConfirm write FButtonIdConfirm;
+    property ButtonIdCancel: string read FButtonIdCancel write FButtonIdCancel;
+    property ButtonIdOther: string read FButtonIdOther write FButtonIdOther;
+    property ButtonIdOK: string read FButtonIdOK write FButtonIdOK;
   public
     constructor Create(AOwner: TComponent); override;
     destructor Destroy; override;
@@ -156,7 +188,10 @@ type
     procedure Question(const Title, Content: string; BC: TButtonCallBack; const TP: TTypeConfirm = Confirm); overload;
     procedure Question(const Title, Content, Icon: string; BC: TButtonCallBack; const TP: TTypeConfirm = Confirm); overload;
     procedure Question(const Title, Content, Icon: string; Color: TTypeColor; Theme: TTheme; BC: TButtonCallBack; const TP: TTypeConfirm = Confirm); overload;
+    procedure Video(const Title, Content: string);
     procedure Mask(const Msg: string; M: TMaskCallBack);
+
+    procedure SetFocusControl(Control: TUniControl; const Delay: Integer = 250);
   end;
 
 procedure Register;
@@ -199,18 +234,45 @@ begin
 end;
 
 function TUniFSConfirm.BuildJS(TypeConfirm: TTypeConfirm): string;
+  function JSStr(const S: string): string;
+  begin
+    Result := '''' + StringReplace(StringReplace(S, '\', '\\', [rfReplaceAll]),
+                                  '''', '\''', [rfReplaceAll]) + '''';
+  end;
 var
   StrBuilder: TStringBuilder;
+  TargetKey: string;
 begin
   RemoveInvalidChar(FTitle);
   RemoveInvalidChar(FContent);
   StrBuilder := TStringBuilder.Create;
   try
+    case FAutoFocusButton of
+      fbConfirm: TargetKey := 'confirm';
+      fbCancel:  TargetKey := 'cancel';
+      fbOther:   TargetKey := 'other';
+      fbOK:      TargetKey := 'ok';
+    else
+      TargetKey := '';
+    end;
+
     with StrBuilder do
     begin
       Append('title: '''+FTitle+''',');
       Append('content: '''+FContent+''', ');
       Append('icon: '''+FIcon+''',  ');
+
+      Append(
+        'onContentReady:function(){ if(window.FFTrap) window.FFTrap.init(this,' +
+          '{targetKey:'+JSStr(TargetKey)+','+
+          ' labels:{'+
+            'confirm:'+JSStr(ButtonTextConfirm)+','+
+            'cancel:'+JSStr(ButtonTextCancel)+','+
+            'ok:'+JSStr(ButtonTextOK)+','+
+            'other:'+JSStr(ButtonTextOther)+
+          '}}); },'
+      );
+      Append('onClose:function(){ if(window.FFTrap) window.FFTrap.clean(this); },');
 
       Append('type: '''+GetStrTypeColor(FTypeColor)+''', ');
       Append('theme: '''+GetStrTheme(FTheme)+''', ');
@@ -233,7 +295,7 @@ begin
         Append('     action: function() {');
         if ScreenMask.Enabled then
           Append('      $(''body'').preloader({text: '''+ScreenMask.Text+'''});  ');
-        Append('        ajaxRequest('+Self.JSName+', "Confirm", ["Button="+"Yes"]); ');
+        Append('        if (typeof '+Self.JSName+' !== ''undefined'') { ajaxRequest('+Self.JSName+', "Confirm", ["Button="+"Yes"]) } ');
         Append('     } ');
         Append('  },');
 
@@ -242,7 +304,7 @@ begin
         Append('     action: function() {');
         if ScreenMask.Enabled then
           Append('      $(''body'').preloader({text: '''+ScreenMask.Text+'''});  ');
-        Append('        ajaxRequest('+Self.JSName+', "Confirm", ["Button="+"No"]); ');
+        Append('        if (typeof '+Self.JSName+' !== ''undefined'') { ajaxRequest('+Self.JSName+', "Confirm", ["Button="+"No"]) } ');
         Append('     } ');
         Append('  },');
 
@@ -253,7 +315,7 @@ begin
           Append('     action: function() {');
           if ScreenMask.Enabled then
             Append('      $(''body'').preloader({text: '''+ScreenMask.Text+'''});  ');
-          Append('        ajaxRequest('+Self.JSName+', "Confirm", ["Button="+"Other"]); ');
+          Append('        if (typeof '+Self.JSName+' !== ''undefined'') { ajaxRequest('+Self.JSName+', "Confirm", ["Button="+"Other"]) } ');
           Append('     } ');
           Append('  }');
         end;
@@ -269,10 +331,10 @@ begin
         Append('  ''<label class="fs-label">'+FMsgPrompt+'</label>'' + ');
         if FPromptType.RequiredField then
           Append('  ''<input style="text-transform: '+GetStrTypeCharCase(FPromptType.CharCase)+
-            '" type="'+GetStrTypePrompt(FPromptType.TypePrompt)+'"  class="name fs-form-control" autofocus required />'' + ')
+            '" type="'+GetStrTypePrompt(FPromptType.TypePrompt)+'" value="'+FPromptType.DefaultValue+'" class="name fs-form-control" autofocus required />'' + ')
         else
           Append('  ''<input style="text-transform: '+GetStrTypeCharCase(FPromptType.CharCase)+
-            '" type="'+GetStrTypePrompt(FPromptType.TypePrompt)+'" class="name fs-form-control" autofocus />'' + ');
+            '" type="'+GetStrTypePrompt(FPromptType.TypePrompt)+'" value="'+FPromptType.DefaultValue+'" class="name fs-form-control" autofocus />'' + ');
         Append('  ''</div>'' + ');
         Append('  ''</form>'', ');
 
@@ -293,10 +355,10 @@ begin
           Append('   $(''body'').preloader({text: '''+ScreenMask.Text+'''});  ');
 
         if FPromptType.CharCase = TTypeCharCase.Normal_ then
-          Append('   ajaxRequest('+Self.JSName+', "Prompt", ["Button="+"Yes","result="+this.$content.find(''.name'').val()]); ')
+          Append('   if (typeof '+Self.JSName+' !== ''undefined'') { ajaxRequest('+Self.JSName+', "Prompt", ["Button="+"Yes","result="+this.$content.find(''.name'').val()])} ')
         else
-          Append('   ajaxRequest('+Self.JSName+', "Prompt", ["Button="+"Yes","result="+this.$content.find(''.name'').val().to'+
-            GetStrTypeCharCase(FPromptType.CharCase)+'()]); ');
+          Append('   if (typeof '+Self.JSName+' !== ''undefined'') { ajaxRequest('+Self.JSName+', "Prompt", ["Button="+"Yes","result="+this.$content.find(''.name'').val().to'+
+            GetStrTypeCharCase(FPromptType.CharCase)+'()]) } ');
 
         Append('     } ');
         Append('  },');
@@ -306,7 +368,7 @@ begin
         Append('     action: function() {');
         if ScreenMask.Enabled then
           Append('      $(''body'').preloader({text: '''+ScreenMask.Text+'''});  ');
-        Append('        ajaxRequest('+Self.JSName+', "Prompt", ["Button="+"No"]); ');
+        Append('        if (typeof '+Self.JSName+' !== ''undefined'') { ajaxRequest('+Self.JSName+', "Prompt", ["Button="+"No"]) } ');
         Append('     } ');
         Append('  }');
         Append('},');
@@ -330,7 +392,7 @@ begin
         Append('     action: function() {');
         if ScreenMask.Enabled then
           Append('      $(''body'').preloader({text: '''+ScreenMask.Text+'''});  ');
-        Append('        ajaxRequest('+Self.JSName+', "Alert", ["Button="+"Ok"]); ');
+        Append('        if (typeof '+Self.JSName+' !== ''undefined'') { ajaxRequest('+Self.JSName+', "Alert", ["Button="+"Ok"]) } ');
         Append('     } ');
         Append('  }');
         Append('}');
@@ -339,9 +401,17 @@ begin
         Append('buttons: {');
         Append('  specialKey: { ');
         Append('     text: '''+Self.ButtonTextOK+''', ');
-        Append('     keys: ["enter"] ');
+        Append('     keys: ["enter"], ');
+        Append('     action: function() {');
+        Append('        if (typeof '+Self.JSName+' !== ''undefined'') { ajaxRequest('+Self.JSName+', "Alert", ["Button="+"Ok"]) } ');
+        Append('     } ');
         Append('  }');
         Append('}');
+      end;
+
+      if (TypeConfirm = TTypeConfirm.Video) then
+      begin
+        Append('buttons: {}');
       end;
 
     end;
@@ -385,19 +455,23 @@ begin
 end;
 
 procedure TUniFSConfirm.DOHandleEvent(EventName: string; Params: TUniStrings);
+var
+  vPar: string;
 begin
   inherited;
+  vPar := Params.Values['Button'];
+
   if EventName = 'Confirm' then
   begin
     if Assigned(FButtonCallBack) then
     begin
-      if Params.Values['Button'] = 'Yes' then
+      if vPar = 'Yes' then
         FButtonCallBack(TConfirmButton.Yes);
-      if Params.Values['Button'] = 'No' then
+      if vPar = 'No' then
         FButtonCallBack(TConfirmButton.No);
-      if Params.Values['Button'] = 'Ok' then
+      if vPar = 'Ok' then
         FButtonCallBack(TConfirmButton.Ok);
-      if Params.Values['Button'] = 'Other' then
+      if vPar = 'Other' then
         FButtonCallBack(TConfirmButton.Other);
     end;
   end;
@@ -405,13 +479,13 @@ begin
   begin
     if Assigned(FPromptCallBack) then
     begin
-      if Params.Values['Button'] = 'Yes' then
+      if vPar = 'Yes' then
         FPromptCallBack(TConfirmButton.Yes, Params.Values['result']);
-      if Params.Values['Button'] = 'No' then
+      if vPar = 'No' then
         FPromptCallBack(TConfirmButton.No, EmptyStr);
-      if Params.Values['Button'] = 'Ok' then
+      if vPar = 'Ok' then
         FButtonCallBack(TConfirmButton.Ok);
-      if Params.Values['Button'] = 'Other' then
+      if vPar = 'Other' then
         FButtonCallBack(TConfirmButton.Other);
     end;
   end;
@@ -419,15 +493,22 @@ begin
   begin
     if Assigned(FButtonCallBack) then
     begin
-      if Params.Values['Button'] = 'Ok' then
+      if vPar = 'Ok' then
         FButtonCallBack(TConfirmButton.Ok);
 
       FButtonCallBack := nil;
     end;
   end;
 
-  if (EventName <> EmptyStr) and (Params.Values['Button'] <> EmptyStr) then
+  if (EventName <> EmptyStr) and (vPar <> EmptyStr) then
     ExecJS('$(''body'').preloader(''remove'');');
+
+  if (Assigned(FOnConfirm)) and ((vPar = 'Yes') or (vPar = 'Ok')) then
+    FOnConfirm(Self);
+  if (Assigned(FOnCancel)) and (vPar = 'No')  then
+    FOnCancel(Self);
+  if (Assigned(FOnOther)) and (vPar = 'Other')  then
+    FOnOther(Self);
 end;
 
 procedure TUniFSConfirm.ExecJS(JS: string);
@@ -520,6 +601,16 @@ begin
   UniSession.Synchronize();
 end;
 
+procedure TUniFSConfirm.SetFocusControl(Control: TUniControl;
+  const Delay: Integer);
+begin
+  if not Assigned(Control) then
+    Exit;
+
+  Self.ExecJS(Format('try{Ext.defer(function(){ %s.focus(true,10); }, %d);}catch(e){} ',
+    [Control.JSName, Delay]));
+end;
+
 procedure TUniFSConfirm.ShowMask(Msg, JSName: string);
 begin
   Self.ExecJS('$('''+JSName+''').preloader({text: '''+Msg+'''});');
@@ -536,6 +627,14 @@ procedure TUniFSConfirm.ShowMaskUpdate(Msg: string; Percent: Integer);
 begin
   Self.ExecJS('$(''body'').preloader(''update'',{text: '''+Msg+''',percent:'''+IntToStr(Percent)+'''});');
   UniSession.Synchronize();
+end;
+
+procedure TUniFSConfirm.Video(const Title, Content: string);
+begin
+  FTitle := Title;
+  FContent := Content;
+  FIcon := EmptyStr;
+  ExecJS('$.dialog({'+BuildJS(TTypeConfirm.Video)+'});');
 end;
 
 procedure TUniFSConfirm.ShowMask(Msg: string);
@@ -593,8 +692,9 @@ end;
 
 initialization
   UniAddCSSLibrary(CDN+'falcon/css/jquery-confirm.min.css?v=3', CDNENABLED, [upoFolderUni, upoPlatformBoth]);
-  UniAddCSSLibrary(CDN+'falcon/css/preloader.css?v=3', CDNENABLED, [upoFolderUni, upoPlatformBoth]);
-  UniAddCSSLibrary(CDN+'falcon/css/jquery-confirm-style.css?v=8', CDNENABLED, [upoFolderUni, upoPlatformBoth]);
+  UniAddCSSLibrary(CDN+'falcon/css/preloader.css?v=4', CDNENABLED, [upoAsync, upoFolderUni, upoPlatformBoth]);
+  UniAddCSSLibrary(CDN+'falcon/css/jquery-confirm-style.css?v=1', CDNENABLED, [upoFolderUni, upoPlatformBoth]);
   UniAddJSLibrary(CDN+'falcon/js/jquery-confirm.min.js?v=3', CDNENABLED, [upoFolderUni, upoPlatformBoth]);
   UniAddJSLibrary(CDN+'falcon/js/jquery.preloader.js?v=1', CDNENABLED, [upoFolderUni, upoPlatformBoth]);
+  UniAddJSLibrary(CDN+'falcon/js/fftrap.min.js?v=5', CDNENABLED, [upoFolderUni, upoPlatformBoth]);
 end.

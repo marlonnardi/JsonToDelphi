@@ -16,19 +16,25 @@ unit UniFSButton;
 interface
 
 uses
-  System.Classes, uniGUIApplication, uniGUIClasses, uniGUITypes, uniBitBtn, uniButton,
-  UniFSBadgeText, UniFSCommon;
+  System.Classes, 
+  uniGUIApplication, 
+  uniGUIClasses, 
+  uniGUITypes, 
+  uniBitBtn,
+  uniButton,
+  UniFSBadgeText, 
+  UniFSCommon;
 
 const
   FSAbout = 'store.falconsistemas.com.br';
-  PackageVersion = '1.3.1.140';
+  PackageVersion = '1.3.1.161';
 
 type
   TStyleButton = (Default, Primary, Success, Info, Warning, Danger, Purple, Butterfly, Black, Transparent,
   	GoogleNarrow, GoogleGreen, GoogleBlue, GoogleDanger, GoogleAccent, GoogleBlue2, GoogleBrow,
-    GoogleSilver, GoogleYellow, GoogleOrange, GoogleBlack, GoogleBlue3, GoogleCustomMenu, GoogleDangerRound,
+    GoogleSilver, GoogleYellow, GoogleOrange, GoogleBlack, GoogleBlue3, GoogleBlue4, GoogleCustomMenu, GoogleDangerRound,
     GoogleBlueRound, GoogleSilverRound, GoogleGreenRound, GoogleYellowRound, GoogleNarrowRound, GoogleOrangeRound,
-    TBDCRound);
+    TBDCRound, GoogleBlue1Round, GoogleBlue3Round, JFGreenRound);
 
   {$IF CompilerVersion >= 23.0}
   [ComponentPlatformsAttribute(pidWin32 or pidWin64 {$IF CompilerVersion >= 34.0}or pidLinux64{$IFEND})]
@@ -214,6 +220,6 @@ begin
 end;
 
 initialization
-  UniAddCSSLibrary(CDN+'falcon/css/falcon.components.css', CDNENABLED, [upoFolderUni, upoPlatformBoth]);
+  UniAddCSSLibrary(CDN+'falcon/css/falcon.components.css?v=12', CDNENABLED, [upoFolderUni, upoPlatformBoth]);
 
 end.

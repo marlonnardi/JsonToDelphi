@@ -808,7 +808,7 @@ object MainForm: TMainForm
     PromptType.RequiredField = False
     PromptType.TextRequiredField = 'Field riquired'
     PromptType.CharCase = Normal_
-    AutoFocusButton = fbNone
+    AutoFocusButton = fbConfirm
     Left = 421
     Top = 144
   end

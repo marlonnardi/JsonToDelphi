@@ -12,8 +12,13 @@ unit UniFSBadgeText;
 interface
 
 uses
-  System.Classes, System.SysUtils, uniGUIApplication, uniGUIClasses, uniGUITypes,
-  uniBitBtn, UniFSCommon;
+  System.Classes, 
+  System.SysUtils, 
+  uniGUIApplication, 
+  uniGUIClasses, 
+  uniGUITypes,
+  uniBitBtn, 
+  UniFSCommon;
 
 type
   TUniFSBadgeText = class(TPersistent)
@@ -132,6 +137,6 @@ begin
 end;
 
 initialization
-  UniAddJSLibrary(CDN+'falcon/js/falcon.components.min.js?v=2', CDNENABLED, [upoFolderUni, upoPlatformBoth]);
+  UniAddJSLibrary(CDN+'falcon/js/falcon.components.min.js?v=7', CDNENABLED, [upoFolderUni, upoPlatformBoth]);
 
 end.

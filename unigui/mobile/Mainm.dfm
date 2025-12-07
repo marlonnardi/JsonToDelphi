@@ -209,6 +209,7 @@ object MainmForm: TMainmForm
     PromptType.RequiredField = False
     PromptType.TextRequiredField = 'Field riquired'
     PromptType.CharCase = Normal_
+    AutoFocusButton = fbConfirm
     Left = 144
     Top = 246
   end
