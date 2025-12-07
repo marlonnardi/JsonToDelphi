@@ -808,6 +808,7 @@ object MainForm: TMainForm
     PromptType.RequiredField = False
     PromptType.TextRequiredField = 'Field riquired'
     PromptType.CharCase = Normal_
+    AutoFocusButton = fbNone
     Left = 421
     Top = 144
   end
@@ -820,7 +821,7 @@ object MainForm: TMainForm
     ImageWidth = 0
     MaxWidth = 0
     zIndex = 99999
-    Layout = SmallInt
+    Layout = Small
     Balloon = False
     Close = True
     CloseOnEscape = False
@@ -844,6 +845,7 @@ object MainForm: TMainForm
     ButtonTextYes = 'Confirma'
     ButtonTextNo = 'Cancela'
     ButtonCustomActive = False
+    RemoveInaldChar = True
     OnButtonCustomClickPopup = ToastButtonCustomClickPopup
     Left = 472
     Top = 143

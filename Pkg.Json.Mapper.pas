@@ -64,6 +64,8 @@ var
   JsonArray: TJSONArray;
   vValid: Boolean;
 begin
+  JSONObject := nil;
+
   if aJsonValue = nil then
     Exit;
 
