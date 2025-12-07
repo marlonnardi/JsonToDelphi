@@ -216,8 +216,7 @@ begin
   if aList = nil then
   begin
     aList := TObjectList<T>.Create;
-    for Element in aSource do
-      aList.Add(Element);
+    aList.AddRange(aSource);
   end;
 
   Exit(aList);
