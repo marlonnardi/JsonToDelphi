@@ -96,7 +96,6 @@ type
 
   private
     { Private declarations }
-    JsonMapper : TPkgJsonMapper;
     JsonSettings : TSettings;
 
     procedure DefineRegrasLayout;
@@ -146,6 +145,7 @@ end;
 procedure TMainForm.btnGenerateClick(Sender: TObject);
 var
   vJson : string;
+  LMapper: TPkgJsonMapper;
 begin
   vJson := Trim(memJson.Lines.Text);
 
@@ -173,14 +173,15 @@ begin
     JsonSettings.AddJsonPropertyAttributes := chkAddJsonPropertyAttributes.Checked;
     JsonSettings.PostFixClassNames := chkPostfixClassNames.Checked;
 
-    if JsonMapper = nil then
-      JsonMapper := TPkgJsonMapper.Create();
-
-    JsonMapper.DestinationUnitName := 'RootUnit';
-    JsonMapper.Parse(memJson.Text);
-
-    frmGenerateUnit.synx.Text := JsonMapper.GenerateUnit;
-    frmGenerateUnit.ShowModal();
+    LMapper := TPkgJsonMapper.Create;
+    try
+      LMapper.DestinationUnitName := 'RootUnit';
+      LMapper.Parse(memJson.Text);
+      frmGenerateUnit.synx.Text := LMapper.GenerateUnit;
+      frmGenerateUnit.ShowModal;
+    finally
+      LMapper.Free;
+    end;
   except
     on e: Exception do
     begin
@@ -342,8 +343,6 @@ end;
 procedure TMainForm.UniFormClose(Sender: TObject; var Action: TCloseAction);
 begin
   CDS.Close;
-  if Assigned(JsonMapper) then
-    FreeAndNil(JsonMapper);
 end;
 
 procedure TMainForm.UniFormCreate(Sender: TObject);
