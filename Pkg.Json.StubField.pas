@@ -57,10 +57,13 @@ type
   end;
 
   TStubArrayField = class(TStubContainerField)
+  strict private
+    FArrayDimension: Integer; // 1 = normal, 2 = array de array
   strict protected
     function GetTypeAsString: string; override;
   public
-    constructor Create(aClass: TStubClass; aItemName: string; aItemSubType: TJsonType; aItemClass: TStubClass);
+    constructor Create(aClass: TStubClass; aItemName: string; aItemSubType: TJsonType; aItemClass: TStubClass; aArrayDimension: Integer = 1);
+    property ArrayDimension: Integer read FArrayDimension;
   end;
 
   TStubFieldList = class(TJsonNameList<TStubField>)
@@ -502,24 +505,32 @@ end;
 
 { TArrayItem }
 
-constructor TStubArrayField.Create(aClass: TStubClass; aItemName: string; aItemSubType: TJsonType; aItemClass: TStubClass);
+constructor TStubArrayField.Create(aClass: TStubClass; aItemName: string; aItemSubType: TJsonType; aItemClass: TStubClass; aArrayDimension: Integer);
 begin
   inherited Create(aClass, aItemName, jtArray);
-  ContainedType := aItemSubType;
+  ContainedType := aItemSubType;    // tipo "base" (string, number, object…)
   FieldClass := aItemClass;
+  FArrayDimension := aArrayDimension;
   aClass.ArrayItems.Add(Self);
 end;
 
 function TStubArrayField.GetTypeAsString: string;
+var
+  Base: string;
+  Level: Integer;
 begin
   case ContainedType of
     jtObject:
-      Result := FieldClass.Name;
-    jtArray:
-      raise EJsonMapper.Create('Nested arrays are not supported!');
+      Base := FieldClass.Name;
   else
-    Result := GetTypeAsString(ContainedType);
+    Base := GetTypeAsString(ContainedType); // tipo simples (string, Integer, etc.)
   end;
+
+  // para dimensão 1, fica só "string" ou "TMinhaClasse"
+  // para dimensão 2, vira "TArray<string>" ou "TArray<TMinhaClasse>"
+  Result := Base;
+  for Level := 2 to FArrayDimension do
+    Result := Format('TArray<%s>', [Result]);
 end;
 
 { TStubObjectField }

@@ -63,6 +63,7 @@ var
   StubClass: TStubClass;
   JsonArray: TJSONArray;
   vValid: Boolean;
+  Dim: Integer;
 begin
   JSONObject := nil;
 
@@ -97,9 +98,33 @@ begin
             JSONValue := GetFirstArrayItem(JsonArray);
             JsonType := GetJsonType(JSONValue);
 
-            StubClass := TStubClass.Construct(aParentClass, JsonPair.JsonString.Value, Self.FStubClasses, '', JsonType = jtObject);
-            TStubArrayField.Create(aParentClass, JsonPair.JsonString.Value, JsonType, StubClass);
+            // Descobre profundidade do array e tipo "base"
+            // Ex.: [[ "a", "b" ]] -> Dim = 2, BaseType = jtString
+            //      [ 1, 2, 3 ]    -> Dim = 1, BaseType = jtNumber
+            Dim := 1;
+            while JsonType = jtArray do
+            begin
+              Inc(Dim);
+              JSONValue := GetFirstArrayItem(TJSONArray(JSONValue));
+              JsonType := GetJsonType(JSONValue);
+            end;
 
+            // não vamos permitir coisas muito malucas
+            if Dim > 2 then
+              raise EJsonMapper.Create('Nested arrays with more than 2 dimensions are not supported!');
+
+            if (Dim > 1) and (JsonType = jtObject) then
+              raise EJsonMapper.Create('Nested arrays of objects are not supported!');
+
+            StubClass := TStubClass.Construct(aParentClass,
+              JsonPair.JsonString.Value, Self.FStubClasses, '', JsonType = jtObject);
+
+            TStubArrayField.Create(aParentClass, JsonPair.JsonString.Value,
+              JsonType, StubClass, Dim);
+
+            // Para arrays de objetos simples (Dim = 1, jtObject) isso continua funcionando.
+            // Para arrays de arrays de tipos simples, o ProcessJsonObject interno não faz nada
+            // (são arrays, não objetos), o que está OK.
             for JSONValue in JsonArray do
               ProcessJsonObject(JSONValue, StubClass);
           end;
