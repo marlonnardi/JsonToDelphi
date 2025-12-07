@@ -6,7 +6,50 @@
 
 https://jsontodelphi.com
 
-Origin [Jens Borrisholt] (https://github.com/JensBorrisholt/Delphi-JsonToDelphiClass)
+## Fixes & Features: 7th December 2025 ##
+
+### Features ###
+* Added full support for **2D arrays of simple JSON types** (`TArray<TArray<string>>`).
+* New internal logic to detect array dimensions during JSON parsing.
+* Arrays up to **2 levels deep** are now supported when containing only simple types (string, number, boolean).
+* Automatic generation of `TList<TArray<string>>` wrapper properties compatible with `Pkg.Json.DTO`.
+
+### Fixes ###
+* **Issue #9 resolved** – nested arrays no longer produce:  
+  `"TPkgJsonMapper.GenerateUnit: Nested arrays are not supported!"`
+* Fixed memory leaks related to:
+  * `TPkgJsonMapper`
+  * `TStubClass`
+  * `TStubFieldList`
+  * `TStubFieldObjectList`
+  * `TStubArrayField`
+* Corrected destructor logic for stub lifecycle cleanup.
+* Improved parser behavior to avoid invalid propagation of `jtArray`.
+* Added validation to block unsupported cases:
+  * Arrays of arrays containing **objects**
+  * Arrays with **more than two dimensions**
+
+### Example ###
+
+#### JSON Input ####
+```json
+{
+  "values":[
+    ["a", "b"],
+    ["c", "d"]
+  ]
+}
+```
+
+### Before ###
+❌ Nested arrays generated an exception:  
+`Nested arrays are not supported!`
+
+### After ###
+✅ Full support for arrays like:  
+```json
+[ ["a","b"], ["c","d"] ]
+```
 
 ## Fixes & Features: 16th June 2024 ##
 ### Features ###
