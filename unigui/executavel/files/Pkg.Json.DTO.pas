@@ -210,8 +210,6 @@ begin
 end;
 
 function TArrayMapper.ObjectList<T>(var aList: TObjectList<T>; aSource: TArray<T>): TObjectList<T>;
-var
-  Element: T;
 begin
   if aList = nil then
   begin

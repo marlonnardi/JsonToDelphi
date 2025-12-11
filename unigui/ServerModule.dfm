@@ -3201,6 +3201,7 @@ object UniServerModule: TUniServerModule
   ConnectionFailureRecovery.ErrorMessage = 'Comunica'#231#227'o com o servidor perdida'
   ConnectionFailureRecovery.RetryMessage = 'Reconectando...'
   ConnectionFailureRecovery.TextColor = 13075991
+  LoadingAnimation.ImageFile = 'unigui-color-48x.gif'
   OnBeforeInit = UniGUIServerModuleBeforeInit
   OnControlPanelLogin = UniGUIServerModuleControlPanelLogin
   UniMobileRoot = 'c:\unigui\[unim]\'
