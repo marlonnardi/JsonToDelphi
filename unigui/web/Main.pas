@@ -69,6 +69,7 @@ type
     lblPipedrive: TUniLabel;
     lblFalconFinancas: TUniLabel;
     lblFalconSistemas: TUniLabel;
+    btnCollaborators1: TUniFSButton;
     procedure UniFormAfterShow(Sender: TObject);
     procedure UniFormClose(Sender: TObject; var Action: TCloseAction);
     procedure UniFormAjaxEvent(Sender: TComponent; EventName: string; Params: TUniStrings);
@@ -135,7 +136,7 @@ begin
   CDS.Last;
   while not CDS.Bof do
   begin
-    vColab := vColab + CDS.FieldByName('Date').AsString+' | '+CDS.FieldByName('Name').AsString+' | <b>$'+CDS.FieldByName('Value').AsString+'</b></br>';
+    vColab := vColab + CDS.FieldByName('Date').AsString+' | '+CDS.FieldByName('Name').AsString+' | <b>$'+FloatToStr(CDS.FieldByName('Value').AsFloat)+'</b></br>';
     CDS.Prior;
   end;
 

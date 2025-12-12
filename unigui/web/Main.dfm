@@ -575,7 +575,7 @@ object MainForm: TMainForm
       Width = 1024
       Height = 327
       Hint = ''
-      ActivePage = tabJson
+      ActivePage = tabDonate
       TabBarVisible = False
       Align = alTop
       TabOrder = 2
@@ -659,6 +659,30 @@ object MainForm: TMainForm
           Align = alTop
           Text = 'Donated so far $'
           TabOrder = 2
+          ExplicitWidth = 944
+        end
+        object btnCollaborators1: TUniFSButton
+          Left = 490
+          Top = 242
+          Width = 38
+          Height = 34
+          Hint = 'List of Contributors'
+          ShowHint = True
+          ParentShowHint = False
+          StyleButton = GoogleSilver
+          CaptionIconFont = '<i class="fas fa-comment-dollar" aria-hidden="true"></i>'
+          BadgeText.Text = '0'
+          BadgeText.TextColor = '#FFFFFF'
+          BadgeText.TextSize = 10
+          BadgeText.TextStyle = 'bold'
+          BadgeText.BackgroundColor = '#D50000'
+          Caption = ''
+          ParentFont = False
+          Font.Color = clGreen
+          Font.Height = -16
+          Font.Name = 'Roboto'
+          TabOrder = 3
+          OnClick = btnCollaboratorsClick
         end
       end
       object tabConfig: TUniTabSheet
