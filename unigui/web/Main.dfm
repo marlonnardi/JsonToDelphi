@@ -659,7 +659,10 @@ object MainForm: TMainForm
           Align = alTop
           Text = 'Donated so far $'
           TabOrder = 2
-          ExplicitWidth = 944
+          ClientEvents.ExtEvents.Strings = (
+            
+              'afterrender=function afterrender(sender, eOpts)'#13#10'{'#13#10'  sender.add' +
+              'Cls('#39'uf-anim-progress'#39');'#13#10'}')
         end
         object btnCollaborators1: TUniFSButton
           Left = 490

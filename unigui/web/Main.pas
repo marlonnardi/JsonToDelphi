@@ -376,7 +376,7 @@ begin
   begin
     pgcJson.ActivePage := tabDonate;
     pgrWizardDonate.Position := Round(Value);
-    pgrWizardDonate.Text := 'Donated so far $' + Value.ToString;
+    pgrWizardDonate.Text := 'Donations so far';
   end
   else
     pgcJson.ActivePage := tabJson;
