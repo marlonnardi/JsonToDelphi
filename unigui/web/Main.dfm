@@ -1,4 +1,4 @@
-object MainForm: TMainForm
+﻿object MainForm: TMainForm
   Left = 0
   Top = 0
   Width = 1080
@@ -654,7 +654,7 @@ object MainForm: TMainForm
           Margins.Left = 20
           Margins.Top = 35
           Margins.Right = 20
-          Max = 175
+          Max = 80
           Position = 2
           Align = alTop
           Text = 'Donated so far $'
@@ -753,7 +753,7 @@ object MainForm: TMainForm
       Anchors = [akLeft, akTop, akRight]
       TabOrder = 11
       object lblPipedrive: TUniLabel
-        Left = 207
+        Left = 227
         Top = 24
         Width = 130
         Height = 34
@@ -778,7 +778,7 @@ object MainForm: TMainForm
       object lblFalconFinancas: TUniLabel
         Left = 18
         Top = 24
-        Width = 130
+        Width = 160
         Height = 34
         Cursor = crHandPoint
         Hint = ''
@@ -786,9 +786,9 @@ object MainForm: TMainForm
         AutoSize = False
         Caption = 
           '<a href="https://www.financeiro.app" target="_blank" alt="Falcon' +
-          ' Finan'#231'as - Gerenciador Financeiro">'#10'  <img src="https://www.fin' +
-          'anceiro.app/wp-content/uploads/2023/07/logo-falcon-financas.svg"' +
-          ' style="height:30px; margin-top:1px;" title="Falcon Finan'#231'as - G' +
+          ' Finan'#231'as - Gerenciador Financeiro">'#10'  <img src="https://finan' +
+          'ceiro.app/assets/img/logo-falcon-financas-1.svg"' +
+          ' style="height:34px; margin-top:1px;" title="Falcon Finan'#231'as - G' +
           'erenciador Financeiro">'#10'</a>'
         ParentFont = False
         Font.Color = clHighlight
@@ -797,6 +797,29 @@ object MainForm: TMainForm
         ParentColor = False
         Color = clBlack
         TabOrder = 1
+      end
+      object lbl1Password: TUniLabel
+        Left = 389
+        Top = 24
+        Width = 130
+        Height = 34
+        Cursor = crHandPoint
+        Hint = ''
+        TextConversion = txtHTML
+        AutoSize = False
+        Caption = 
+          '<a href="https://1password.partnerlinks.io/tzvgyyqd3rr3" target=' +
+          '"_blank" alt="O Melhor Gerenciador de Senha"> <img src="https://' +
+          'falconsistemas.com.br/assets/img/1password_logo.png?v=1" style="' +
+          'height:26px;margin-top: 2px;" title="O Melhor Gerenciador de Sen' +
+          'ha"></a>'
+        ParentFont = False
+        Font.Color = clDefault
+        Font.Height = -13
+        Font.Name = 'Roboto'
+        ParentColor = False
+        Color = clBlack
+        TabOrder = 3
       end
     end
   end

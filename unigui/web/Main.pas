@@ -70,6 +70,7 @@ type
     lblFalconFinancas: TUniLabel;
     lblFalconSistemas: TUniLabel;
     btnCollaborators1: TUniFSButton;
+    lbl1Password: TUniLabel;
     procedure UniFormAfterShow(Sender: TObject);
     procedure UniFormClose(Sender: TObject; var Action: TCloseAction);
     procedure UniFormAjaxEvent(Sender: TComponent; EventName: string; Params: TUniStrings);
@@ -352,27 +353,19 @@ var
 begin
   JsonSettings := TSettings.Instance;
 
-//  Popup := TUniFSPopup.Create(Self);
-//  Popup.Width := 350;
-//  Popup.RelativeY := 60;
-//  Popup.RelativeX := -200;
-//  Popup.RelativePosition := TRelativePosition.b_t;
-//  Popup.ArrowLocation := TArrowLocation.right;
-//  Popup.Target := btnCollaborators;
-
   CDS.FileName := UniServerModule.StartPath + '\dados.dat';
   if not FileExists(CDS.FileName) then
     CDS.CreateDataSet;
   CDS.LoadFromFile(CDS.FileName);
   CDS.Open;
-  CDS.Filter := 'AND Year = ' + YearOf(Now).ToString;
+  CDS.Filter := 'AND Year in (' + YearOf(Now).ToString + ',' + (YearOf(Now)-1).ToString + ')';
 
   if AggregateCDSSumValue.AsVariant = Null then
     Value := 0
   else
     Value := AggregateCDSSumValue.AsVariant;
 
-  if (Value < 175) and (MonthOf(Now) = 12) then
+  if (Value < 80) and ((MonthOf(Now) = 12) or (MonthOf(Now) = 1)) then
   begin
     pgcJson.ActivePage := tabDonate;
     pgrWizardDonate.Position := Round(Value);
