@@ -1,10 +1,35 @@
-# Delphi-JsonToDelphiClass
+﻿# Delphi-JsonToDelphiClass
 
 ## This is a fork of Petar Georgiev with improvements of Jens Borrisholt and Marlon Nardi
 
 ## JsonToDelphi Online
 
 https://jsontodelphi.com
+
+## Fixes & Features: 20th May 2026 ##
+
+### Features ###
+* Modernized the online generator main screen with a new HTMLFrame-based interface.
+* Added a larger JSON editor experience with direct actions for:
+  * Generate Unit
+  * Validate JSON
+  * Sample Use
+  * Pretty print
+  * Clear JSON
+* Improved generation options layout for PascalCase, JsonProperty attributes, zero-date suppression and class-name postfixing.
+* Added a top PayPal donation button and kept project support links available in the support area.
+* Improved SEO and AI discovery metadata:
+  * Canonical URL
+  * Open Graph tags
+  * Twitter Card tags
+  * Schema.org JSON-LD for `WebSite` and `WebApplication`
+  * Richer keywords and application descriptions for JSON to Delphi, JSON to Pascal and Delphi DTO generation
+* Corrected `robots.txt` sitemap URL and enriched `sitemap.xml`.
+
+### Build / publishing ###
+* The uniGUI web application is published as an ISAPI DLL on IIS.
+* Publication builds should keep `UNIGUI_DLL` enabled in `unigui\JsonToDelphi.dpr`.
+* Latest DLL build produced during this update: `2.1.0.204`.
 
 ## Fixes & Features: 7th December 2025 ##
 

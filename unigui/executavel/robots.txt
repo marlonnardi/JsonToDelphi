@@ -1,4 +1,4 @@
-Sitemap: https://financeiro.app/sitemap.xml
+Sitemap: https://jsontodelphi.com/sitemap.xml
 
 User-Agent: *
 Allow: /

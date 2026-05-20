@@ -112,7 +112,7 @@
         Height = 45
         Hint = ''
         TextConversion = txtHTML
-        Caption = '<a href="https://jsontodelphi.com">jsontodelphi</a>'
+        Caption = '<a href="https://jsontodelphi.com">Json To Delphi Class</a>'
         ParentFont = False
         Font.Color = 9264680
         Font.Height = -33
@@ -126,7 +126,7 @@
         Width = 231
         Height = 21
         Hint = ''
-        Caption = 'generate delphi classes from json'
+        Caption = 'Generate Delphi, Pascal and DTO classes from JSON online'
         ParentFont = False
         Font.Color = clGray
         Font.Height = -16
@@ -367,8 +367,8 @@
         TextConversion = txtHTML
         Caption = 
           '<a style="color: #3399ff;" href="https://store.falconsistemas.co' +
-          'm.br" target="_blank"><i class="fas fa-star"></i> The best compo' +
-          'nents for Delphi</a>'
+          'm.br" target="_blank"><i class="fas fa-star"></i> Delphi compone' +
+          'nts, uniGUI tools and JSON DTO generator resources</a>'
         ParentFont = False
         Font.Color = 15748954
         Font.Height = -15
@@ -410,8 +410,8 @@
       TextConversion = txtHTML
       AutoSize = False
       Caption = 
-        '<i class="fab fa-lg fa-github"></i> News Fixes & Features Decemb' +
-        'er 2025'
+        '<i class="fab fa-lg fa-github"></i> News, fixes and features - D' +
+        'ecember 2025'
       ParentFont = False
       Font.Color = clHighlight
       Font.Height = -13
@@ -504,7 +504,7 @@
       Width = 384
       Height = 76
       Hint = ''
-      Caption = 'Delphi class generation options'
+      Caption = 'Generation options'
       TabOrder = 10
       ParentFont = False
       Font.Name = 'Roboto'
@@ -594,7 +594,7 @@
           Font.Name = 'Roboto'
           Align = alTop
           TabOrder = 0
-          EmptyText = 'Enter JSON'
+          EmptyText = 'Paste JSON here to generate Delphi Pascal classes'
         end
       end
       object tabDonate: TUniTabSheet
