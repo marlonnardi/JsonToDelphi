@@ -23,6 +23,7 @@ type
     Confirm: TUniFSConfirm;
     tmr: TUniTimer;
     btnComponents: TUnimButton;
+    lblShutdown: TUnimLabel;
     procedure UnimFormShow(Sender: TObject);
     procedure UnimFormTitleButtonClick(Sender: TUnimTitleButton);
     procedure UnimFormResize(Sender: TObject);
@@ -151,6 +152,9 @@ end;
 procedure TMainmForm.UnimFormShow(Sender: TObject);
 begin
   DefineRegrasLayout;
+  lblShutdown.Caption :=
+    '<div style="padding:10px;background:#fff8e1;border:1px solid #f0b429;border-radius:8px;color:#5c3c00;line-height:1.4">' +
+    DiscontinueNoticeHtml + '</div>';
   UniMainModule.SetGA4(Self.Name);
 end;
 

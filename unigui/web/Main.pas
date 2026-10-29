@@ -388,6 +388,7 @@ begin
     HTML.Add('<div id="jtd-app" class="jtd-html-app">');
     HTML.Add('  <div class="jtd-page-bg"></div>');
     HTML.Add('  <main class="jtd-workspace">');
+    HTML.Add('    <div class="jtd-shutdown" role="alert"><i class="fas fa-exclamation-triangle"></i><span>' + DiscontinueNoticeHtml + '</span></div>');
     HTML.Add('    <section class="jtd-hero-panel">');
     HTML.Add('      <div class="jtd-brand">');
     HTML.Add('        <span class="jtd-logo"><i class="fas fa-code"></i></span>');

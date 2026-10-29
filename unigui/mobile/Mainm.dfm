@@ -1,4 +1,4 @@
-object MainmForm: TMainmForm
+﻿object MainmForm: TMainmForm
   Left = 0
   Top = 0
   ClientHeight = 796
@@ -45,6 +45,21 @@ object MainmForm: TMainmForm
     ScrollIndicators = False
     ScrollHeight = 737
     ScrollWidth = 0
+    object lblShutdown: TUnimLabel
+      AlignWithMargins = True
+      Left = 15
+      Top = 0
+      Width = 288
+      Height = 130
+      Hint = ''
+      Margins.Left = 15
+      Margins.Top = 5
+      Margins.Right = 15
+      AutoSize = False
+      Caption = ''
+      Align = alTop
+      ParentFont = False
+    end
     object memJson: TUnimMemo
       AlignWithMargins = True
       Left = 15

@@ -48,6 +48,31 @@ body {
   padding: 28px 0 54px;
 }
 
+.jtd-shutdown {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  margin-bottom: 16px;
+  padding: 14px 18px;
+  border: 1px solid #f0b429;
+  border-radius: 8px;
+  background: #fff8e1;
+  color: #5c3c00;
+  font-size: 14px;
+  line-height: 1.5;
+  box-shadow: 0 10px 30px rgba(92, 60, 0, 0.10);
+}
+
+.jtd-shutdown i {
+  margin-top: 3px;
+  color: #d08700;
+}
+
+.jtd-shutdown a {
+  color: #0b5cad;
+  font-weight: 700;
+}
+
 .jtd-hero-panel {
   position: relative;
   display: grid;
