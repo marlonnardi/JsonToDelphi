@@ -178,29 +178,6 @@
       Align = alTop
       ParentFont = False
     end
-    object btnComponents: TUnimButton
-      AlignWithMargins = True
-      Left = 15
-      Top = 481
-      Width = 288
-      Height = 47
-      Hint = ''
-      Margins.Left = 15
-      Margins.Top = 10
-      Margins.Right = 15
-      Align = alTop
-      Caption = 'Components Delphi'
-      ClientEvents.ExtEvents.Strings = (
-        
-          'tap=function tap(sender, e, eOpts)'#13#10'{'#13#10'   window.open("https://c' +
-          'omponents.falconsistemas.com.br/");'#13#10'}')
-      UI = 'round'
-      ScreenMask.Enabled = True
-      ScreenMask.WaitData = True
-      ScreenMask.Message = 'Processing...'
-      LayoutConfig.Cls = 'button-style'
-      OnClick = btnSampleClick
-    end
   end
   object Confirm: TUniFSConfirm
     Theme = modern

@@ -397,7 +397,6 @@ begin
     HTML.Add('      <div class="jtd-hero-actions">');
     HTML.Add('        <button type="button" id="jtd-paypal-top"><i class="fab fa-paypal"></i> Donate</button>');
     HTML.Add('        <a href="https://github.com/marlonnardi/JsonToDelphi" target="_blank" rel="noopener"><i class="fab fa-github"></i> GitHub</a>');
-    HTML.Add('        <a href="https://store.falconsistemas.com.br" target="_blank" rel="noopener"><i class="fas fa-star"></i> Delphi components</a>');
     HTML.Add('      </div>');
     HTML.Add('      <div class="jtd-hero-copy">');
     HTML.Add('        <span>JSON to Delphi class generator</span>');
